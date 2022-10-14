@@ -1,7 +1,11 @@
 // import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test/coucou.dart';
+import 'package:test/fonction.dart';
+import 'package:test/crypt.dart';
+import 'package:bcrypt/bcrypt.dart';
+import 'package:encrypt/encrypt.dart';
+
 void main() {
   runApp(MaterialApp(
     home: HomePage(),
@@ -11,15 +15,22 @@ void main() {
   ));
 }
 
-class SecondRoute extends StatelessWidget {
-  SecondRoute({super.key});
-  
+class ThirdRoute extends StatefulWidget {
+  const ThirdRoute({super.key});
 
   @override
-  Widget build(BuildContext context) {
-var device = MediaQuery.of(context).size;
-    String coucou="ça arrive";
+  State<ThirdRoute> createState() => _ThirdRouteState();
+}
+
+class _ThirdRouteState extends State<ThirdRoute> {
   TextEditingController generatedPwd = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    // déclaration variables :
+var device = MediaQuery.of(context).size;
+    String salut=coucou();
+    double currentSliderValue = 20;
+
     return Scaffold(
       floatingActionButton:
          FloatingActionButton(onPressed: () {
@@ -46,20 +57,20 @@ var device = MediaQuery.of(context).size;
             Row(
               children:[
                 Container(
-                  width: device.width/3,
+                  width: device.width/6,
                 ),
             Container(
-              width: device.width/3,
+              width: device.width*2/3,
               color: Colors.green,
               child: Text(
-               coucou,
+               salut,
                 style: const TextStyle(
                  color: Colors.black54,
                  fontSize: 25.0,
                ),
               )
             ),
-            ElevatedButton(onPressed: ()async{await Clipboard.setData(ClipboardData(text: coucou));},
+            ElevatedButton(onPressed: ()async{await Clipboard.setData(ClipboardData(text: salut));},
             child: const Icon(Icons.copy)
             ),
               ]
@@ -69,19 +80,34 @@ var device = MediaQuery.of(context).size;
               height: 30,
             ),
             Row(
-              children: [
+              children:[
                 Container(
-                  width: device.width/3,
+                  width: device.width/6,
                 ),
-            const Text("linear"),
-            Container(
-              width: device.width/3,
-              height: 10,
-              child: const LinearProgressIndicator(
-              value: 0.5,
-              semanticsLabel: 'Linear progress indicator',
+                const Text("Length",style: TextStyle(fontSize: 20)),
+              ],
             ),
-            )
+            Row(
+              children: <Widget>[
+                Container(
+                  width: device.width/6,
+                ),
+            Container(
+              width: device.width*2/3,
+              height: 10,
+              child: Slider(
+                value: currentSliderValue,
+                max: 100,
+                divisions: 20,
+                label: currentSliderValue.round().toString(),
+                onChanged: (double value) {setState((){currentSliderValue = value;});
+                },
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+              Text(currentSliderValue.toString(),style: const TextStyle(fontSize: 25)),
               ]
             )
           ],
@@ -96,18 +122,11 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-
-class Compte{
-  var id="Aurian";
-  var motdepasse="coucou";
-}
-
 class _HomePageState extends State<HomePage> {
-  var myText = "Change My name";
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _mdpController = TextEditingController();
-
-
+// Déclaration de valeurs :
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mdpController = TextEditingController();
+  
   @override
   void initState() {
     super.initState();
@@ -117,6 +136,15 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    var test=Compte();
+    final String login = "Pierre";
+    final String password = 'password123';
+    final String salt = BCrypt.gensalt();
+    final String hash = BCrypt.hashpw(
+        password,
+        salt,
+      );
+    final crypt = encrypt(hash);
     return Scaffold(
       backgroundColor: Colors.white,
         body: Center(
@@ -140,7 +168,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           width: 400,
           child: TextField(
-            controller: _nameController,
+            controller: nameController,
             decoration: InputDecoration(                        
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100.0)
@@ -157,7 +185,7 @@ class _HomePageState extends State<HomePage> {
           width: 400,
           child: TextField(
             obscureText: true,
-            controller: _mdpController,
+            controller: mdpController,
             decoration: InputDecoration(
               hoverColor: Colors.red,
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -169,7 +197,21 @@ class _HomePageState extends State<HomePage> {
           height: 75.0,
         ),
         ElevatedButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SecondRoute()));
+          if(BCrypt.hashpw(mdpController.text,salt) == decrypt(crypt) && login == nameController.text){
+            Navigator.push(context, MaterialPageRoute<dynamic>(builder: (context) => ThirdRoute()));
+          }
+          else{
+              showDialog(context: context, builder: (context) => AlertDialog(
+              title: Text('Erreur'),
+              content: Text("Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+              actions: [
+                TextButton(
+                  child: Text('Ok'),
+                  onPressed: ()=>Navigator.pop(context),
+                ) 
+              ],
+            ));
+            }
         },
           child: const Text(
           "Connexion",

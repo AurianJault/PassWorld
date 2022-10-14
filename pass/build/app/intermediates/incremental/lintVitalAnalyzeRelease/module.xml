@@ -1,11 +1,11 @@
 <lint-module
     format="1"
-    dir="/home/aurian/flute/test/android/app"
+    dir="/home/aurian/PassWorld/pass/android/app"
     name=":app"
     type="APP"
     maven="android:app:"
     gradle="7.1.2"
-    buildFolder="/home/aurian/flute/test/build/app"
+    buildFolder="/home/aurian/PassWorld/pass/build/app"
     bootClassPath="/home/aurian/Android/Sdk/platforms/android-31/android.jar:/home/aurian/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar"
     javaSourceLevel="1.8"
     compileTarget="android-31">

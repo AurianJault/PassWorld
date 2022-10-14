@@ -1,4 +1,4 @@
-#Sun Oct 09 20:29:56 CEST 2022
-base.0=/home/aurian/flute/test/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+#Mon Oct 10 12:27:16 CEST 2022
+base.0=/home/aurian/PassWorld/pass/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

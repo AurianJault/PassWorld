@@ -126,6 +126,7 @@ class _HomePageState extends State<HomePage> {
 // Déclaration de valeurs :
   TextEditingController nameController = TextEditingController();
   TextEditingController mdpController = TextEditingController();
+
   
   @override
   void initState() {
@@ -136,7 +137,7 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    var test=Compte();
+    var device = MediaQuery.of(context).size;
     final String login = "Pierre";
     final String password = 'password123';
     final String salt = BCrypt.gensalt();
@@ -166,7 +167,7 @@ class _HomePageState extends State<HomePage> {
           height: 20.0,
         ),
         SizedBox(
-          width: 400,
+          width: device.width*4/6,
           child: TextField(
             controller: nameController,
             decoration: InputDecoration(                        
@@ -182,7 +183,7 @@ class _HomePageState extends State<HomePage> {
           height: 20.0,
         ),
         SizedBox(
-          width: 400,
+          width: device.width*4/6,
           child: TextField(
             obscureText: true,
             controller: mdpController,

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/aurian/flute/test/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/aurian/PassWorld/pass/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/aurian/flute/test/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/aurian/PassWorld/pass/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

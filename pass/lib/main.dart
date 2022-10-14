@@ -5,6 +5,7 @@ import 'package:test/fonction.dart';
 import 'package:test/crypt.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/gestures.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
           height: 20.0,
         ),
         SizedBox(
-          width: device.width*4/6,
+          width: device.width/3,
           child: TextField(
             controller: nameController,
             decoration: InputDecoration(                        
@@ -183,7 +184,7 @@ class _HomePageState extends State<HomePage> {
           height: 20.0,
         ),
         SizedBox(
-          width: device.width*4/6,
+          width: device.width/3,
           child: TextField(
             obscureText: true,
             controller: mdpController,
@@ -194,7 +195,33 @@ class _HomePageState extends State<HomePage> {
               labelText: "Password",
             ),
           ),
-        ),const SizedBox(
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: device.width*3/6,
+            ),
+            RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(text: "Jamais connecté ?",style: TextStyle(color: Colors.black)),
+                  TextSpan(
+                    text: " Créer un compte",
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap= () {
+                        Navigator.push(context, MaterialPageRoute<dynamic>(builder: (context) => Authentification()));
+                      }
+                  )
+                ]
+              )
+            ),
+          ],
+        ),
+        const SizedBox(
           height: 75.0,
         ),
         ElevatedButton(onPressed: (){
@@ -203,11 +230,11 @@ class _HomePageState extends State<HomePage> {
           }
           else{
               showDialog(context: context, builder: (context) => AlertDialog(
-              title: Text('Erreur'),
-              content: Text("Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+              title: const Text('Erreur'),
+              content: const Text("Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
               actions: [
                 TextButton(
-                  child: Text('Ok'),
+                  child: const Text('Ok'),
                   onPressed: ()=>Navigator.pop(context),
                 ) 
               ],
@@ -224,4 +251,113 @@ class _HomePageState extends State<HomePage> {
   ),
 );
 }
+}
+
+class Authentification extends StatefulWidget {
+  const Authentification({super.key});
+
+  @override
+  State<Authentification> createState() => _AuthentificationState();
+}
+
+class _AuthentificationState extends State<Authentification> {
+  @override
+  Widget build(BuildContext context) {
+    //Variables
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mdpController = TextEditingController();
+  var device = MediaQuery.of(context).size;
+
+
+
+
+
+    return Scaffold(
+      body: Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+        const Text(
+          "Authentification",
+          style: TextStyle(fontSize: 45,fontWeight: FontWeight.w900),
+          ),
+        const SizedBox(
+          height: 20,
+        ),
+        const Text(
+          "Entrez vos identifiant",
+          style: TextStyle(fontSize: 15 ),
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        SizedBox(
+          width: device.width/3,
+          child: TextField(
+            controller: nameController,
+            decoration: InputDecoration(                        
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100.0)
+              ),
+              hintText: "Enter your mail adress",
+              labelText: "Email",
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        SizedBox(
+          width: device.width/3,
+          child: TextField(
+            obscureText: true,
+            controller: mdpController,
+            decoration: InputDecoration(
+              hoverColor: Colors.red,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
+              hintText: "Enter your password",
+              labelText: "Password",
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: device.width*3/6,
+            ),
+            RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(text: "Déjà un compte ?",style: TextStyle(color: Colors.black)),
+                  TextSpan(
+                    text: " Login",
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap= () {
+                        Navigator.pop(context);
+                      }
+                  )
+                ]
+              )
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 75.0,
+        ),
+        ElevatedButton(onPressed: (){
+          // Vérifier que l'user existe pas déjà
+          // importer le compte dans base de do
+          Navigator.pop(context);
+        },
+          child: const Text(
+          "Créer un compte",
+          style: TextStyle(fontSize: 25)
+          )
+        ),
+        ],
+      )
+      ),
+    );
+  }
 }

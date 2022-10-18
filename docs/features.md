@@ -44,6 +44,9 @@
 
 ## Authentification
 
+- masterpassword
 - Yubikey
 - biométrie (touchid + faceid)
 - qr code → pour récupérer la clé de chiffrement
+- check par mail à l'inscription
+- 2FA → message ou mail   

@@ -1,7 +1,6 @@
 // import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test/fonction.dart';
 import 'package:test/crypt.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
@@ -29,7 +28,7 @@ class _ThirdRouteState extends State<ThirdRoute> {
   Widget build(BuildContext context) {
     // déclaration variables :
 var device = MediaQuery.of(context).size;
-    String salut=coucou();
+    var salut = "coucou";
     double currentSliderValue = 20;
 
     return Scaffold(
@@ -334,6 +333,12 @@ class _AuthentificationState extends State<Authentification> {
                     style: const TextStyle(color: Colors.blue),
                     recognizer: TapGestureRecognizer()
                       ..onTap= () {
+                        // Check Si champ rempli
+                            // False = PopUp
+                        // Appelle la fonction register
+                        //  Check le code retour
+                            // False = login déjà existant
+                            // True = registered
                         Navigator.pop(context);
                       }
                   )
@@ -355,9 +360,9 @@ class _AuthentificationState extends State<Authentification> {
           style: TextStyle(fontSize: 25)
           )
         ),
-        ],
-      )
+      ],
       ),
+    ),
     );
   }
 }

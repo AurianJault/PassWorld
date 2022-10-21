@@ -1,3 +1,5 @@
+[![Build Status](https://codefirst.iut.uca.fr/api/badges/PassWorld/PassWorld/status.svg)](https://codefirst.iut.uca.fr/PassWorld/PassWorld)
+
 # test
 
 A new Flutter project.

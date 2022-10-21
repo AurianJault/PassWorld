@@ -13,4 +13,4 @@ steps:
       cn_net: true
       source: "."
       commands:
-        - flutter build apk
+        - flutter build apk 

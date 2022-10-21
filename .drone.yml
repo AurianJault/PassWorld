@@ -1,0 +1,16 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    - push
+
+steps:
+  - name: flutter
+    image: jarry6/drone-flutter:2
+    settings:
+      cn_net: true
+      source: "."
+      commands:
+        - flutter build apk

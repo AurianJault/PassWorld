@@ -11,4 +11,3 @@ steps:
     image: cirrusci/flutter:stable
     commands:
       - flutter build apk
-      

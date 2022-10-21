@@ -7,7 +7,7 @@ trigger:
     - push
 
 steps:
-  - name: flutter
+  - name: build-apk
     image: jarry6/drone-flutter:2
     settings:
       cn_net: true

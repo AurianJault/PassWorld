@@ -1,6 +1,6 @@
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/PassWorld/PassWorld/status.svg)](https://codefirst.iut.uca.fr/PassWorld/PassWorld)
 
-# test
+# PassWorld
 
 A new Flutter project.
 

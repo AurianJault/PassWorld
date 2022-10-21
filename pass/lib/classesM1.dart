@@ -176,46 +176,15 @@ Future<bool> register(String login, String mdp)async{
   return true;
 }
 
+// Ecrit dans un fichier 
 void ecriture(List<Utilisateur> list,String fichier)async{
   for(var i in list){
     var file = File(fichier).writeAsString("${i._identifiant} ${i.salt.base16} ${i.hash.base16}");
   }
 }
-/*
-class Manager
-{
 
-}
-*/
 void main()async
 {
-  // Compte c = Compte('nifranco','Netflix','netflix.com','password1');
-  // Compte c1 = Compte('nifranco2','Netflix','netflix.com','password2');
-
-  // Utilisateur u = Utilisateur('user1', 'mdp');
-  // u._vault.add(c);
-  // u._vault.add(c1);
-
-  // //Test rech mdp
-  // String mdpRech = u.rechercherMdp('Netflix','nifranco');
-  // print(mdpRech);
-
-  // //Test ajouter mdp
-  // print(u._vault.length);
-  // Compte c2 = Compte('nifranco3','Gmail','gmail.com','password3');
-  // u.ajouterMdp(c2);
-  // print(u._vault.length);
-
-  // //Test supprimer mdp
-  // u.supprimerMdp(c1);
-  // print(u._vault.length);
-  // var coucou=Utilisateur("Aurian", "123soleil");
-  // if(await authentification("Aurian","123soleil")){
-  //   print("Identifié !");
-  // }
-  // else{
-  //   print("cpt");
-  //}
   await register("Aurian", "123soleil");
   if(await authentification("Aurian", "123soleil"))
   {

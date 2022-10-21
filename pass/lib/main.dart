@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage> {
             }
         },
           child: const Text(
-          "Connexion",
+          "Sign up",
           style: TextStyle(fontSize: 25)
           )
         ),
@@ -277,7 +277,7 @@ class _AuthentificationState extends State<Authentification> {
         children: [
 
         const Text(
-          "Authentification",
+          "Sign up",
           style: TextStyle(fontSize: 45,fontWeight: FontWeight.w900),
           ),
         const SizedBox(

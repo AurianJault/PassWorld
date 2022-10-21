@@ -8,9 +8,9 @@ trigger:
 
 steps:
   - name: build-apk
-    image: jarry6/drone-flutter:2
+    image: cirrusci/flutter:stable
     settings:
       cn_net: true
       source: "."
       commands:
-        - flutter build apk 
+        - flutter build apk

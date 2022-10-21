@@ -9,8 +9,5 @@ trigger:
 steps:
   - name: build-apk
     image: cirrusci/flutter:stable
-    settings:
-      cn_net: true
-      source: "."
-      commands:
-        - flutter build apk
+    commands:
+      - flutter build apk

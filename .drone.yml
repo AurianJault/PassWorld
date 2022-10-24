@@ -20,9 +20,9 @@ steps:
     commands:
       - pwd 
       - export SONAR_SCANNER_VERSION=4.7.0.2747
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip --directory-prefix $HOME/.sonar/ 
-      - unzip -o $HOME/.sonar/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip -d $HOME/.sonar/
-      - export PATH=/root/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin:$PATH
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip --directory-prefix drone/src/.sonar/ 
+      - unzip -o /drone/src/.sonar/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip -d $HOME/.sonar/
+      - export PATH=/drone/src/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin:$PATH
       - export SONAR_SCANNER_OPTS="-server"
       - sonar-scanner \
         -Dsonar.projectKey=Passworld \

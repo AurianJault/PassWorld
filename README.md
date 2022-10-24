@@ -2,9 +2,9 @@
 
 ## Badge
 
+![Flutter](https://img.shields.io/badge/flutter-40C4FF.svg?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/dart-04599C.svg?style=for-the-badge&logo=dart&logoColor=white)
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/PassWorld/PassWorld/status.svg)](https://codefirst.iut.uca.fr/PassWorld/PassWorld)
-
-
 
 A new Flutter project.
 

@@ -22,4 +22,4 @@ steps:
   -Dsonar.projectKey=Passworld \
   -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar \
   -Dsonar.login=$${SONAR_TOKEN}
-    depends_on: [ app-build, api-build]
+    depends_on: [ build-apk ]

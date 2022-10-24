@@ -18,6 +18,7 @@ steps:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
+      - apk info -W /bin/chmod 
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar

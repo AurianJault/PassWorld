@@ -29,3 +29,7 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+plugins {
+  id "org.sonarqube" version "3.4.0.2513"
+}

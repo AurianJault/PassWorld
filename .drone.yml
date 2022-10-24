@@ -11,3 +11,15 @@ steps:
     image: cirrusci/flutter:stable
     commands:
       - flutter build apk
+
+  - name: code-analysis
+    image: cirrusci/flutter:stable
+    environment:
+        SONAR_TOKEN:
+          from_secret: sonar_token
+    commands:
+    - ./gradlew sonarqube \
+  -Dsonar.projectKey=Passworld \
+  -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar \
+  -Dsonar.login=$${SONAR_TOKEN}
+    depends_on: [ app-build, api-build]

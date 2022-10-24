@@ -18,6 +18,7 @@ steps:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
+      - pwd 
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip --directory-prefix $HOME/.sonar/ 
       - unzip -o $HOME/.sonar/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip -d $HOME/.sonar/

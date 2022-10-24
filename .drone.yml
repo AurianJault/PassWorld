@@ -18,7 +18,7 @@ steps:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
-    - ./gradlew sonarqube \
+    - sonar-scanner \
       -Dsonar.projectKey=Passworld \
       -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar \
       -Dsonar.login=$${SONAR_TOKEN}

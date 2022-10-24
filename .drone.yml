@@ -1,0 +1,13 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    - push
+
+steps:
+  - name: build-apk
+    image: cirrusci/flutter:stable
+    commands:
+      - flutter build apk

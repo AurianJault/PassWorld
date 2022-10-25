@@ -1,6 +1,6 @@
+import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
 import 'compte.dart';
-import 'package:encrypt/encrypt.dart';
 import 'dart:io';
 
 class Utilisateur

@@ -10,12 +10,13 @@ void main()async
   // print(moi.salt.base64);
   // print(moi.hash.base64);
   // register("aurian", "123soleil");
-  // register("theo", "123soleil");
+  register("theo", "123soleil");
   // if(await authentification("aurian", "123soleil")) {
   //   print("CA MARCHE");
   // } else {
   //   print("Marche po");
-  // }
+  // // }
+
   if(await authentification("theo", "123soleil"))print("CA MARCHE");
   else print("Marche po");
 }

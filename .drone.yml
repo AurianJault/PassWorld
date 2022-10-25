@@ -18,7 +18,7 @@ steps:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
-      - apk add zip unzip openjdk11
+      - apk add zip unzip openjdk11 tree
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar
@@ -29,6 +29,7 @@ steps:
       - tar xzvf AutoDL?BundleId=247127_10e8cce67c7843478f41411b7003171c
       - mv jre1.8.0_351 jre
       - cd ../..
+      - tree
       - export SONAR_SCANNER_OPTS="-server"
       - ./.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner \
         -Dsonar.projectKey=Passworld \

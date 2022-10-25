@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/utilisateur.dart';

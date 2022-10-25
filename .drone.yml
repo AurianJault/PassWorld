@@ -30,8 +30,8 @@ steps:
       - rm -rf jre
       - mv jre1.8.0_351 jre
       - cd ../..
-      - tree / -d -L 2
-      - pwd
+      - tree /drone/src -L 2
+      - ./drone/src/.sonar/sonar-scanner-4.7.0.2747-linux/jre/bin/java
       - export SONAR_SCANNER_OPTS="-server"
       - ./.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner \
         -Dsonar.projectKey=Passworld \

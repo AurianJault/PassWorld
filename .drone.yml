@@ -24,10 +24,14 @@ steps:
       - cd .sonar
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - unzip -o sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
-      - cd ..
+      - cd sonar-scanner-$SONAR_SCANNER_VERSION-linux/
+      - wget https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247127_10e8cce67c7843478f41411b7003171c
+      - tar xzvf AutoDL?BundleId=247127_10e8cce67c7843478f41411b7003171c
+      - mv jre1.8.0_351 jre
+      - cd ../..
       - export SONAR_SCANNER_OPTS="-server"
       - ./.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner \
         -Dsonar.projectKey=Passworld \
         -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar \
         -Dsonar.login=$${SONAR_TOKEN}
-    depends_on: [ build-apk ]
+    # depends_on: [ build-apk ]

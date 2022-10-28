@@ -13,7 +13,7 @@ steps:
       - flutter build apk
 
   - name: code-analysis
-    image: cirrusci/flutter:stable
+    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-sonar
     environment:
         SONAR_TOKEN:
           from_secret: sonar_token

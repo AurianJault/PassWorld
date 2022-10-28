@@ -13,12 +13,13 @@ steps:
       - flutter build apk
 
   - name: code-analysis
-    image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-sonar
+    image: cirrusci/flutter:stable
+    #hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-sonar
     environment:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
-      - apk add zip unzip openjdk11 tree
+      #- apk add zip unzip openjdk11 tree
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar

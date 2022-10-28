@@ -32,8 +32,5 @@ steps:
       - mv jre1.8.0_351 jre
       - cd ../..
       - export SONAR_SCANNER_OPTS="-server"
-      - ./.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner \
-        -D sonar.projectKey=Passworld \
-        -D sonar.host.url=https://codefirst.iut.uca.fr/sonar \
-        -D sonar.login=$${SONAR_TOKEN}
+      - ./.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin/sonar-scanner -D sonar.projectKey=Passworld -D sonar.host.url=https://codefirst.iut.uca.fr/sonar -D sonar.login=$${SONAR_TOKEN}
     depends_on: [ build-apk ]

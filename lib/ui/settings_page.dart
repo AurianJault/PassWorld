@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(25),
-          child: const Text('Home',
+          child: const Text('Settings',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
         ),
       ),

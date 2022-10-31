@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HealthPage extends StatefulWidget {
+  const HealthPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HealthPage> createState() => _HealthPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HealthPageState extends State<HealthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(25),
-          child: const Text('Home',
+          child: const Text('Health',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
         ),
       ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class GeneratorPage extends StatefulWidget {
+  const GeneratorPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<GeneratorPage> createState() => _GeneratorPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GeneratorPageState extends State<GeneratorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(25),
-          child: const Text('Home',
+          child: const Text('Generator',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
         ),
       ),

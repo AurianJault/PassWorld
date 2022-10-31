@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
+import 'package:test/ui/nav_bar.dart';
 import 'register_page.dart';
-import 'home_page.dart';
 import 'cle.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -110,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute<dynamic>(
-                                    builder: (context) => const HomePage()));
+                                    builder: (context) => const NavBar()));
                           } else {
                             showDialog(
                                 context: context,

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/utilisateur.dart';
+import 'package:test/Classes/yubikey_related/sendCode.dart';
 
 Future<bool> authentification(String login,String mdp)async{
   var list=await allUser();
@@ -51,4 +52,10 @@ void ecriture(List<Utilisateur> list,String fichier)async{
     print("${i.key.base64} ${i.iv.base64}");
     var file = File(fichier).writeAsStringSync("${i.identifiant} ${i.salt.base64} ${i.hash.base64} ${i.key.base64} ${i.iv.base64}\n",mode: FileMode.append);
   }
+}
+
+
+// Authentification avec l'yubikey (otp seulement)
+Future<bool> authentificationOtp(String? y){
+  return sendCode(y);
 }

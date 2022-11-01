@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:test/ui/home_page.dart';
-import 'package:test/ui/login_page.dart';
-import 'package:test/ui/register_page.dart';
-import 'package:test/ui/settings_page.dart';
+import 'package:test/ui/home_page.dart' show HomePage;
+import 'package:test/ui/settings_page.dart' show SettingsPage;
 
 import 'generator_page.dart';
 import 'health_page.dart';
@@ -24,7 +22,7 @@ class _NavBarState extends State<NavBar> {
     });
   }
 
-  final List<Widget> _pages = [
+  static const List<Widget> _pages = [
     HomePage(),
     GeneratorPage(),
     HealthPage(),

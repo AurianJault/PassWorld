@@ -13,6 +13,27 @@ class _HomePageState extends State<HomePage> {
     'aurain@lecaiman.crocs',
     'tim@leviking.thor',
     'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
+    'aurain@lecaiman.crocs',
+    'tim@leviking.thor',
+    'nicolas@napasdebras.manchot',
     'corentin@regardetintin.milou'
   ];
 
@@ -95,13 +116,17 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: _email.length,
-                    itemBuilder: (context, index) {
-                      return const PasswordWidget();
-                    }),
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context)
+                      .copyWith(scrollbars: false),
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: _email.length,
+                      itemBuilder: (context, index) {
+                        return const PasswordWidget();
+                      }),
+                ),
               ),
             ),
           ],

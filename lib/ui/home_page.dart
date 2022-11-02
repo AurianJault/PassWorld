@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+                    color: Colors.deepPurple[300],
                     borderRadius: BorderRadius.circular(30)),
                 child: const Padding(
                   padding: EdgeInsets.only(left: 20),
@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> {
                           Icons.search,
                           color: Colors.white,
                         ),
-                        iconColor: Colors.deepPurple,
                         border: InputBorder.none,
                         hintText: 'Search',
                         hintStyle: TextStyle(color: Colors.white),
@@ -92,14 +91,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // Padding(
-            //     padding:
-            //         const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            //     child: ListView.builder(
-            //         itemCount: _email.length,
-            //         itemBuilder: (context, index) {
-            //           return const PasswordWidget();
-            //         })),
+            Flexible(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: _email.length,
+                    itemBuilder: (context, index) {
+                      return const PasswordWidget();
+                    }),
+              ),
+            ),
           ],
         ),
       ),

@@ -34,11 +34,11 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
-        color: Colors.deepPurple,
+        color: Colors.deepPurple[300],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
           child: GNav(
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: const Color.fromARGB(255, 149, 117, 205),
             tabBackgroundColor: Colors.white,
             color: Colors.white,
             activeColor: Colors.black,

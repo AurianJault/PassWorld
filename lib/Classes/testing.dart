@@ -23,10 +23,4 @@ void main()async
   //else print("Marche po");
   
   print("Insert yubikey and press");
-  String? y = stdin.readLineSync();
-  if(await authentificationOtp(y)){
-    print("Validated!");
-  } else {
-    print("Impossible to validate otp");
-  }
 }

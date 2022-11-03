@@ -1,43 +1,50 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'chiffrement.dart';
 import 'compte.dart';
 import 'dart:io';
 
-class Utilisateur
+class Account
 {
-  late String _identifiant;
-  late Chiffrement _motDePasse;
+  late String _id;
+  late Chiffrement _masterPassword;
+  late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late List<Compte> _vault;
+  late List<TwoFA> _secondFactors;
+  
+  
   // pas sûr;
   // besoin de le créer avec l'iv et la clé que quand nécessaire
   Key key; // marche pas avec une autre clé
   IV iv = IV.fromLength(16);
 
 
-  Utilisateur(String id, String mdp)
+  Account(String id, String mdp)
     : key = Key.fromUtf8("my 32 length key...............u")
   {
-    _identifiant = id;
-    _motDePasse = Chiffrement(mdp,key,iv);
+    _id = id;
+    _masterPassword = Chiffrement(mdp,key,iv);
     _vault = List.empty(growable: true);
+    _secondFactors = List.empty(growable: true);
+    authMethod = "conventional";
     // Charge la liste des comptes liés a ce compte
     // chargement("listCompte.txt");
   }
 
-  Utilisateur.old(String id,Encrypted salty,Encrypted hashy,Key key, IV iv)
+  Account.old(String id,Encrypted salty,Encrypted hashy,Key key, IV iv)
   : this.key = key
   {
     iv = iv;
-    _identifiant = id;
-    _motDePasse=Chiffrement.old(salty,hashy);
+    _id = id;
+    _masterPassword=Chiffrement.old(salty,hashy);
     _vault=List.empty(growable: true);
     chargement("listCompte.txt");
   }
   Encrypted get hash {
-    return _motDePasse.hash;
+    return _masterPassword.hash;
   }
   Encrypted get salt {
-    return _motDePasse.salt;
+    return _masterPassword.salt;
   }
 
   Key get cle {
@@ -49,8 +56,12 @@ class Utilisateur
     return _vault;
   }
 
-  String get identifiant {
-    return _identifiant;
+  String get id {
+    return _id;
+  }
+
+  List<TwoFA> get secondFactors{
+    return _secondFactors;
   }
 
   @override
@@ -65,7 +76,7 @@ class Utilisateur
   // String rechercherMdp(String nom, String id)
   // {
   //   _vault.forEach((element) {
-  //     if(nom == element.nom && id == element.identifiant)
+  //     if(nom == element.nom && id == element.id)
   //     return mdp;
   //   });
   // }

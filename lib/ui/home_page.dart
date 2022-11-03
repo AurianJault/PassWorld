@@ -13,29 +13,10 @@ class _HomePageState extends State<HomePage> {
     'aurain@lecaiman.crocs',
     'tim@leviking.thor',
     'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'corentin@regardetintin.milou'
+    'aurian@lecaiman.crocs',
   ];
+
+  final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
 
   final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
 
@@ -111,7 +92,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
+            //------------------
+            // PASSWORD LISTVIEW
+            //------------------
             Flexible(
               child: Padding(
                 padding:
@@ -124,7 +107,10 @@ class _HomePageState extends State<HomePage> {
                       shrinkWrap: true,
                       itemCount: _email.length,
                       itemBuilder: (context, index) {
-                        return const PasswordWidget();
+                        return PasswordWidget(
+                            website: _website[index],
+                            image: _image[index],
+                            email: _email[index]);
                       }),
                 ),
               ),

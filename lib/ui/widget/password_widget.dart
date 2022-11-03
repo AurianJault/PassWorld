@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PasswordWidget extends StatelessWidget {
-  // Variable for data binding
+  // Variable for data binding -- will change when list of password
   final String website;
   final String image;
   final String email;

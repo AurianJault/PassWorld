@@ -34,11 +34,11 @@ steps:
     depends_on: [ build-apk ]
 
     # database container deployment
-  - name: deploy-container-mysql
+  - name: database_users
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: mariadb:10
-        CONTAINERNAME: mysql
+        CONTAINERNAME: db_users
         COMMAND: create
         # OVERWRITE: false
         PRIVATE: true

@@ -5,7 +5,7 @@ class Authentificator {
   // static Future<bool> conventionalAuth(string id, string psswd)
 
   //Authentification seulement avec yubikey
-  static Future<bool> yubikeyAuth(String id, String otp)async{
+  static Future<bool> yubikeyAuth(String id, String? otp)async{
       /*Verifier que l'yubikey est la bonne:
       - chercher l'user a partir de son id
       - parcourir user.secondFactors

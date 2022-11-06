@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:test/Classes/authentification.dart';
+import 'package:test/Classes/authentificator.dart';
 
 
 void main()async
@@ -23,10 +24,10 @@ void main()async
   //else print("Marche po");
   
   print("Insert yubikey and press");
-  String? y = stdin.readLineSync();
-  if(await authentificationOtp(y)){
-    print("Validated!");
+  String? otp = stdin.readLineSync();
+  if(await Authentificator.yubikeyAuth('1', otp)){
+    print("valid");
   } else {
-    print("Impossible to validate otp");
+    print("error");
   }
 }

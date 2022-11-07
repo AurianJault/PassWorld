@@ -38,7 +38,7 @@ steps:
     image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
     environment:
         IMAGENAME: mariadb:10
-        CONTAINERNAME: db_users
+        CONTAINERNAME: mysql
         COMMAND: create
         # OVERWRITE: false
         PRIVATE: true

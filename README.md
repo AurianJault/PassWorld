@@ -4,8 +4,6 @@
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
 [![Build Status](https://codefirst.iut.uca.fr/api/badges/PassWorld/PassWorld/status.svg)](https://codefirst.iut.uca.fr/PassWorld/PassWorld)
 
-A new Flutter project.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:test/Classes/cle.dart';
+import 'package:test/ui/nav_bar.dart';
 import 'register_page.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -96,46 +96,46 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple[300],
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Center(
-                      child: InkWell(
-                        onTap: () {
-                          if (BCrypt.hashpw(passwordController.text, salt) ==
-                                  decrypt(crypt) &&
-                              login == emailController.text) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => const HomePage()));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                      title: const Text('Erreur'),
-                                      content: const Text(
-                                          "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text('Ok'),
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                        )
-                                      ],
-                                    ));
-                          }
-                        },
-                        child: const Text(
-                          'Sign In',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(12)),
+                  child: InkWell(
+                    onTap: () {
+                      if (BCrypt.hashpw(passwordController.text, salt) ==
+                              decrypt(crypt) &&
+                          login == emailController.text) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                                builder: (context) => const NavBar()));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Erreur'),
+                                  content: const Text(
+                                      "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () => Navigator.pop(context),
+                                    )
+                                  ],
+                                ));
+                      }
+                    },
+                    child: const Center(
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 30),
 

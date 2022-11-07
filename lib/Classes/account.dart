@@ -8,7 +8,7 @@ class Account
 {
   late String _id;
   late Chiffrement _masterPassword;
-  late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
+  late Map<String,bool> authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late List<Compte> _vault;
   late List<TwoFA> _secondFactors;
   
@@ -26,7 +26,7 @@ class Account
     _masterPassword = Chiffrement(mdp,key,iv);
     _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
-    authMethod = "conventional";
+    authMethod = {"conventional":true, "yubikey_only":false, "twoFA_with_yubikey":false};
     // Charge la liste des comptes liés a ce compte
     // chargement("listCompte.txt");
   }

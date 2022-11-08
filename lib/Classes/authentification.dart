@@ -10,10 +10,10 @@ Future<bool> authentification(String login,String mdp)async{
   while(it.moveNext()){
     if(it.current.id == login)
     {
-      var encrypter = Encrypter(AES(it.current.cle));
-      var sel = encrypter.decrypt(it.current.salt, iv: it.current.iv);
+      var encrypter = Encrypter(AES(it.current.s.getKey()));
+      var sel = encrypter.decrypt(it.current.salt, iv: it.current.s.getIV());
       var tmp = BCrypt.hashpw(mdp, sel);
-      return tmp == encrypter.decrypt(it.current.hash,iv: it.current.iv);
+      return tmp == encrypter.decrypt(it.current.hash,iv: it.current.s.getIV());
     }
   }
     return false;
@@ -49,7 +49,7 @@ Future<bool> register(String login, String mdp)async{
 // Ecrit dans un fichier 
 void ecriture(List<Account> list,String fichier)async{
   for(var i in list){
-    print("${i.key.base64} ${i.iv.base64}");
-    var file = File(fichier).writeAsStringSync("${i.id} ${i.salt.base64} ${i.hash.base64} ${i.key.base64} ${i.iv.base64}\n",mode: FileMode.append);
+    print("${i.s.getKey().base64} ${i.s.getIV().base64}");
+    var file = File(fichier).writeAsStringSync("${i.id} ${i.salt.base64} ${i.hash.base64} ${i.s.getKey().base64} ${i.s.getIV().base64}\n",mode: FileMode.append);
   }
 }

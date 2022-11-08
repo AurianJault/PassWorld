@@ -3,6 +3,9 @@ import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'chiffrement.dart';
 import 'compte.dart';
 import 'dart:io';
+import 'storage_item.dart';
+import 'secureStorage.dart';
+import 'storage.dart';
 
 class Account
 {
@@ -11,19 +14,15 @@ class Account
   late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late List<Compte> _vault;
   late List<TwoFA> _secondFactors;
-  
-  
-  // pas sûr;
-  // besoin de le créer avec l'iv et la clé que quand nécessaire
-  Key key; // marche pas avec une autre clé
-  IV iv = IV.fromLength(16);
+  Storage s = new Storage();
 
 
   Account(String id, String mdp)
-    : key = Key.fromUtf8("my 32 length key...............u")
   {
     _id = id;
-    _masterPassword = Chiffrement(mdp,key,iv);
+    s.setKey(id);
+    s.setIV(id);
+    _masterPassword = Chiffrement(mdp,s.getKey(),s.getIV());
     _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
     authMethod = "conventional";
@@ -32,10 +31,9 @@ class Account
   }
 
   Account.old(String id,Encrypted salty,Encrypted hashy,Key key, IV iv)
-  : this.key = key
   {
-    iv = iv;
-    _id = id;
+    s.setKey(id);
+    s.setIV(id);
     _masterPassword=Chiffrement.old(salty,hashy);
     _vault=List.empty(growable: true);
     chargement("listCompte.txt");
@@ -45,10 +43,6 @@ class Account
   }
   Encrypted get salt {
     return _masterPassword.salt;
-  }
-
-  Key get cle {
-    return key;
   }
 
   List<Compte> get vlt 

@@ -1,6 +1,7 @@
 // Class for password objects
 
 class Password {
+  // Fields
   final int _id; // never change
   String _name;
   String? _website;
@@ -21,36 +22,41 @@ class Password {
   }
 
   // Methods
+  // Update modifDate when password is modified
   void updateModifDate() {
     _modifDate = DateTime.now();
   }
 
   // Setters
-  set setName(String x) {
-    _name = x;
+  set setName(String s) {
+    _name = s;
   }
 
-  set setWebsite(String x) {
-    _website = x;
+  set setWebsite(String s) {
+    _website = s;
   }
 
-  set setUsername(String x) {
-    _username = x;
+  set setUsername(String s) {
+    _username = s;
   }
 
-  set setEmail(String x) {
-    _email = x;
+  set setEmail(String s) {
+    _email = s;
   }
 
-  set setNote(String x) {
-    _note = x;
+  set setNote(String s) {
+    _note = s;
   }
 
-  set setPassword(String x) {
-    _password = x;
+  set setPassword(String s) {
+    _password = s;
   }
 
   // Getters
+  int get getId {
+    return _id;
+  }
+
   String get getName {
     return _name;
   }

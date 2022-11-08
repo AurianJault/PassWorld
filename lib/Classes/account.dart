@@ -1,15 +1,14 @@
 import 'package:encrypt/encrypt.dart';
-import 'package:test/Classes/password.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'chiffrement.dart';
-import 'password.dart';
+import 'package:test/Classes/vault.dart';
 import 'dart:io';
 
 class Account {
   late String _id;
   late Chiffrement _masterPassword;
   late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
-  late List<Password> _vault;
+  late Vault _vault;
   late List<TwoFA> _secondFactors;
 
   // pas sûr;
@@ -21,7 +20,6 @@ class Account {
       : key = Key.fromUtf8("my 32 length key...............u") {
     _id = id;
     _masterPassword = Chiffrement(mdp, key, iv);
-    _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
     authMethod = "conventional";
     // Charge la liste des comptes liés a ce compte
@@ -33,7 +31,6 @@ class Account {
     iv = iv;
     _id = id;
     _masterPassword = Chiffrement.old(salty, hashy);
-    _vault = List.empty(growable: true);
     //chargement("listCompte.txt");
   }
   Encrypted get hash {
@@ -48,7 +45,7 @@ class Account {
     return key;
   }
 
-  List<Password> get vlt {
+  Vault get vlt {
     return _vault;
   }
 
@@ -77,14 +74,6 @@ class Account {
   //   });
   // }
   // Ajoute un mdp à stocker
-  void ajouterMdp(Password p) {
-    _vault.add(p);
-  }
-
-  //supprime un mdp stocké
-  void supprimerMdp(Password p) {
-    _vault.remove(p);
-  }
 
   // AURIAN: Charge les mots de passe stockés dans un fichier (à upgrade)
   // REMI: Ne sert à rien pour l'appli finale

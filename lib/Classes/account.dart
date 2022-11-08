@@ -1,52 +1,41 @@
-import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
+import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
 import 'compte.dart';
 import 'dart:io';
-import 'storage_item.dart';
-import 'secureStorage.dart';
 import 'storage.dart';
 
-class Account
-{
+class Account {
   late String _id;
   late Chiffrement _masterPassword;
   late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late List<Compte> _vault;
   late List<TwoFA> _secondFactors;
-  Storage s = new Storage();
+  Storage s = Storage();
 
-
-  Account(String id, String mdp)
-  {
+  Account(String id, String mdp) {
     _id = id;
-    s.setKey(id);
-    s.setIV(id);
-    _masterPassword = Chiffrement(mdp,s.getKey(),s.getIV());
+    _masterPassword = Chiffrement(mdp, id);
     _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
     authMethod = "conventional";
-    // Charge la liste des comptes liés a ce compte
-    // chargement("listCompte.txt");
   }
 
-  Account.old(String id,Encrypted salty,Encrypted hashy,Key key, IV iv)
-  {
-    s.setKey(id);
-    s.setIV(id);
-    _masterPassword=Chiffrement.old(salty,hashy);
-    _vault=List.empty(growable: true);
+  Account.old(String id, Encrypted salty, Encrypted hashy) {
+    _masterPassword = Chiffrement.old(salty, hashy);
+    _vault = List.empty(growable: true);
     chargement("listCompte.txt");
   }
+
   Encrypted get hash {
     return _masterPassword.hash;
   }
+
   Encrypted get salt {
     return _masterPassword.salt;
   }
 
-  List<Compte> get vlt 
-  {
+  List<Compte> get vlt {
     return _vault;
   }
 
@@ -54,18 +43,18 @@ class Account
     return _id;
   }
 
-  List<TwoFA> get secondFactors{
+  List<TwoFA> get secondFactors {
     return _secondFactors;
   }
 
   @override
-  bool operator ==(Object c)
-  {
-    if(identical(this, c)) {
+  bool operator ==(Object c) {
+    if (identical(this, c)) {
       return true;
     }
     return false;
   }
+
   // Recherche un mot de passe dans la liste de mdp stocké pour un compte donné
   // String rechercherMdp(String nom, String id)
   // {
@@ -75,22 +64,22 @@ class Account
   //   });
   // }
   // Ajoute un mdp à stocker
-  void ajouterMdp(Compte compte)
-  {
+  void ajouterMdp(Compte compte) {
     _vault.add(compte);
   }
+
   //supprime un mdp stocké
-  void supprimerMdp(Compte compte)
-  {
+  void supprimerMdp(Compte compte) {
     _vault.remove(compte);
   }
+
   // Charge les mots de passe stockés dans un fichier (à upgrade)
-  void chargement(String fichier){
+  void chargement(String fichier) {
     var file = File(fichier);
     List<String> stream = file.readAsLinesSync();
     stream.forEach((element) {
-    var arr = element.split(' ');
-     _vault.add(Compte(arr[0],arr[1],arr[2],arr[3]));
+      var arr = element.split(' ');
+      _vault.add(Compte(arr[0], arr[1], arr[2], arr[3]));
     });
   }
 }

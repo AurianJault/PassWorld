@@ -1,7 +1,8 @@
+import 'package:test/Classes/password.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
-import 'compte.dart';
+import 'password.dart';
 import 'dart:io';
 import 'storage.dart';
 
@@ -9,7 +10,7 @@ class Account {
   late String _id;
   late Chiffrement _masterPassword;
   late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
-  late List<Compte> _vault;
+  late List<Password> _vault;
   late List<TwoFA> _secondFactors;
   Storage s = Storage();
 
@@ -35,7 +36,7 @@ class Account {
     return _masterPassword.salt;
   }
 
-  List<Compte> get vlt {
+  List<Password> get vlt {
     return _vault;
   }
 
@@ -64,12 +65,12 @@ class Account {
   //   });
   // }
   // Ajoute un mdp à stocker
-  void ajouterMdp(Compte compte) {
+  void ajouterMdp(Password compte) {
     _vault.add(compte);
   }
 
   //supprime un mdp stocké
-  void supprimerMdp(Compte compte) {
+  void supprimerMdp(Password compte) {
     _vault.remove(compte);
   }
 
@@ -79,7 +80,7 @@ class Account {
     List<String> stream = file.readAsLinesSync();
     stream.forEach((element) {
       var arr = element.split(' ');
-      _vault.add(Compte(arr[0], arr[1], arr[2], arr[3]));
+     // _vault.add(Password(arr[0], arr[1], arr[2], arr[3]));
     });
   }
 }

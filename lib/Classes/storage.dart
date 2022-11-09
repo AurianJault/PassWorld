@@ -21,10 +21,11 @@ class Storage {
 
   static Future<encrypt.Key> getKey(String id) async {
     const storer = FlutterSecureStorage();
-    var base = storer.read(key: "${id}Key");
-    // Problème avec String? et String
-      // Ne peut pas être nul on check si le login existe avant
-      // On peut afficher au user qu'il n'a pas importer sa clé sinon
+    bool testCle = await storer.containsKey(key: "${id}Key");
+    if(!testCle){
+      //mettre message d'erreur ici
+    }
+    var base =await storer.read(key: "${id}Key")??"";
     late final cle = encrypt.Key.fromBase64(base);
     return cle;
   }
@@ -32,11 +33,22 @@ class Storage {
 
   static Future<encrypt.IV> getIV(String id) async {
     const storer = FlutterSecureStorage();
-    var base = storer.read(key: "${id}IV");
-    // Problème avec String? et String
-      // Ne peut pas être nul on check si le login existe avant
-      // On peut afficher au user qu'il n'a pas importer sa clé sinon
+    bool testIV = await storer.containsKey(key: "${id}IV");
+    if(!testIV){
+      //mettre message d'erreur ici
+    }
+    String base =await storer.read(key: "${id}IV")??"";
     late final iv = encrypt.IV.fromBase64(base);
     return iv;
+  }
+
+  static Future<void> ajouterKeyIV(String id) async{
+    const storer = FlutterSecureStorage();
+    bool testKey = await storer.containsKey(key: "${id}IV");
+    bool testIV = await storer.containsKey(key: "${id}IV");
+    if(!testKey && !testIV){
+      //mettre message d'erreur ici
+    }
+    storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
   }
 }

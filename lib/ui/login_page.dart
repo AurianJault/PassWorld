@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:test/Classes/cle.dart';
-import 'package:test/Classes/authentificator.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 import 'package:test/ui/nav_bar.dart';
 import 'register_page.dart';
 
@@ -103,56 +101,14 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
-                    onTap: () async {
-                      /*if (BCrypt.hashpw(passwordController.text, salt) ==
+                    onTap: () {
+                      if (BCrypt.hashpw(passwordController.text, salt) ==
                               decrypt(crypt) &&
                           login == emailController.text) {
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(
                                 builder: (context) => const NavBar()));
-                      }*/ 
-                      final bool isAvailable = await NfcManager.instance.isAvailable();
-                      if (isAvailable){
-                        NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-                          final String otp = Authentificator.getOTPFromYubiKeyNFC(tag);
-                          if(otp.isNotEmpty){
-                            if(await Authentificator.yubikeyAuth("nicolas", otp)){
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                builder: (context) => const NavBar()));
-                            } else {
-                              showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: const Text('Erreur'),
-                                  content: const Text(
-                                      "otp invalide"),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('Ok'),
-                                      onPressed: () => Navigator.pop(context),
-                                    )
-                                  ],
-                                ));
-                            }
-                          } else {
-                            showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: const Text('Erreur'),
-                                  content: const Text(
-                                      "otp vide"),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('Ok'),
-                                      onPressed: () => Navigator.pop(context),
-                                    )
-                                  ],
-                                ));
-                          }
-                        });
                       } else {
                         showDialog(
                             context: context,

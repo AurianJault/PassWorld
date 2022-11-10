@@ -46,9 +46,20 @@ class Storage {
     const storer = FlutterSecureStorage();
     bool testKey = await storer.containsKey(key: "${id}IV");
     bool testIV = await storer.containsKey(key: "${id}IV");
+    if(testKey && testIV){
+      //mettre message d'erreur ici
+    }
+    storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
+  }
+
+  static Future<void> newMasterKey(String id) async{
+    const storer = FlutterSecureStorage();
+    bool testKey = await storer.containsKey(key: "${id}IV");
+    bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testKey && !testIV){
       //mettre message d'erreur ici
     }
+    // vérifier que tout est bien déchiffré avant
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
   }
 }

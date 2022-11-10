@@ -12,7 +12,6 @@ class Account {
   late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late List<Password> _vault;
   late List<TwoFA> _secondFactors;
-  Storage s = Storage();
 
   Account(String id, String mdp) {
     _id = id;

@@ -9,18 +9,28 @@ class Password {
   String? _email;
   String? _note;
   String _password;
-  final DateTime _creationDate = DateTime.now(); // never change
-  DateTime _modifDate = DateTime.now();
+  DateTime? _creationDate = DateTime.now(); 
+  DateTime? _modifDate = DateTime.now();
 
   // Constructor: [x,y] -> x and y are optional
-  Password(this._id, this._name, this._password,
-      [this._website, this._username, this._email, this._note]);
+  //Password(this._id, this._name, this._password, //old constructor
+  //    [this._website, this._username, this._email, this._note,this._creationDate,this._modifDate]);
 
-  // Password Getter ? WHY ?
-  Password get password {
-    return this;
+  Password(this._id, this._name, String? website,String? username,String? email,String? note,this._password,DateTime? creationDate,DateTime? modifDate){
+    _website=website;
+    _username=username;
+    _email=email;
+    _note=note;
+    if(creationDate==null || modifDate==null){
+      _creationDate=DateTime.now();
+      _modifDate=DateTime.now();
+    }else{
+      _creationDate=creationDate;
+      _modifDate=modifDate;
+    }
+
+    
   }
-
   // Methods
   // Update modifDate when password is modified
   void updateModifDate() {
@@ -79,6 +89,14 @@ class Password {
 
   String? get getPassword {
     return _password;
+  }
+
+  DateTime? get getCreationDate{
+    return _creationDate;
+  }
+
+  DateTime? get getModifDate{
+    return _modifDate;
   }
 
   // To string

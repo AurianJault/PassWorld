@@ -43,6 +43,7 @@ dependencies:
   update: ^0.3.1
   http: ^0.13.5
   google_nav_bar: ^5.0.6
+  sqlite3: ^1.9.1
 
 flutter_icons:
   android: "launcher_icon"

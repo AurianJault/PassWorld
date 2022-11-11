@@ -92,10 +92,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                   InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<dynamic>(
-                                builder: (context) => const LoginPage()));
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         'Sign in',

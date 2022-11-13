@@ -9,11 +9,11 @@ class EncryptFile implements Exception{
   // ignore: non_constant_identifier_names
   static void encrypt_file(String path) async{
     AesCrypt crypt = AesCrypt();
-    //crypt.setOverwriteMode(AesCryptOwMode.on);
+    crypt.setOverwriteMode(AesCryptOwMode.on);
     crypt.setPassword('my cool password');
     String encFilepath;
     try {
-      encFilepath = crypt.encryptTextToFileSync((await Storage.getKey("Pierre")).base64, path);
+      encFilepath = crypt.encryptTextToFileSync((await Storage.getKey("Pierre")).base64+(await Storage.getIV("Pierre")).base64, path);
       print('The encryption has been completed successfully.');
       print('Encrypted file: $encFilepath');
     } on AesCryptException catch (e) {
@@ -50,9 +50,11 @@ class EncryptFile implements Exception{
   }
 }
 
-/*
+
 void main(List<String> args) async{
   TestWidgetsFlutterBinding.ensureInitialized();
-  var test = EncryptFile.encrypt_file("test.txt");
-  //print(test);
-}*/
+  print(((await Storage.getIV("Pierre")).base64).length);
+  print(((await Storage.getKey("Pierre")).base64).length);
+  String test = EncryptFile.decrypt_file("test.txt")??"";
+  print(test.length);
+}

@@ -4,6 +4,7 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'storage_item.dart';
 import 'secureStorage.dart';
+import 'fileEncrypt.dart';
 
 class Storage {
   static final SecureStorage storage = SecureStorage();
@@ -44,7 +45,7 @@ class Storage {
 
   static Future<void> ajouterKeyIV(String id) async{
     const storer = FlutterSecureStorage();
-    bool testKey = await storer.containsKey(key: "${id}IV");
+    bool testKey = await storer.containsKey(key: "${id}Key");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(testKey && testIV){
       //mettre message d'erreur ici
@@ -61,5 +62,16 @@ class Storage {
     }
     // vérifier que tout est bien déchiffré avant
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
+  }
+
+  static Future<void> newMasterKeyFromFile(String path,String id) async{
+    const storer = FlutterSecureStorage();    
+    String keyIv = EncryptFile.decrypt_file(path)??"";
+    bool testKey = await storer.containsKey(key: "${id}Key");
+    bool testIV = await storer.containsKey(key: "${id}IV");
+    if(!testKey && !testIV){
+      //mettre message d'erreur ici
+    }
+    storing(encrypt.Key.fromBase64(keyIv.substring(0,43)), encrypt.IV.fromBase64(keyIv.substring(44)), id);
   }
 }

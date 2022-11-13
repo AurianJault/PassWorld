@@ -22,8 +22,6 @@ class Account {
     _masterPassword = Chiffrement(mdp, key, iv);
     _secondFactors = List.empty(growable: true);
     authMethod = {"conventional":true, "yubikey_only":false, "twoFA_with_yubikey":false};
-    // Charge la liste des comptes liés a ce compte
-    // chargement("listCompte.txt");
   }
 
   Account.old(String id, Encrypted salty, Encrypted hashy, Key key, IV iv)
@@ -31,7 +29,6 @@ class Account {
     iv = iv;
     _id = id;
     _masterPassword = Chiffrement.old(salty, hashy);
-    //chargement("listCompte.txt");
   }
   Encrypted get hash {
     return _masterPassword.hash;

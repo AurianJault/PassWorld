@@ -1,29 +1,30 @@
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
-import 'compte.dart';
+import 'package:test/Classes/vault.dart';
 import 'dart:io';
 import 'storage.dart';
 
 class Account {
   late String _id;
   late Chiffrement _masterPassword;
-  late String authMethod; // conventional, yubikey_only, twoFA_with_yubikey
-  late List<Compte> _vault;
+  late Map<String,bool> authMethod; // conventional, yubikey_only, twoFA_with_yubikey
+  late Vault _vault;
   late List<TwoFA> _secondFactors;
-
+  
   Account(String id, String mdp) {
     _id = id;
     _masterPassword = Chiffrement(mdp, id);
-    _vault = List.empty(growable: true);
+    // Initialiser vault
+    // _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
-    authMethod = "conventional";
+    authMethod = {"conventional":true, "yubikey_only":false, "twoFA_with_yubikey":false};
   }
 
   Account.old(String id, Encrypted salty, Encrypted hashy) {
     _masterPassword = Chiffrement.old(salty, hashy);
-    _vault = List.empty(growable: true);
-    chargement("listCompte.txt");
+    // Fonction changeant _vault
+    // _vault = List.empty(growable: true);
   }
 
   Encrypted get hash {
@@ -33,8 +34,7 @@ class Account {
   Encrypted get salt {
     return _masterPassword.salt;
   }
-
-  List<Compte> get vlt {
+  Vault get vlt {
     return _vault;
   }
 
@@ -52,33 +52,5 @@ class Account {
       return true;
     }
     return false;
-  }
-
-  // Recherche un mot de passe dans la liste de mdp stocké pour un compte donné
-  // String rechercherMdp(String nom, String id)
-  // {
-  //   _vault.forEach((element) {
-  //     if(nom == element.nom && id == element.id)
-  //     return mdp;
-  //   });
-  // }
-  // Ajoute un mdp à stocker
-  void ajouterMdp(Compte compte) {
-    _vault.add(compte);
-  }
-
-  //supprime un mdp stocké
-  void supprimerMdp(Compte compte) {
-    _vault.remove(compte);
-  }
-
-  // Charge les mots de passe stockés dans un fichier (à upgrade)
-  void chargement(String fichier) {
-    var file = File(fichier);
-    List<String> stream = file.readAsLinesSync();
-    stream.forEach((element) {
-      var arr = element.split(' ');
-      _vault.add(Compte(arr[0], arr[1], arr[2], arr[3]));
-    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,20 +41,26 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        InkWell(
+                      children: [
+                        const InkWell(
                           onTap: null,
                           child: Icon(
                             Icons.sort,
                             size: 34,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         InkWell(
-                          onTap: null,
-                          child: Icon(Icons.add, size: 34),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const AddPasswordPage()));
+                          },
+                          child: const Icon(Icons.add, size: 34),
                         ),
                       ],
                     ),

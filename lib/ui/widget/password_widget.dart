@@ -24,7 +24,7 @@ class PasswordWidget extends StatelessWidget {
       child: Container(
         height: h * 0.07,
         decoration: BoxDecoration(
-            color: Colors.grey[400],
+            color: Colors.grey[300],
             borderRadius: BorderRadius.circular(w * 0.02)),
         child: Padding(
           padding: EdgeInsets.all(w * 0.015),

@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:test/Classes/authentification.dart';
 import 'login_page.dart';
+import 'package:test/ui/nav_bar.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPage();
+}
+
+class _RegisterPage extends State<RegisterPage> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +46,11 @@ class RegisterPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12)),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: emailController,
+                      decoration:const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Email',
                       ),
@@ -46,11 +67,12 @@ class RegisterPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12)),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
                       obscureText: true,
-                      decoration: InputDecoration(
+                      controller: passwordController,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Password',
                       ),
@@ -68,15 +90,21 @@ class RegisterPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.deepPurple[300],
                         borderRadius: BorderRadius.circular(12)),
-                    child: const Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    )),
+                    child : InkWell (
+                      onTap: () {
+                        Authentification.register(emailController.text,passwordController.text);
+                      },
+                      child:const Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        )
+                      )
+                    )
+                    ),
               ),
               const SizedBox(height: 30),
 

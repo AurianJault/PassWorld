@@ -28,6 +28,7 @@ var db;
   @override
   List<Password> loadPasswords(){
     initPass();
+    // Faire un vault a lieu d'une liste de passworlds
     var passwords = List<Password>.empty(growable: true);
     final ResultSet resultSet = db.select('SELECT * FROM Passwords');
     for(final Row row in resultSet){

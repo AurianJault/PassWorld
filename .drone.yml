@@ -25,6 +25,7 @@ steps:
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar
+      - curl -V
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - unzip -o sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - cd sonar-scanner-$SONAR_SCANNER_VERSION-linux/

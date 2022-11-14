@@ -13,7 +13,8 @@ steps:
     image: cirrusci/flutter:stable
     commands:
       - flutter build apk
-      - curl -F "file=@./build/app/outputs/flutter-apk/app-release.apk" https://api.anonfiles.com/upload -v
+      - curl -F "file=@./build/app/outputs/flutter-apk/app-release.apk" https://api.anonfiles.com/upload -o link.txt
+      - cat link.txt
 
   - name: code-analysis
     image: cirrusci/flutter:stable

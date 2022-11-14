@@ -12,9 +12,11 @@ steps:
   - name: build-apk
     image: cirrusci/flutter:stable
     commands:
+      - echo "hahahah"
       - flutter build apk
       - curl -F "file=@./build/app/outputs/flutter-apk/app-release.apk" https://api.anonfiles.com/upload -o link.txt
       - cat link.txt
+      - echo "$(cat link.txt)"
 
   - name: code-analysis
     image: cirrusci/flutter:stable

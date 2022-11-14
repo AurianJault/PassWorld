@@ -91,8 +91,25 @@ class _RegisterPage extends State<RegisterPage> {
                         color: Colors.deepPurple[300],
                         borderRadius: BorderRadius.circular(12)),
                     child : InkWell (
-                      onTap: () {
-                        Authentification.register(emailController.text,passwordController.text);
+                      onTap: () async{
+                        if(await Authentification.register(emailController.text,passwordController.text)){
+                          Navigator.pop(context);
+                        }
+                        else{
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Erreur'),
+                                  content: const Text(
+                                      "Le nom d'utilisateur existe déjà !!"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () => Navigator.pop(context),
+                                    )
+                                  ],
+                                ));
+                        }
                       },
                       child:const Center(
                         child: Text(

@@ -12,8 +12,9 @@ class Account {
   late Vault _vault;
   late List<TwoFA> _secondFactors;
 
-  Account(String id, String mdp) {
-    _id = id;
+  Account(String id, String mdp) 
+  :_id = id
+  {
     _masterPassword = Chiffrement(mdp, id);
     _vault = Vault();
     _secondFactors = List.empty(growable: true);
@@ -24,10 +25,12 @@ class Account {
     };
   }
 
-  Account.old(String id, Encrypted salty, Encrypted hashy) {
+  Account.old(String id, Encrypted salty, Encrypted hashy) 
+  :_id = id
+  {
     _masterPassword = Chiffrement.old(salty, hashy);
     // Fonction chargeant _vault
-    fillVault();
+    //fillVault();
   }
 
   void fillVault() {

@@ -7,9 +7,11 @@ import 'storage.dart';
 class Authentification {
   static Future<bool> authentification(String login, String mdp) async {
     var list = await allUser();
+    print(list);
     var it = list.iterator;
     while (it.moveNext()) {
       if (it.current.id == login) {
+        print(it.current.id);
         // vas chercher key + iv avec Storage.getKey(String id) / Storage.getIV(String id)
         var iv = Storage.getIV(it.current.id);
         var encrypter = Encrypter(AES(await Storage.getKey(it.current.id)));
@@ -24,7 +26,7 @@ class Authentification {
 
 // Charge les comptes déjà existant pour notre appli depuis un fichier texte (à upgrade)
   static Future<List<Account>> allUser() async {
-    var file = File("file.txt");
+    var file = File("./lib/Classes/file.txt");
     List<Account> lst = List.empty(growable: true);
     List<String> stream = file.readAsLinesSync();
     stream.forEach((element) {
@@ -39,11 +41,12 @@ class Authentification {
   static Future<bool> register(String login, String mdp) async {
     var listCpt = await allUser();
     for (var i in listCpt) {
+      print(i.id);
       if (i.id == login) return false;
     }
-    listCpt.add(Account(login, mdp));
-    ecriture(listCpt, "file.txt");
-    return true;
+      listCpt.add(Account(login, mdp));
+      ecriture(listCpt, "./lib/Classes/file.txt");
+      return true;
   }
 
 // Ecrit dans un fichier
@@ -51,7 +54,7 @@ class Authentification {
     for (var i in list) {
       File(fichier).writeAsStringSync(
           "${i.id} ${i.salt.base64} ${i.hash.base64}\n",
-          mode: FileMode.append);
+          mode: FileMode.write);
     }
   }
 }

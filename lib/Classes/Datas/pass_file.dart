@@ -33,7 +33,7 @@ var db;
     final ResultSet resultSet = db.select('SELECT * FROM Passwords');
     for(final Row row in resultSet){
       if(row['creationDate'].toString()!='null'){
-        passwords.add(Password(row['id'],row['name'].toString(),row['password'],row['website'].toString(),row['username'].toString(),row['email'].toString(),row['note'].toString(),DateTime.parse(row['creationDate'].toString()),DateTime.parse(row['modifDate'].toString())));
+        passwords.add(Password.load(row['id'],row['name'].toString(),row['password'],DateTime.parse(row['creationDate'].toString()),DateTime.parse(row['modifDate'].toString()),row['website'].toString(),row['username'].toString(),row['email'].toString(),row['note'].toString()));
       }
     }
     return passwords;

@@ -1,30 +1,44 @@
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
-import 'package:test/Classes/vault.dart';
-import 'dart:io';
-import 'storage.dart';
+import 'vault.dart';
+import 'Datas/pass_file.dart';
 
 class Account {
   late String _id;
   late Chiffrement _masterPassword;
-  late Map<String,bool> authMethod; // conventional, yubikey_only, twoFA_with_yubikey
+  late Map<String, bool>
+      authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late Vault _vault;
   late List<TwoFA> _secondFactors;
-  
+
   Account(String id, String mdp) {
     _id = id;
     _masterPassword = Chiffrement(mdp, id);
-    // Initialiser vault
-    // _vault = List.empty(growable: true);
+    _vault = Vault();
     _secondFactors = List.empty(growable: true);
-    authMethod = {"conventional":true, "yubikey_only":false, "twoFA_with_yubikey":false};
+    authMethod = {
+      "conventional": true,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false
+    };
   }
 
   Account.old(String id, Encrypted salty, Encrypted hashy) {
     _masterPassword = Chiffrement.old(salty, hashy);
-    // Fonction changeant _vault
-    // _vault = List.empty(growable: true);
+    // Fonction chargeant _vault
+    fillVault();
+  }
+
+  void fillVault() {
+    PassFile base = PassFile(_id);
+    _vault.passwordList = base.loadPasswords();
+  }
+
+  void saveFile() {
+    PassFile base = PassFile(_id);
+    // Check File ?
+    base.savePasswords(_vault.passwordList);
   }
 
   Encrypted get hash {
@@ -34,6 +48,7 @@ class Account {
   Encrypted get salt {
     return _masterPassword.salt;
   }
+
   Vault get vlt {
     return _vault;
   }

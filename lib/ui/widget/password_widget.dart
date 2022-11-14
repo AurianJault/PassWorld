@@ -14,37 +14,43 @@ class PasswordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Media Queries
+    var size = MediaQuery.of(context).size;
+    double w = size.width * MediaQuery.of(context).devicePixelRatio;
+    double h = size.height * MediaQuery.of(context).devicePixelRatio;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: h * 0.015),
       child: Container(
-        height: 70,
+        height: h * 0.07,
         decoration: BoxDecoration(
-            color: Colors.grey[400], borderRadius: BorderRadius.circular(12)),
+            color: Colors.grey[400],
+            borderRadius: BorderRadius.circular(w * 0.02)),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(w * 0.015),
           child: Row(
             children: [
               Image.asset(
                 'assets/$image',
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16),
+                padding: EdgeInsets.only(left: w * 0.02),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: EdgeInsets.symmetric(vertical: w * 0.005),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         website,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 19,
+                          fontSize: w * 0.035,
                         ),
                       ),
                       Text(
                         email,
-                        style: const TextStyle(
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontSize: w * 0.03,
                         ),
                       )
                     ],
@@ -52,9 +58,9 @@ class PasswordWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const Icon(
+              Icon(
                 Icons.copy,
-                size: 40,
+                size: w * 0.08,
               )
             ],
           ),

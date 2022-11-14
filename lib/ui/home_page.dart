@@ -18,11 +18,14 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
-
   final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -32,21 +35,21 @@ class _HomePageState extends State<HomePage> {
             // TITLE BAR + ICONS
             //------------------
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  const Text('Home',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
+                  Text('Home',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: w * 0.09)),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const InkWell(
+                        InkWell(
                           onTap: null,
                           child: Icon(
                             Icons.sort,
-                            size: 34,
+                            size: w * 0.06,
                           ),
                         ),
                         const SizedBox(
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context) =>
                                         const AddPasswordPage()));
                           },
-                          child: const Icon(Icons.add, size: 34),
+                          child: Icon(Icons.add, size: w * 0.06),
                         ),
                       ],
                     ),
@@ -72,15 +75,16 @@ class _HomePageState extends State<HomePage> {
             // SEARCH BOX
             //-----------
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.04, vertical: h * 0.01),
               child: Container(
-                height: 60,
+                height: h * 0.06,
                 decoration: BoxDecoration(
                     color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(30)),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Center(
+                    borderRadius: BorderRadius.circular(w * 0.06)),
+                child: Padding(
+                  padding: EdgeInsets.only(left: w * 0.03),
+                  child: const Center(
                     child: TextField(
                       style: TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
@@ -99,13 +103,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            SizedBox(
+              height: h * 0.03,
+            ),
             //------------------
             // PASSWORD LISTVIEW
             //------------------
             Flexible(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: EdgeInsets.symmetric(horizontal: w * 0.04),
                 child: ScrollConfiguration(
                   behavior: ScrollConfiguration.of(context)
                       .copyWith(scrollbars: false),

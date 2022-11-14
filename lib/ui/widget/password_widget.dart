@@ -16,8 +16,8 @@ class PasswordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Media Queries
     var size = MediaQuery.of(context).size;
-    double w = size.width * MediaQuery.of(context).devicePixelRatio;
-    double h = size.height * MediaQuery.of(context).devicePixelRatio;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
 
     return Padding(
       padding: EdgeInsets.only(bottom: h * 0.015),

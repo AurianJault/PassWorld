@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/widget/add_password_input.dart';
 
+// Page to add new passwords to Vault
 class AddPasswordPage extends StatefulWidget {
   const AddPasswordPage({Key? key}) : super(key: key);
 
@@ -9,7 +10,15 @@ class AddPasswordPage extends StatefulWidget {
 }
 
 class _HealthPageState extends State<AddPasswordPage> {
+  // Array of TextFormField labelText
   final name = ['Name', 'E-Mail', 'Username', 'Password', 'Notes'];
+
+  // Controllers for all inputs
+  TextEditingController nameCtrl = TextEditingController();
+  TextEditingController mailCtrl = TextEditingController();
+  TextEditingController usernameCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+  TextEditingController notesCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +26,7 @@ class _HealthPageState extends State<AddPasswordPage> {
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
+
     // Widget
     return Scaffold(
       backgroundColor: Colors.white,
@@ -60,25 +70,33 @@ class _HealthPageState extends State<AddPasswordPage> {
                         borderRadius: BorderRadius.circular(w * 0.01)),
                     child: Column(
                       children: [
-                        AddPasswordInputWidget(name: name[0]),
-                        AddPasswordInputWidget(name: name[1]),
-                        AddPasswordInputWidget(name: name[2]),
-                        AddPasswordInputWidget(name: name[3]),
+                        AddPasswordInputWidget(
+                            name: name[0], controlleur: nameCtrl),
+                        AddPasswordInputWidget(
+                            name: name[1], controlleur: mailCtrl),
+                        AddPasswordInputWidget(
+                            name: name[2], controlleur: usernameCtrl),
+                        AddPasswordInputWidget(
+                            name: name[3], controlleur: passwordCtrl),
                         SizedBox(height: h * 0.02),
                         Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.deepPurple[300],
-                                borderRadius: BorderRadius.circular(w * 0.04)),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: w * 0.03, vertical: h * 0.01),
-                              child: Text(
-                                'Generate',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: w * 0.065),
+                          child: InkWell(
+                            onTap: null,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.deepPurple[300],
+                                  borderRadius:
+                                      BorderRadius.circular(w * 0.04)),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: w * 0.03, vertical: h * 0.01),
+                                child: Text(
+                                  'Generate',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: w * 0.065),
+                                ),
                               ),
                             ),
                           ),
@@ -106,7 +124,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                             color: Colors.black,
                             fontSize: w * 0.032),
                         cursorColor: Colors.black,
-                        controller: null,
+                        controller: notesCtrl,
                         decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -136,7 +154,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                             width: w * 0.35,
                             decoration: BoxDecoration(
                                 color: Colors.red[400],
-                                borderRadius: BorderRadius.circular(w * 0.07)),
+                                borderRadius: BorderRadius.circular(w * 0.04)),
                             child: Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: w * 0.03, vertical: h * 0.01),
@@ -156,7 +174,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                             width: w * 0.35,
                             decoration: BoxDecoration(
                                 color: Colors.green[400],
-                                borderRadius: BorderRadius.circular(w * 0.07)),
+                                borderRadius: BorderRadius.circular(w * 0.04)),
                             child: Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: w * 0.03, vertical: h * 0.01),

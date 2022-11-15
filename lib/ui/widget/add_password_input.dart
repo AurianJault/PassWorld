@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
+// Widget for all inputs of addPasswordPage
 class AddPasswordInputWidget extends StatelessWidget {
+  // Variables
   final String name;
+  final TextEditingController controlleur;
 
-  const AddPasswordInputWidget({super.key, required this.name});
-
-  // Variable for data binding -- will change when list of password
-  // final String website;
-  // final String image;
-  // final String email;
+  // Constructor
+  const AddPasswordInputWidget(
+      {super.key, required this.name, required this.controlleur});
 
   @override
   Widget build(BuildContext context) {
     // Media Query
     var size = MediaQuery.of(context).size;
     var w = size.width;
-    var h = size.height;
+
     // Widget
     return Padding(
       padding: EdgeInsets.all(w * 0.02),
@@ -25,7 +25,7 @@ class AddPasswordInputWidget extends StatelessWidget {
             color: Colors.black,
             fontSize: w * 0.032),
         cursorColor: Colors.black,
-        controller: null,
+        controller: controlleur,
         decoration: InputDecoration(
             enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black, width: w * 0.004)),

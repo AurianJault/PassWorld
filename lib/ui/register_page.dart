@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  // Controllers for passw and mail
+  TextEditingController mailCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +34,11 @@ class RegisterPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12)),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: mailCtrl,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Email',
                       ),
@@ -46,11 +55,12 @@ class RegisterPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12)),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: passwordCtrl,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Password',
                       ),

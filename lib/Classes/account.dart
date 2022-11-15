@@ -2,12 +2,12 @@ import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'chiffrement.dart';
 import 'package:test/Classes/vault.dart';
-import 'dart:io';
 
 class Account {
   late String _id;
   late Chiffrement _masterPassword;
-  late Map<String,bool> authMethod; // conventional, yubikey_only, twoFA_with_yubikey
+  late Map<String, bool>
+      authMethod; // conventional, yubikey_only, twoFA_with_yubikey
   late Vault _vault;
   late List<TwoFA> _secondFactors;
 
@@ -21,7 +21,11 @@ class Account {
     _id = id;
     _masterPassword = Chiffrement(mdp, key, iv);
     _secondFactors = List.empty(growable: true);
-    authMethod = {"conventional":true, "yubikey_only":false, "twoFA_with_yubikey":false};
+    authMethod = {
+      "conventional": true,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false
+    };
   }
 
   Account.old(String id, Encrypted salty, Encrypted hashy, Key key, IV iv)

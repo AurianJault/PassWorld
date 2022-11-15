@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Widget for password objects in home page listview
+
 class PasswordWidget extends StatelessWidget {
   // Variable for data binding -- will change when list of password
   final String website;
@@ -14,11 +16,12 @@ class PasswordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Media Queries
+    // Media Query
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
 
+    // Widget
     return Padding(
       padding: EdgeInsets.only(bottom: h * 0.015),
       child: Container(

@@ -3,6 +3,8 @@ import 'storage_item.dart';
 
 class SecureStorage{
 
+  final options = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
      encryptedSharedPreferences: true,
    );
@@ -12,7 +14,7 @@ class SecureStorage{
 
   // Ajoute l'item au storage
   Future<void> writeSecureData(StorageItem newItem) async {
-    await _secureStorage.write(key: newItem.key, value: newItem.value, aOptions: _getAndroidOptions());
+    await _secureStorage.write(key: newItem.key, value: newItem.value, aOptions: _getAndroidOptions(), iOptions: options);
   }
 
   // Lit l'item du storage

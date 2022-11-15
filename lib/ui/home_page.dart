@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
+import 'package:test/ui/widget/page_title_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,15 +11,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Stub like
   final _email = [
     'aurain@lecaiman.crocs',
     'tim@leviking.thor',
     'nicolas@napasdebras.manchot',
     'aurian@lecaiman.crocs',
   ];
-
   final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
   final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
+
+  // Controller for search bar
+  TextEditingController searchCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +42,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  Text('Home',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: w * 0.09)),
+                  const PageTitleW(title: 'Home'),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -84,12 +86,12 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(w * 0.06)),
                 child: Padding(
                   padding: EdgeInsets.only(left: w * 0.03),
-                  child: const Center(
+                  child: Center(
                     child: TextField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
-                      controller: null,
-                      decoration: InputDecoration(
+                      controller: searchCtrl,
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.search,
                           color: Colors.white,

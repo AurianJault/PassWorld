@@ -36,6 +36,10 @@ class _LoginPageState extends State<LoginPage> {
     );
     final crypt = encrypt(hash);
 
+    var size = MediaQuery.of(context).size;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height;
+
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(

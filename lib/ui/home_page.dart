@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
+import 'package:test/ui/widget/page_title_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,9 +39,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  Text('Home',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: w * 0.09)),
+                  const PageTitleW(title: 'Home'),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

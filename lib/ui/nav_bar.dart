@@ -33,8 +33,8 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     // Media Query
     var size = MediaQuery.of(context).size;
-    double w = size.width * MediaQuery.of(context).devicePixelRatio;
-    double h = size.height * MediaQuery.of(context).devicePixelRatio;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
 
     return Scaffold(
       body: _pages[_selectedIndex],

@@ -13,6 +13,11 @@ class _HealthPageState extends State<AddPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Media Query
+    var size = MediaQuery.of(context).size;
+    var w = size.width;
+    var h = size.height;
+    // Widget
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -23,92 +28,92 @@ class _HealthPageState extends State<AddPasswordPage> {
             // PAGE TITLE
             //-----------
             Container(
-              height: 80,
+              height: h * 0.075,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[300],
                 borderRadius:
-                    const BorderRadius.vertical(bottom: Radius.circular(10)),
+                    BorderRadius.vertical(bottom: Radius.circular(w * 0.02)),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Add Password',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      fontSize: 20),
+                      fontSize: w * 0.04),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: h * 0.03,
             ),
             //----------------
             // INPUT LIST VIEW
             //----------------
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(w * 0.03),
               child: Column(
                 children: [
                   Container(
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(w * 0.01)),
                     child: Column(
                       children: [
                         AddPasswordInputWidget(name: name[0]),
                         AddPasswordInputWidget(name: name[1]),
                         AddPasswordInputWidget(name: name[2]),
                         AddPasswordInputWidget(name: name[3]),
-                        const SizedBox(height: 20),
+                        SizedBox(height: h * 0.02),
                         Center(
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.deepPurple[300],
-                                borderRadius: BorderRadius.circular(30)),
-                            child: const Padding(
+                                borderRadius: BorderRadius.circular(w * 0.04)),
+                            child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10),
+                                  horizontal: w * 0.03, vertical: h * 0.01),
                               child: Text(
                                 'Generate',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 35),
+                                    fontSize: w * 0.065),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
+                        SizedBox(
+                          height: h * 0.03,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: h * 0.03,
                   ),
                   Container(
                     decoration: BoxDecoration(
                         color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(w * 0.01)),
                     child: Padding(
-                      padding: const EdgeInsets.all(12),
+                      padding: EdgeInsets.all(w * 0.02),
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
-                            fontSize: 18),
+                            fontSize: w * 0.032),
                         cursorColor: Colors.black,
                         controller: null,
                         decoration: InputDecoration(
-                            enabledBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.black, width: 2)),
-                            focusedBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.green, width: 2)),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: w * 0.004)),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: w * 0.004)),
                             labelText: 'Notes',
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -117,50 +122,54 @@ class _HealthPageState extends State<AddPasswordPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 250),
+                  SizedBox(height: h * 0.04),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      // Cancel Button
                       InkWell(
                         onTap: () {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            width: 200,
+                            width: w * 0.35,
                             decoration: BoxDecoration(
                                 color: Colors.red[400],
-                                borderRadius: BorderRadius.circular(30)),
-                            child: const Padding(
+                                borderRadius: BorderRadius.circular(w * 0.07)),
+                            child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10),
+                                    horizontal: w * 0.03, vertical: h * 0.01),
                                 child: Center(
                                   child: Text(
                                     'Cancel',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 35),
+                                        fontSize: w * 0.065),
                                   ),
                                 ))),
                       ),
-                      Container(
-                          width: 200,
-                          decoration: BoxDecoration(
-                              color: Colors.green[400],
-                              borderRadius: BorderRadius.circular(30)),
-                          child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10),
-                              child: Center(
-                                child: Text(
-                                  'Save',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 35),
-                                ),
-                              ))),
+                      InkWell(
+                        onTap: null,
+                        child: Container(
+                            width: w * 0.35,
+                            decoration: BoxDecoration(
+                                color: Colors.green[400],
+                                borderRadius: BorderRadius.circular(w * 0.07)),
+                            child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: w * 0.03, vertical: h * 0.01),
+                                child: Center(
+                                  child: Text(
+                                    'Save',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: w * 0.065),
+                                  ),
+                                ))),
+                      ),
                     ],
                   )
                 ],

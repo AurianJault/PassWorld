@@ -12,18 +12,25 @@ class AddPasswordInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Media Query
+    var size = MediaQuery.of(context).size;
+    var w = size.width;
+    var h = size.height;
+    // Widget
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(w * 0.02),
       child: TextFormField(
-        style: const TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: w * 0.032),
         cursorColor: Colors.black,
         controller: null,
         decoration: InputDecoration(
-            enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black, width: 2)),
-            focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.green, width: 2)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: w * 0.004)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green, width: w * 0.004)),
             labelText: name,
             labelStyle: TextStyle(
               fontWeight: FontWeight.bold,

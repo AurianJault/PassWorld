@@ -41,7 +41,6 @@ class Authentification {
   static Future<bool> register(String login, String mdp) async {
     var listCpt = await allUser();
     for (var i in listCpt) {
-      print(i.id);
       if (i.id == login) return false;
     }
       listCpt.add(Account(login, mdp));

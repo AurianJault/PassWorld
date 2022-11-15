@@ -3,12 +3,16 @@ import 'storage_item.dart';
 
 class SecureStorage{
 
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+     encryptedSharedPreferences: true,
+   );
+
   // Initialisation du storage
   final _secureStorage = const FlutterSecureStorage();
 
   // Ajoute l'item au storage
   Future<void> writeSecureData(StorageItem newItem) async {
-    await _secureStorage.write(key: newItem.key, value: newItem.value);
+    await _secureStorage.write(key: newItem.key, value: newItem.value, aOptions: _getAndroidOptions());
   }
 
   // Lit l'item du storage

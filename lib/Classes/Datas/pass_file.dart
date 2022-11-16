@@ -1,6 +1,7 @@
 import 'package:sqlite3/sqlite3.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/Classes/Datas/i_data_strategy.dart';
+import 'package:test/Classes/vault.dart';
 
 class PassFile extends IDataStrategy {
   var db;
@@ -25,32 +26,32 @@ class PassFile extends IDataStrategy {
   }
 
   @override
-  List<Password> loadPasswords() {
+  Vault loadPasswords() {
     initPass();
-    var passwords = List<Password>.empty(growable: true);
+    // Faire un vault a lieu d'une liste de passworlds
+    var vaul = Vault();
     final ResultSet resultSet = db.select('SELECT * FROM Passwords');
     for (final Row row in resultSet) {
       if (row['creationDate'].toString() != 'null') {
-        passwords.add(Password.load(
-          row['id'],
-          row['name'].toString(),
-          row['password'],
-          DateTime.parse(row['creationDate'].toString()),
-          DateTime.parse(row['modifDate'].toString()),
-          row['website'].toString(),
-          row['username'].toString(),
-          row['email'].toString(),
-          row['note'].toString(),
-        ));
+        vaul.addPassword(Password.load(
+            row['id'],
+            row['name'].toString(),
+            row['password'],
+            DateTime.parse(row['creationDate'].toString()),
+            DateTime.parse(row['modifDate'].toString()),
+            row['website'].toString(),
+            row['username'].toString(),
+            row['email'].toString(),
+            row['note'].toString()));
       }
     }
-    return passwords;
+    return vaul;
   }
 
   @override
-  void savePasswords(List<Password> passwords) {
+  void savePasswords(Vault passwords) {
     db.execute("DELETE FROM Passwords");
-    for (var element in passwords) {
+    for (var element in passwords.passwordList) {
       insertValue(
           element.getId,
           element.getName,

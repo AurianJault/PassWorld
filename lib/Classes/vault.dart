@@ -4,6 +4,12 @@ class Vault {
   // Fields
   final List<Password> _passwordList = List.empty(growable: true);
 
+  set passwordList(List<Password> passwordList) {}
+
+  List<Password> get passwordList{
+    return _passwordList;
+  }
+
   // Methods
   // Add Password to passwordList
   void addPassword(Password p) {

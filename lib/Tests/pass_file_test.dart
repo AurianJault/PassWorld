@@ -2,7 +2,8 @@ import 'package:test/Classes/Datas/i_data_strategy.dart';
 import 'package:test/Classes/Datas/pass_file.dart';
 import 'package:test/Classes/password.dart';
 
-void main() {
+/*
+void main(){
   IDataStrategy stub = PassFile('theo');
   List<Password> passwords = stub.loadPasswords();
 
@@ -15,4 +16,7 @@ void main() {
 
   print(passwords);
   stub.savePasswords(passwords);
-}
+
+  
+
+}*/

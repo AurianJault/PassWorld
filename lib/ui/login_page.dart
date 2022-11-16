@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
+import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
 import 'register_page.dart';
+import '../Classes/authentification.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -105,10 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
-                    onTap: () {
-                      if (BCrypt.hashpw(passwordController.text, salt) ==
-                              decrypt(crypt) &&
-                          login == emailController.text) {
+                    onTap: () async{
+                      if (await Authentification.authentification((emailController.text).trim(),(passwordController.text).trim())) {
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(

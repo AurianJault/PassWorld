@@ -92,7 +92,7 @@ class _RegisterPage extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12)),
                     child : InkWell (
                       onTap: () async{
-                        if(await Authentification.register(emailController.text,passwordController.text)){
+                        if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
                           Navigator.pop(context);
                         }
                         else{

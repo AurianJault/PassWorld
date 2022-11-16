@@ -7,7 +7,6 @@ import 'storage.dart';
 class Authentification {
   static Future<bool> authentification(String login, String mdp) async {
     var list = await allUser();
-    print(list);
     var it = list.iterator;
     while (it.moveNext()) {
       if (it.current.id == login) {

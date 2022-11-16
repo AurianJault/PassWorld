@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:test/Classes/authentification.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterPage> createState() => _RegisterPage();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  // Controllers for passw and mail
-  TextEditingController mailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
+class _RegisterPage extends State<RegisterPage> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +47,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: mailCtrl,
-                      decoration: const InputDecoration(
+                      controller: emailController,
+                      decoration:const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Email',
                       ),
@@ -58,8 +68,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
-                      controller: passwordCtrl,
                       obscureText: true,
+                      controller: passwordController,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Password',
@@ -78,15 +88,38 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: BoxDecoration(
                         color: Colors.deepPurple[300],
                         borderRadius: BorderRadius.circular(12)),
-                    child: const Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    )),
+                    child : InkWell (
+                      onTap: () async{
+                        if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
+                          Navigator.pop(context);
+                        }
+                        else{
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Erreur'),
+                                  content: const Text(
+                                      "Le nom d'utilisateur existe déjà !!"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () => Navigator.pop(context),
+                                    )
+                                  ],
+                                ));
+                        }
+                      },
+                      child:const Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        )
+                      )
+                    )
+                    ),
               ),
               const SizedBox(height: 30),
 

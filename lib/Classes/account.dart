@@ -1,7 +1,8 @@
-import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
+import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
-import 'package:test/Classes/vault.dart';
+import 'vault.dart';
+import 'Datas/pass_file.dart';
 
 class Account {
   late String _id;
@@ -11,15 +12,11 @@ class Account {
   late Vault _vault;
   late List<TwoFA> _secondFactors;
 
-  // pas sûr;
-  // besoin de le créer avec l'iv et la clé que quand nécessaire
-  Key key; // marche pas avec une autre clé
-  IV iv = IV.fromLength(16);
-
-  Account(String id, String mdp)
-      : key = Key.fromUtf8("my 32 length key...............u") {
-    _id = id;
-    _masterPassword = Chiffrement(mdp, key, iv);
+  Account(String id, String mdp) 
+  :_id = id
+  {
+    _masterPassword = Chiffrement(mdp, id);
+    _vault = Vault();
     _secondFactors = List.empty(growable: true);
     authMethod = {
       "conventional": true,
@@ -28,22 +25,30 @@ class Account {
     };
   }
 
-  Account.old(String id, Encrypted salty, Encrypted hashy, Key key, IV iv)
-      : this.key = key {
-    iv = iv;
-    _id = id;
+  Account.old(String id, Encrypted salty, Encrypted hashy) 
+  :_id = id
+  {
     _masterPassword = Chiffrement.old(salty, hashy);
+    // Fonction chargeant _vault
+    //fillVault();
   }
+  void fillVault() {
+    PassFile base = PassFile(_id);
+    _vault = base.loadPasswords();
+  }
+
+  void saveFile() {
+    PassFile base = PassFile(_id);
+    // Check File ?
+    base.savePasswords(_vault);
+  }
+
   Encrypted get hash {
     return _masterPassword.hash;
   }
 
   Encrypted get salt {
     return _masterPassword.salt;
-  }
-
-  Key get cle {
-    return key;
   }
 
   Vault get vlt {
@@ -65,27 +70,4 @@ class Account {
     }
     return false;
   }
-
-  // Recherche un mot de passe dans la liste de mdp stocké pour un compte donné
-  // String rechercherMdp(String nom, String id)
-  // {
-  //   _vault.forEach((element) {
-  //     if(nom == element.nom && id == element.id)
-  //     return mdp;
-  //   });
-  // }
-  // Ajoute un mdp à stocker
-
-  // AURIAN: Charge les mots de passe stockés dans un fichier (à upgrade)
-  // REMI: Ne sert à rien pour l'appli finale
-  /*
-  void chargement(String fichier) {
-    var file = File(fichier);
-    List<String> stream = file.readAsLinesSync();
-    stream.forEach((element) {
-      var arr = element.split(' ');
-      _vault.add(Password(arr[0], arr[1], arr[2], arr[3]));
-    });
-  }
-  */
 }

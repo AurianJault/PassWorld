@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
+import 'package:test/ui/widget/page_title_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,19 +11,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Stub like
   final _email = [
     'aurain@lecaiman.crocs',
     'tim@leviking.thor',
     'nicolas@napasdebras.manchot',
     'aurian@lecaiman.crocs',
   ];
-
   final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
-
   final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
+
+  // Controller for search bar
+  TextEditingController searchCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -32,21 +39,19 @@ class _HomePageState extends State<HomePage> {
             // TITLE BAR + ICONS
             //------------------
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  const Text('Home',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
+                  const PageTitleW(title: 'Home'),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const InkWell(
+                        InkWell(
                           onTap: null,
                           child: Icon(
                             Icons.sort,
-                            size: 34,
+                            size: w * 0.06,
                           ),
                         ),
                         const SizedBox(
@@ -60,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context) =>
                                         const AddPasswordPage()));
                           },
-                          child: const Icon(Icons.add, size: 34),
+                          child: Icon(Icons.add, size: w * 0.06),
                         ),
                       ],
                     ),
@@ -72,20 +77,21 @@ class _HomePageState extends State<HomePage> {
             // SEARCH BOX
             //-----------
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.04, vertical: h * 0.01),
               child: Container(
-                height: 60,
+                height: h * 0.06,
                 decoration: BoxDecoration(
                     color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(30)),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20),
+                    borderRadius: BorderRadius.circular(w * 0.06)),
+                child: Padding(
+                  padding: EdgeInsets.only(left: w * 0.03),
                   child: Center(
                     child: TextField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
-                      controller: null,
-                      decoration: InputDecoration(
+                      controller: searchCtrl,
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.search,
                           color: Colors.white,
@@ -99,13 +105,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            SizedBox(
+              height: h * 0.03,
+            ),
             //------------------
             // PASSWORD LISTVIEW
             //------------------
             Flexible(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: EdgeInsets.symmetric(horizontal: w * 0.04),
                 child: ScrollConfiguration(
                   behavior: ScrollConfiguration.of(context)
                       .copyWith(scrollbars: false),

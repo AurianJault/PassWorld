@@ -31,20 +31,27 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
+    // Media Query
+    var size = MediaQuery.of(context).size;
+    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
         color: Colors.deepPurple[300],
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+          padding:
+              EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.02),
           child: GNav(
             backgroundColor: const Color.fromARGB(255, 149, 117, 205),
             tabBackgroundColor: Colors.white,
             color: Colors.white,
             activeColor: Colors.black,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            gap: 8,
-            iconSize: 34,
+            padding:
+                EdgeInsets.symmetric(horizontal: w * 0.04, vertical: h * 0.015),
+            gap: w * 0.012,
+            iconSize: w * 0.06,
             tabs: const [
               GButton(
                 icon: Icons.home,

@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async{
-                      if (await Authentification.authentification(emailController.text, passwordController.text)) {
+                      if (await Authentification.authentification((emailController.text).trim(),(passwordController.text).trim())) {
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(

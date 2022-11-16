@@ -3,7 +3,7 @@ import 'storage_item.dart';
 
 class SecureStorage{
 
-  final options = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+  final options =const IOSOptions(accessibility: KeychainAccessibility.first_unlock);
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
      encryptedSharedPreferences: true,

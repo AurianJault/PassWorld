@@ -50,10 +50,11 @@ class Authentification {
 
 // Ecrit dans un fichier
   static void ecriture(List<Account> list, String fichier) async {
+    File(fichier).writeAsStringSync("", mode: FileMode.write);
     for (var i in list) {
       File(fichier).writeAsStringSync(
           "${i.id} ${i.salt.base64} ${i.hash.base64}\n",
-          mode: FileMode.write);
+          mode: FileMode.writeOnlyAppend);
     }
   }
 }

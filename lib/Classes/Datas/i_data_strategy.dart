@@ -1,6 +1,7 @@
 import 'package:test/Classes/password.dart';
+import 'package:test/Classes/vault.dart';
 
 abstract class IDataStrategy{
-  List<Password> loadPasswords();
-  void savePasswords(List<Password> passwords);
+  Vault loadPasswords();
+  void savePasswords(Vault passwords);
 }

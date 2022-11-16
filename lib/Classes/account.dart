@@ -32,16 +32,15 @@ class Account {
     // Fonction chargeant _vault
     //fillVault();
   }
-
   void fillVault() {
     PassFile base = PassFile(_id);
-    _vault.passwordList = base.loadPasswords();
+    _vault = base.loadPasswords();
   }
 
   void saveFile() {
     PassFile base = PassFile(_id);
     // Check File ?
-    base.savePasswords(_vault.passwordList);
+    base.savePasswords(_vault);
   }
 
   Encrypted get hash {

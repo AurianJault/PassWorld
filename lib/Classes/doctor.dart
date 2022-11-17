@@ -3,13 +3,9 @@ import 'package:test/Classes/password.dart';
 import 'package:password_strength/password_strength.dart';
 
 class Doctor {
-  // list des fonctions a faire
-  // Check nbr de fois used pour un mdp
   static List reused(Account user) {
     List<Password> list = user.vlt.passwordList;
     var res = [];
-    // Pour chaque element de la list :
-    // Check si ce mdp est plus d'une fois dans la même liste
     list.forEach((element) {
       int count = 0;
       var pwd = element.getPassword;
@@ -23,8 +19,9 @@ class Doctor {
     return res;
   }
 
-  // double strength = estimatePasswordStrength(password);
-  // Check la force de chaque mdp
+  // retourne une liste de deux tableaux
+  // Res[0] --> Listes de Passwords "Moyen" (Affichage Orange)
+  // Res[1] --> Listes de Passwords "Trop faible" (Affichage Rouge)
   static List strenght(Account user) {
     var orange = [];
     var red = [];
@@ -43,7 +40,6 @@ class Doctor {
     return res;
   }
 
-  // Si le mdp est updated
   static List timeUsed(Account user) {
     List<Password> list = user.vlt.passwordList;
     var res = [];
@@ -53,7 +49,7 @@ class Doctor {
       if (toDay.year != date.year) {
         res.add(element);
       } else {
-        if (toDay.month - date.month > 1) res.add(element);
+        if (toDay.month - date.month > 6) res.add(element);
       }
     });
     return res;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:test/Classes/account.dart';
 import 'package:test/ui/home_page.dart' show HomePage;
 import 'package:test/ui/settings_page.dart' show SettingsPage;
 

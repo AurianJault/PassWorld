@@ -16,13 +16,25 @@ class Doctor {
         if (i.getPassword == pwd) count++;
       }
       if (count > 1) {
-        if (!res.contains(element))res.add(element);
+        if (!res.contains(element)) res.add(element);
       }
     });
     return res;
   }
   // Check la force de chaque mdp
-  
 
   // Si le mdp est updated
+  static List timeUsed(Account user) {
+    List<Password> list = user.vlt.passwordList;
+    var res = [];
+    var toDay = DateTime.now();
+    list.forEach((element) {
+      var date = element.getModifDate!;
+      if (toDay.year != date.year) {
+        res.add(element);
+      }
+      else{if (toDay.month - date.month > 1) res.add(element);}
+    });
+    return res;
+  }
 }

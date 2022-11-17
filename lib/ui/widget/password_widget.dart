@@ -30,7 +30,7 @@ class PasswordWidget extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                'assets/youtube.png',
+                'assets/${password.getWebsiteImage}.png',
               ),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.02),

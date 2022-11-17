@@ -83,7 +83,7 @@ class Password {
     return _note;
   }
 
-  String? get getPassword {
+  String get getPassword {
     return _password;
   }
 

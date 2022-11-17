@@ -1,5 +1,6 @@
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/password.dart';
+import 'package:password_strength/password_strength.dart';
 
 class Doctor {
   // list des fonctions a faire
@@ -21,7 +22,26 @@ class Doctor {
     });
     return res;
   }
+
+  // double strength = estimatePasswordStrength(password);
   // Check la force de chaque mdp
+  static List strenght(Account user) {
+    var orange = [];
+    var red = [];
+    List<Password> list = user.vlt.passwordList;
+    list.forEach((element) {
+      double strength = estimatePasswordStrength(element.getPassword);
+      if (strength < 0.5) {
+        red.add(element);
+      } else {
+        if (strength < 0.7) {
+          orange.add(element);
+        }
+      }
+    });
+    var res = [orange, red];
+    return res;
+  }
 
   // Si le mdp est updated
   static List timeUsed(Account user) {
@@ -32,8 +52,9 @@ class Doctor {
       var date = element.getModifDate!;
       if (toDay.year != date.year) {
         res.add(element);
+      } else {
+        if (toDay.month - date.month > 1) res.add(element);
       }
-      else{if (toDay.month - date.month > 1) res.add(element);}
     });
     return res;
   }

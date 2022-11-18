@@ -113,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;
+                        context.read<Account>().fillVault();
                         // context
                         //     .read<Account>()
                         //     .changeMasterPassword(passwordController.text); LIGNE QUI BUG SA MERE LA P*TE

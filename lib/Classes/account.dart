@@ -39,7 +39,7 @@ class Account with ChangeNotifier {
   Account.old(String id, Encrypted salty, Encrypted hashy) : _id = id {
     _masterPassword = Chiffrement.old(salty, hashy);
     // Fonction chargeant _vault
-    //fillVault();
+    fillVault();
   }
 
   // Methods

@@ -185,6 +185,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                               usernameCtrl.text,
                               mailCtrl.text,
                               notesCtrl.text));
+                          context.read<Account>().saveFile();
                           Navigator.pop(context);
                         },
                         child: Container(

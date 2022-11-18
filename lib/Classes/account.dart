@@ -1,22 +1,22 @@
+import 'package:flutter/widgets.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
 import 'vault.dart';
 import 'Datas/pass_file.dart';
 
-class Account {
+class Account with ChangeNotifier {
+  // Fields
   late String _id;
   late Chiffrement _masterPassword;
   late Map<String, bool>
       authMethod; // conventional, yubikey_only, twoFA_with_yubikey
-  late Vault _vault;
+  Vault _vault = Vault();
   late List<TwoFA> _secondFactors;
 
-  Account(String id, String mdp) 
-  :_id = id
-  {
+  // Constructors
+  Account(String id, String mdp) : _id = id {
     _masterPassword = Chiffrement(mdp, id);
-    _vault = Vault();
     _secondFactors = List.empty(growable: true);
     authMethod = {
       "conventional": true,
@@ -25,13 +25,24 @@ class Account {
     };
   }
 
-  Account.old(String id, Encrypted salty, Encrypted hashy) 
-  :_id = id
-  {
+  Account.manager() {
+    _id = 'null';
+    _masterPassword = Chiffrement('null', _id);
+    _secondFactors = List.empty(growable: true);
+    authMethod = {
+      "conventional": true,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false
+    };
+  }
+
+  Account.old(String id, Encrypted salty, Encrypted hashy) : _id = id {
     _masterPassword = Chiffrement.old(salty, hashy);
     // Fonction chargeant _vault
     //fillVault();
   }
+
+  // Methods
   void fillVault() {
     PassFile base = PassFile(_id);
     _vault = base.loadPasswords();
@@ -43,6 +54,11 @@ class Account {
     base.savePasswords(_vault);
   }
 
+  void changeMasterPassword(String mdp) {
+    _masterPassword = Chiffrement(mdp, _id);
+  }
+
+  // Getter
   Encrypted get hash {
     return _masterPassword.hash;
   }
@@ -51,7 +67,7 @@ class Account {
     return _masterPassword.salt;
   }
 
-  Vault get vlt {
+  Vault get vault {
     return _vault;
   }
 
@@ -61,6 +77,12 @@ class Account {
 
   List<TwoFA> get secondFactors {
     return _secondFactors;
+  }
+
+  // Setter
+
+  set setId(String s) {
+    _id = s;
   }
 
   @override

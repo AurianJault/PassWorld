@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test/Classes/account.dart';
+import 'package:test/Classes/password.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,16 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Stub like
-  final _email = [
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurian@lecaiman.crocs',
-  ];
-  final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
-  final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
-
   // Controller for search bar
   TextEditingController searchCtrl = TextEditingController();
 
@@ -29,6 +22,14 @@ class _HomePageState extends State<HomePage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+
+    // FALSE DATA
+    // Passwords
+    Password p1 = Password(1, 'Caca', 'hahaJeSuisUnMdp', 'instagram.de',
+        'haha.png', 'tada@gmail.fr');
+
+    // Vault
+    context.read<Account>().vault.addPassword(p1);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  const PageTitleW(title: 'Home'),
+                  const PageTitleW(title: "Home"),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -120,12 +121,11 @@ class _HomePageState extends State<HomePage> {
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      itemCount: _email.length,
+                      itemCount: context.watch<Account>().vault.lenght(),
                       itemBuilder: (context, index) {
                         return PasswordWidget(
-                            website: _website[index],
-                            image: _image[index],
-                            email: _email[index]);
+                            password:
+                                context.read<Account>().vault.access(index));
                       }),
                 ),
               ),

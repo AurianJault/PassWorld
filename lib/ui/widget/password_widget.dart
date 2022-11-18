@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:test/Classes/password.dart';
 
 // Widget for password objects in home page listview
 
 class PasswordWidget extends StatelessWidget {
   // Variable for data binding -- will change when list of password
-  final String website;
-  final String image;
-  final String email;
 
-  const PasswordWidget(
-      {super.key,
-      required this.website,
-      required this.image,
-      required this.email});
+  Password password;
+
+  PasswordWidget({super.key, required this.password});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +30,7 @@ class PasswordWidget extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                'assets/$image',
+                'assets/${password.getWebsiteImage}.png',
               ),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.02),
@@ -44,14 +40,14 @@ class PasswordWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        website,
+                        password.getName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: w * 0.035,
                         ),
                       ),
                       Text(
-                        email,
+                        password.getEmail!,
                         style: TextStyle(
                           fontSize: w * 0.03,
                         ),

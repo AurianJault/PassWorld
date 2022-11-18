@@ -6,7 +6,7 @@ class Vault {
 
   set passwordList(List<Password> passwordList) {}
 
-  List<Password> get passwordList{
+  List<Password> get passwordList {
     return _passwordList;
   }
 
@@ -27,6 +27,10 @@ class Vault {
     return _passwordList.indexWhere((element) => element.getId == id);
   }
 
+  Password access(int i) {
+    return _passwordList[i];
+  }
+
   // Return passwordList lenght
   int lenght() {
     return _passwordList.length;
@@ -37,5 +41,10 @@ class Vault {
     for (int i = 0; i < lenght(); i++) {
       print(_passwordList[i]);
     }
+  }
+
+  //Operator
+  Password operator [](int i) {
+    return _passwordList[i];
   }
 }

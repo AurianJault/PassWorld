@@ -95,6 +95,17 @@ class Password {
     return _modifDate;
   }
 
+  // Getter to obtain the root of website url
+  String get getWebsiteImage {
+    String d = '.';
+    String s = _website!.toLowerCase();
+    int index = s.indexOf(d);
+    if (index == -1) {
+      return 'null';
+    }
+    return s.substring(0, index);
+  }
+
   // To string
   @override
   String toString() {

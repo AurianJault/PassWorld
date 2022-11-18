@@ -176,8 +176,9 @@ class _HealthPageState extends State<AddPasswordPage> {
                       ),
                       InkWell(
                         onTap: () {
+                          int id = context.read<Account>().vault.getMaxInt();
                           context.read<Account>().vault.addPassword(Password(
-                              1,
+                              id,
                               nameCtrl.text,
                               passwordCtrl.text,
                               websiteCtrl.text,

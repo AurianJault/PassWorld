@@ -20,7 +20,7 @@ class Vault with ChangeNotifier {
   }
 
   int getMaxInt() {
-    return passwordList.length+1;
+    return passwordList.length + 1;
   }
 
   // Remove Password from passwordList

@@ -4,7 +4,7 @@ import 'package:password_strength/password_strength.dart';
 
 class Doctor {
   static List reused(Account user) {
-    List<Password> list = user.vlt.passwordList;
+    List<Password> list = user.vault.passwordList;
     var res = [];
     list.forEach((element) {
       int count = 0;
@@ -25,7 +25,7 @@ class Doctor {
   static List strenght(Account user) {
     var orange = [];
     var red = [];
-    List<Password> list = user.vlt.passwordList;
+    List<Password> list = user.vault.passwordList;
     list.forEach((element) {
       double strength = estimatePasswordStrength(element.getPassword);
       if (strength < 0.5) {
@@ -41,7 +41,7 @@ class Doctor {
   }
 
   static List timeUsed(Account user) {
-    List<Password> list = user.vlt.passwordList;
+    List<Password> list = user.vault.passwordList;
     var res = [];
     var toDay = DateTime.now();
     list.forEach((element) {

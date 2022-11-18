@@ -1,6 +1,8 @@
+import 'package:flutter/widgets.dart';
+
 import 'password.dart';
 
-class Vault {
+class Vault with ChangeNotifier {
   // Fields
   final List<Password> _passwordList = List.empty(growable: true);
 
@@ -14,6 +16,7 @@ class Vault {
   // Add Password to passwordList
   void addPassword(Password p) {
     _passwordList.add(p);
+    notifyListeners();
   }
 
   int getMaxInt() {
@@ -22,7 +25,7 @@ class Vault {
     while (it.moveNext()) {
       if (it.current.getId > max) max = it.current.getId;
     }
-    return max+1;
+    return max + 1;
   }
 
   // Remove Password from passwordList

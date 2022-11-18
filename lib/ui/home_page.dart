@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/account.dart';
-import 'package:test/Classes/password.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -22,14 +21,6 @@ class _HomePageState extends State<HomePage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
-
-    // FALSE DATA
-    // Passwords
-    Password p1 = Password(1, 'Caca', 'hahaJeSuisUnMdp', 'instagram.de',
-        'haha.png', 'tada@gmail.fr');
-
-    // Vault
-    context.read<Account>().vault.addPassword(p1);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -61,10 +52,11 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        const AddPasswordPage()));
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            const AddPasswordPage()))
+                                .then((_) => setState(() {}));
                           },
                           child: Icon(Icons.add, size: w * 0.06),
                         ),
@@ -118,15 +110,16 @@ class _HomePageState extends State<HomePage> {
                 child: ScrollConfiguration(
                   behavior: ScrollConfiguration.of(context)
                       .copyWith(scrollbars: false),
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: context.watch<Account>().vault.lenght(),
-                      itemBuilder: (context, index) {
-                        return PasswordWidget(
-                            password:
-                                context.read<Account>().vault.access(index));
-                      }),
+                  child: Consumer<Account>(builder: (context, account, child) {
+                    return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: account.vault.lenght(),
+                        itemBuilder: (context, index) {
+                          return PasswordWidget(
+                              password: account.vault.access(index));
+                        });
+                  }),
                 ),
               ),
             ),

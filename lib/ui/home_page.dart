@@ -52,10 +52,11 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        const AddPasswordPage()));
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            const AddPasswordPage()))
+                                .then((_) => setState(() {}));
                           },
                           child: Icon(Icons.add, size: w * 0.06),
                         ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/account.dart';
+import 'package:test/Classes/password.dart';
 import 'package:test/ui/widget/add_password_input.dart';
 
 // Page to add new passwords to Vault
@@ -11,11 +14,12 @@ class AddPasswordPage extends StatefulWidget {
 
 class _HealthPageState extends State<AddPasswordPage> {
   // Array of TextFormField labelText
-  final name = ['Name', 'E-Mail', 'Username', 'Password', 'Notes'];
+  final name = ['Name', 'E-Mail', 'Username', 'Password', 'Notes', 'Website'];
 
   // Controllers for all inputs
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController mailCtrl = TextEditingController();
+  TextEditingController websiteCtrl = TextEditingController();
   TextEditingController usernameCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
   TextEditingController notesCtrl = TextEditingController();
@@ -74,6 +78,8 @@ class _HealthPageState extends State<AddPasswordPage> {
                             name: name[0], controlleur: nameCtrl),
                         AddPasswordInputWidget(
                             name: name[1], controlleur: mailCtrl),
+                        AddPasswordInputWidget(
+                            name: name[5], controlleur: websiteCtrl),
                         AddPasswordInputWidget(
                             name: name[2], controlleur: usernameCtrl),
                         AddPasswordInputWidget(
@@ -169,7 +175,17 @@ class _HealthPageState extends State<AddPasswordPage> {
                                 ))),
                       ),
                       InkWell(
-                        onTap: null,
+                        onTap: () {
+                          context.read<Account>().vault.addPassword(Password(
+                              1,
+                              nameCtrl.text,
+                              passwordCtrl.text,
+                              websiteCtrl.text,
+                              usernameCtrl.text,
+                              mailCtrl.text,
+                              notesCtrl.text));
+                          Navigator.pop(context);
+                        },
                         child: Container(
                             width: w * 0.35,
                             decoration: BoxDecoration(

@@ -17,7 +17,12 @@ class Vault {
   }
 
   int getMaxInt() {
-    return passwordList.length+1;
+    int max = 0;
+    var it = passwordList.iterator;
+    while (it.moveNext()) {
+      if (it.current.getId > max) max = it.current.getId;
+    }
+    return max+1;
   }
 
   // Remove Password from passwordList

@@ -16,6 +16,10 @@ class Vault {
     _passwordList.add(p);
   }
 
+  int getMaxInt() {
+    return passwordList.length+1;
+  }
+
   // Remove Password from passwordList
   void removePassword(int id) {
     int index = searchPassword(id);

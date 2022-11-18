@@ -54,6 +54,10 @@ class Account with ChangeNotifier {
     base.savePasswords(_vault);
   }
 
+  void changeMasterPassword(String mdp) {
+    _masterPassword = Chiffrement(mdp, _id);
+  }
+
   // Getter
   Encrypted get hash {
     return _masterPassword.hash;

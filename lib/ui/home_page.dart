@@ -14,16 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Stub like
-  final _email = [
-    'aurain@lecaiman.crocs',
-    'tim@leviking.thor',
-    'nicolas@napasdebras.manchot',
-    'aurian@lecaiman.crocs',
-  ];
-  final _image = ['github.png', 'youtube.png', 'instagram.png', 'bereal.png'];
-  final _website = ['Github', 'Youtube', 'Instagram', 'BeReal'];
-
   // Controller for search bar
   TextEditingController searchCtrl = TextEditingController();
 
@@ -53,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  PageTitleW(title: Provider.of<Account>(context).id),
+                  const PageTitleW(title: "Home"),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

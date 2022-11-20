@@ -1,10 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:test/ui/nfc/tagReader_page.dart';
-import '../register_page.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:yubidart/yubidart.dart' show YubicoService;
-import 'package:ndef/ndef.dart' as ndef;
+import 'package:test/Classes/yubikey_related/yubiValidator.dart';
+
+import '../nav_bar.dart';
+//import 'package:ndef/ndef.dart' as ndef;
 
 class NfcPage extends StatefulWidget {
   const NfcPage({Key? key}) : super(key: key);
@@ -17,6 +20,7 @@ class _NfcPageState extends State<NfcPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   String otp = 'flop';
+  bool valid = false;
 
   @override
   void initState() {
@@ -98,18 +102,13 @@ class _NfcPageState extends State<NfcPage> {
                     onTap: () {
                       tagRead2();
                       if (otp != 'flop') {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: const Text('OTP'),
-                                  content: Text(otp),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('Ok'),
-                                      onPressed: () => Navigator.pop(context),
-                                    )
-                                  ],
-                                ));
+                        validate();
+                        if(valid){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                                builder: (context) => const NavBar()));
+                        }       
                       } else {
                         showDialog(
                             context: context,
@@ -170,13 +169,6 @@ class _NfcPageState extends State<NfcPage> {
           ),
         ));
   }
-  void _tagRead() {
-    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-      //otp = random;
-      otp = tag.data as String;
-      NfcManager.instance.stopSession();
-    });
-  }
 
   void tagRead2() async {
     var tag = await FlutterNfcKit.poll(timeout: Duration(seconds: 10),
@@ -185,11 +177,13 @@ class _NfcPageState extends State<NfcPage> {
       otp = (record.toString());
     }
   }
-
-  void testChangeOTP(){
-    otp = 'buenos';
+  void validate() async {
+    var rep = await YubiValidator.validadeNfcTag(otp);
+    valid = rep;
   }
 }
+
+
 
 /* 
 // read NDEF records if available

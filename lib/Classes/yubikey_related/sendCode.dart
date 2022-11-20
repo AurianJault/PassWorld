@@ -5,7 +5,7 @@ import 'package:test/Classes/yubikey_related/nonce.dart';
 Future<bool> sendCode(String? y) async {
 
   Nonce n = new Nonce();
-  
+
   final http.Response responseHttp = await http.get(
         Uri.parse(
             'https://api.yubico.com/wsapi/2.0/verify?id=1&otp=$y&nonce=${n.nonce}'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/password.dart';
+import 'package:flutter/services.dart';
 
 // Widget for password objects in home page listview
 
@@ -57,9 +58,15 @@ class PasswordWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Icon(
-                Icons.copy,
-                size: w * 0.08,
+              InkWell(
+                onTap: () async {
+                  await Clipboard.setData(
+                      ClipboardData(text: password.getPassword));
+                },
+                child: Icon(
+                  Icons.copy,
+                  size: w * 0.08,
+                ),
               )
             ],
           ),

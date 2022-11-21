@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/config.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -22,6 +23,9 @@ class _HomePageState extends State<HomePage> {
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
 
+    context.read<Config>().setAppDirPath();
+    var config = context.read<Config>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -34,7 +38,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  const PageTitleW(title: "Home"),
+                  PageTitleW(title: config.appDirPath),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

@@ -4,6 +4,8 @@ import 'package:test/Classes/account.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/ui/widget/add_password_input.dart';
 
+import '../Classes/config.dart';
+
 // Page to add new passwords to Vault
 class AddPasswordPage extends StatefulWidget {
   const AddPasswordPage({Key? key}) : super(key: key);
@@ -185,6 +187,9 @@ class _HealthPageState extends State<AddPasswordPage> {
                               usernameCtrl.text,
                               mailCtrl.text,
                               notesCtrl.text));
+                          context
+                              .read<Account>()
+                              .saveFile(context.read<Config>().appDirPath);
                           Navigator.pop(context);
                         },
                         child: Container(

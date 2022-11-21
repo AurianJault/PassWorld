@@ -2,6 +2,9 @@ import 'package:test/Classes/Datas/i_data_strategy.dart';
 import 'package:test/Classes/Datas/pass_file.dart';
 import 'package:test/Classes/password.dart';
 
+import '../Classes/vault.dart';
+import 'dart:ui';
+
 /*
 void main(){
   IDataStrategy stub = PassFile('theo');

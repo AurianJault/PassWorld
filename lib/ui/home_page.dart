@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/account.dart';
-import 'package:test/config.dart';
+import 'package:test/Classes/config.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';

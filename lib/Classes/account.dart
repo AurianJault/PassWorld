@@ -39,17 +39,17 @@ class Account with ChangeNotifier {
   Account.old(String id, Encrypted salty, Encrypted hashy) : _id = id {
     _masterPassword = Chiffrement.old(salty, hashy);
     // Fonction chargeant _vault
-    //fillVault();
+    //fillVault(); // Maybe uncomment
   }
 
   // Methods
-  void fillVault() {
-    PassFile base = PassFile(_id);
+  void fillVault(String appDirPath) {
+    PassFile base = PassFile(_id, appDirPath);
     _vault = base.loadPasswords();
   }
 
-  void saveFile() {
-    PassFile base = PassFile(_id);
+  void saveFile(String appDirPath) {
+    PassFile base = PassFile(_id, appDirPath);
     // Check File ?
     base.savePasswords(_vault);
   }

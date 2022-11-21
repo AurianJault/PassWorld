@@ -12,7 +12,7 @@ class Generator{
     for(int i=0;i<caracOut.length;i++){
       chars = chars.replaceAll(caracOut[i], "");
     }
-    Random rnd = Random();
+    Random rnd = Random.secure();
     return List.generate(length, (index) => chars[rnd.nextInt(chars.length)]).join();
   }
   

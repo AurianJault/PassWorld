@@ -6,7 +6,7 @@ import 'package:test/Classes/vault.dart';
 class PassFile extends IDataStrategy {
   var db;
   PassFile(String identifiant) {
-    db = sqlite3.open("lib/Classes/Datas/passwords/$identifiant.txt");
+    db = sqlite3.open("lib/Classes/Datas/passwords/$identifiant.sqlite");
   }
 
   void initPass() {

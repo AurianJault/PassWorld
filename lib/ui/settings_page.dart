@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/ui/widget/page_title_widget.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -14,10 +15,8 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(25),
-          child: const Text('Settings',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45)),
-        ),
+            padding: const EdgeInsets.all(25),
+            child: const PageTitleW(title: 'Settings')),
       ),
     );
   }

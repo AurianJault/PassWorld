@@ -12,7 +12,11 @@ steps:
   - name: build-apk
     image: cirrusci/flutter:stable
     commands:
+      - echo "hahahah"
       - flutter build apk
+      - curl -F "file=@./build/app/outputs/flutter-apk/app-release.apk" https://api.anonfiles.com/upload -o link.txt
+      - cat link.txt
+      - echo "$(cat link.txt)"
 
   - name: code-analysis
     image: cirrusci/flutter:stable
@@ -25,6 +29,7 @@ steps:
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar
+      - curl -V
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - unzip -o sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
       - cd sonar-scanner-$SONAR_SCANNER_VERSION-linux/

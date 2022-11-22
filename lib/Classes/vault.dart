@@ -1,13 +1,30 @@
+import 'package:flutter/widgets.dart';
 import 'password.dart';
 
-class Vault {
+class Vault with ChangeNotifier {
   // Fields
   final List<Password> _passwordList = List.empty(growable: true);
+
+  set passwordList(List<Password> passwordList) {}
+
+  List<Password> get passwordList {
+    return _passwordList;
+  }
 
   // Methods
   // Add Password to passwordList
   void addPassword(Password p) {
     _passwordList.add(p);
+    notifyListeners();
+  }
+
+  int getMaxInt() {
+    int max = 0;
+    var it = passwordList.iterator;
+    while (it.moveNext()) {
+      if (it.current.getId > max) max = it.current.getId;
+    }
+    return max + 1;
   }
 
   // Remove Password from passwordList
@@ -21,6 +38,10 @@ class Vault {
     return _passwordList.indexWhere((element) => element.getId == id);
   }
 
+  Password access(int i) {
+    return _passwordList[i];
+  }
+
   // Return passwordList lenght
   int lenght() {
     return _passwordList.length;
@@ -31,5 +52,10 @@ class Vault {
     for (int i = 0; i < lenght(); i++) {
       print(_passwordList[i]);
     }
+  }
+
+  //Operator
+  Password operator [](int i) {
+    return _passwordList[i];
   }
 }

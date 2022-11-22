@@ -1,12 +1,11 @@
-import 'dart:io';
-
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test/Classes/Exception/storageException.dart';
 import 'storage_item.dart';
 import 'secureStorage.dart';
 import 'fileEncrypt.dart';
 
-class Storage {
+class Storage implements Exception{
   static final SecureStorage storage = SecureStorage();
 
   static storing(encrypt.Key cle, encrypt.IV iv, String nom) {
@@ -24,9 +23,12 @@ class Storage {
     const storer = FlutterSecureStorage();
     bool testCle = await storer.containsKey(key: "${id}Key");
     if(!testCle){
-      //mettre message d'erreur ici
+      throw StorageException("L'utilisateur n'existe pas");
     }
     var base =await storer.read(key: "${id}Key")??"";
+    if(base.isEmpty){
+      throw StorageException("Problème de récupération de clé !!");
+    }
     late final cle = encrypt.Key.fromBase64(base);
     return cle;
   }
@@ -36,9 +38,12 @@ class Storage {
     const storer = FlutterSecureStorage();
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testIV){
-      //mettre message d'erreur ici
+      throw StorageException("L'utilisateur n'existe pas !!");
     }
     String base =await storer.read(key: "${id}IV")??"";
+    if(base.isEmpty){
+      throw StorageException("Problème de récupation de l'IV !!");
+    }
     late final iv = encrypt.IV.fromBase64(base);
     return iv;
   }
@@ -48,7 +53,7 @@ class Storage {
     bool testKey = await storer.containsKey(key: "${id}Key");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(testKey && testIV){
-      //mettre message d'erreur ici
+      throw StorageException("Clé et IV déjà existante");
     }
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
   }
@@ -58,7 +63,7 @@ class Storage {
     bool testKey = await storer.containsKey(key: "${id}IV");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testKey && !testIV){
-      //mettre message d'erreur ici
+      throw StorageException("Clé et IV inexistante");
     }
     // vérifier que tout est bien déchiffré avant
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);

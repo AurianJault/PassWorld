@@ -9,17 +9,19 @@ class Password {
   String? _email;
   String? _note;
   String _password;
-  final DateTime _creationDate = DateTime.now(); // never change
-  DateTime _modifDate = DateTime.now();
+  DateTime? _creationDate; // Can't be final is complete non-sense
+  DateTime? _modifDate;
 
   // Constructor: [x,y] -> x and y are optional
   Password(this._id, this._name, this._password,
-      [this._website, this._username, this._email, this._note]);
-
-  // Password Getter ? WHY ?
-  Password get password {
-    return this;
+      [this._website, this._username, this._email, this._note]) {
+    _creationDate = DateTime.now();
+    _modifDate = DateTime.now();
   }
+
+  Password.load(
+      this._id, this._name, this._password, this._creationDate, this._modifDate,
+      [this._website, this._username, this._email, this._note]);
 
   // Methods
   // Update modifDate when password is modified
@@ -52,6 +54,10 @@ class Password {
     _password = s;
   }
 
+  set setCreationDate(DateTime d) {
+    _creationDate = d;
+  }
+
   // Getters
   int get getId {
     return _id;
@@ -77,8 +83,27 @@ class Password {
     return _note;
   }
 
-  String? get getPassword {
+  String get getPassword {
     return _password;
+  }
+
+  DateTime? get getCreationDate {
+    return _creationDate;
+  }
+
+  DateTime? get getModifDate {
+    return _modifDate;
+  }
+
+  // Getter to obtain the root of website url
+  String get getWebsiteImage {
+    String d = '.';
+    String s = _website!.toLowerCase();
+    int index = s.indexOf(d);
+    if (index == -1) {
+      return 'null';
+    }
+    return s.substring(0, index);
   }
 
   // To string

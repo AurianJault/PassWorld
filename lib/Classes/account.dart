@@ -1,33 +1,64 @@
-import 'package:test/Classes/password.dart';
+import 'package:flutter/widgets.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
-import 'password.dart';
-import 'package:test/Classes/vault.dart';
-import 'dart:io';
-import 'storage.dart';
+import 'vault.dart';
+import 'Datas/pass_file.dart';
 
-class Account {
+class Account with ChangeNotifier {
+  // Fields
   late String _id;
   late Chiffrement _masterPassword;
-  late Map<String,bool> authMethod; // conventional, yubikey_only, twoFA_with_yubikey
-  late List<Password> _vault;
+  late Map<String, bool>
+      authMethod; // conventional, yubikey_only, twoFA_with_yubikey
+  Vault _vault = Vault();
   late List<TwoFA> _secondFactors;
 
-  Account(String id, String mdp) {
-    _id = id;
+  // Constructors
+  Account(String id, String mdp) : _id = id {
     _masterPassword = Chiffrement(mdp, id);
-    _vault = List.empty(growable: true);
     _secondFactors = List.empty(growable: true);
-    authMethod = {"conventional":true,"yubikey_only":false,"twoFA_with_yubikey":false};
+    authMethod = {
+      "conventional": true,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false
+    };
   }
 
-  Account.old(String id, Encrypted salty, Encrypted hashy) {
+  Account.manager() {
+    _id = 'null';
+    _masterPassword = Chiffrement('null', _id);
+    _secondFactors = List.empty(growable: true);
+    authMethod = {
+      "conventional": true,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false
+    };
+  }
+
+  Account.old(String id, Encrypted salty, Encrypted hashy) : _id = id {
     _masterPassword = Chiffrement.old(salty, hashy);
-    _vault = List.empty(growable: true);
-    //chargement("listCompte.txt");
+    // Fonction chargeant _vault
+    fillVault();
   }
 
+  // Methods
+  void fillVault() {
+    PassFile base = PassFile(_id);
+    _vault = base.loadPasswords();
+  }
+
+  void saveFile() {
+    PassFile base = PassFile(_id);
+    // Check File ?
+    base.savePasswords(_vault);
+  }
+
+  void changeMasterPassword(String mdp) {
+    _masterPassword = Chiffrement(mdp, _id);
+  }
+
+  // Getter
   Encrypted get hash {
     return _masterPassword.hash;
   }
@@ -36,7 +67,7 @@ class Account {
     return _masterPassword.salt;
   }
 
-  List<Password> get vlt {
+  Vault get vault {
     return _vault;
   }
 
@@ -48,6 +79,12 @@ class Account {
     return _secondFactors;
   }
 
+  // Setter
+
+  set setId(String s) {
+    _id = s;
+  }
+
   @override
   bool operator ==(Object c) {
     if (identical(this, c)) {
@@ -55,39 +92,4 @@ class Account {
     }
     return false;
   }
-
-  // Recherche un mot de passe dans la liste de mdp stocké pour un compte donné
-  // String rechercherMdp(String nom, String id)
-  // {
-  //   _vault.forEach((element) {
-  //     if(nom == element.nom && id == element.id)
-  //     return mdp;
-  //   });
-  // }
-  // Ajoute un mdp à stocker
-
-  void ajouterMdp(Password compte) {
-    _vault.add(compte);
-  }
-
-  //supprime un mdp stocké
-  void supprimerMdp(Password compte) {
-    _vault.remove(compte);
-  }
-
-  // Charge les mots de passe stockés dans un fichier (à upgrade)
-  // AURIAN: Charge les mots de passe stockés dans un fichier (à upgrade)
-  // REMI: Ne sert à rien pour l'appli finale
-  /*
-
-  void chargement(String fichier) {
-    var file = File(fichier);
-    List<String> stream = file.readAsLinesSync();
-    stream.forEach((element) {
-      var arr = element.split(' ');
-     _vault.add(Password(arr[0], arr[1], arr[2], arr[3]));
-
-    });
-  }
-  */
 }

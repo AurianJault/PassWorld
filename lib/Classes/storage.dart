@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test/Classes/Exception/storageException.dart';
 import 'storage_item.dart';
 import 'secureStorage.dart';
 
@@ -23,9 +24,12 @@ class Storage implements Exception{
     const storer = FlutterSecureStorage();
     bool testCle = await storer.containsKey(key: "${id}Key");
     if(!testCle){
-      throw Exception("La clé n'existe pas !");
+      throw StorageException("La clé n'existe pas !");
     }
     var base =await storer.read(key: "${id}Key")??"";
+    if(base.isEmpty){
+      throw StorageException("La valeur récupérée est vide !!");
+    }
     late final cle = encrypt.Key.fromBase64(base);
     return cle;
   }
@@ -35,9 +39,12 @@ class Storage implements Exception{
     const storer = FlutterSecureStorage();
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testIV){
-      throw Exception("L'IV n'existe pas");
+      throw StorageException("L'IV n'existe pas");
     }
     String base =await storer.read(key: "${id}IV")??"";
+    if(base.isEmpty){
+      throw StorageException("La valeur récupérée est vide !!");
+    }
     late final iv = encrypt.IV.fromBase64(base);
     return iv;
   }
@@ -47,7 +54,7 @@ class Storage implements Exception{
     bool testKey = await storer.containsKey(key: "${id}IV");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(testKey && testIV){
-      throw Exception("Clé et IV déjà existante");
+      throw StorageException("Clé et IV déjà existante");
     }
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);
   }
@@ -57,7 +64,7 @@ class Storage implements Exception{
     bool testKey = await storer.containsKey(key: "${id}IV");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testKey && !testIV){
-      throw Exception("Clé et IV déjà inexistante");
+      throw StorageException("Clé et IV déjà inexistante");
     }
     // vérifier que tout est bien déchiffré avant
     storing(encrypt.Key.fromSecureRandom(32), encrypt.IV.fromSecureRandom(16), id);

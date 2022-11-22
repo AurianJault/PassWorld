@@ -71,7 +71,7 @@ class Storage implements Exception{
 
   static Future<void> newMasterKeyFromFile(String path,String id) async{
     const storer = FlutterSecureStorage();    
-    String keyIv = EncryptFile.decrypt_file(path)??"";
+    String keyIv = EncryptFile.decrypt_file(path);
     bool testKey = await storer.containsKey(key: "${id}Key");
     bool testIV = await storer.containsKey(key: "${id}IV");
     if(!testKey && !testIV){

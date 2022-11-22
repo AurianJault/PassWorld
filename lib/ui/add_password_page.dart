@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
@@ -187,9 +188,9 @@ class _HealthPageState extends State<AddPasswordPage> {
                               usernameCtrl.text,
                               mailCtrl.text,
                               notesCtrl.text));
-                          context
-                              .read<Account>()
-                              .saveFile(context.read<Config>().appDirPath);
+                          var path = Config();
+                          path.setAppDirPath();
+                          context.read<Account>().saveFile(path.appDirPath);
                           Navigator.pop(context);
                         },
                         child: Container(

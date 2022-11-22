@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  PageTitleW(title: config.appDirPath),
+                  const PageTitleW(title: "Home"),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -58,10 +58,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: () {
-                            // =========================
-                            // ===== TEST FONCTION =====
-                            // =========================
-                            Try.Path();
                             Navigator.push(
                                     context,
                                     MaterialPageRoute<dynamic>(

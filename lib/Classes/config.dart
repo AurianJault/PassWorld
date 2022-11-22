@@ -1,9 +1,8 @@
-import 'dart:io';
+import 'dart:io' show Platform;
+import 'dart:io' as io;
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:process_run/shell.dart';
-import 'package:process_run/which.dart';
 
 class Config extends ChangeNotifier {
   String appDirPath = "";
@@ -11,11 +10,21 @@ class Config extends ChangeNotifier {
   Config();
 
   void setAppDirPath() async {
-    if (defaultTargetPlatform == TargetPlatform.linux) {
-      // Check path for android
+    if (Platform.isLinux) {
+      appDirPath = "${Platform.environment['HOME'].toString()}/.passworld/";
+      setDirectory();
+    } else {
+      var dir = await getApplicationDocumentsDirectory();
+      appDirPath = dir.path;
     }
+  }
 
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    appDirPath = appDocDir.path;
+  void setDirectory() {
+    if (!io.Directory(appDirPath).existsSync()) {
+      io.Directory(appDirPath).createSync();
+    }
+    if(!io.File("${appDirPath}file.txt").existsSync()) {
+      io.File("${appDirPath}file.txt").createSync();
+    }
   }
 }

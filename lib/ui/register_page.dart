@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/authentification.dart';
+import 'PopUp/popupError.dart';
+import '../Classes/Exception/storageException.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -90,24 +92,29 @@ class _RegisterPage extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12)),
                     child : InkWell (
                       onTap: () async{
-                        if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
-                          Navigator.pop(context);
+                        try{
+                            if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
+                            Navigator.pop(context);
+                          }
+                          else{
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: const Text('Erreur'),
+                                    content: const Text(
+                                        "Le nom d'utilisateur existe déjà !!"),
+                                    actions: [
+                                      TextButton(
+                                        child: const Text('Ok'),
+                                        onPressed: () => Navigator.pop(context),
+                                      )
+                                    ],
+                                  ));
+                          }
+                        }on StorageException catch(e){
+                          showAlertDialog(context,e.message );
                         }
-                        else{
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: const Text('Erreur'),
-                                  content: const Text(
-                                      "Le nom d'utilisateur existe déjà !!"),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('Ok'),
-                                      onPressed: () => Navigator.pop(context),
-                                    )
-                                  ],
-                                ));
-                        }
+                        
                       },
                       child:const Center(
                         child: Text(

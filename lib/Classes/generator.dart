@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/widgets.dart';
 
 class Generator{
 
@@ -15,5 +16,4 @@ class Generator{
     Random rnd = Random.secure();
     return List.generate(length, (index) => chars[rnd.nextInt(chars.length)]).join();
   }
-  
 }

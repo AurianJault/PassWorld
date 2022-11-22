@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:provider/provider.dart';
-import 'package:sqlite3/wasm.dart' as sql;
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/authentification.dart';

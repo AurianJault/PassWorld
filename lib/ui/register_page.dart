@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sqlite3/wasm.dart' as sql;
+import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/authentification.dart';
 import 'PopUp/popupError.dart';
-import '../Classes/Exception/storageException.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -93,7 +92,7 @@ class _RegisterPage extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12)),
                     child : InkWell (
                       onTap: () async{
-                       // try{
+                        try{
                             if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
                             Navigator.pop(context);
                           }
@@ -112,9 +111,9 @@ class _RegisterPage extends State<RegisterPage> {
                                     ],
                                   ));
                           }
-                        /*}on StorageException catch(e){
-                          showAlertDialog(context,e.message );
-                        }*/
+                        }on StorageException catch(e){
+                          showAlertDialog(context, e.message);
+                        }
                       },
                       child:const Center(
                         child: Text(

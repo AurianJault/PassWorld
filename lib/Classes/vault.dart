@@ -1,6 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:test/Classes/Datas/pass_file.dart';
-
 import 'password.dart';
 
 class Vault with ChangeNotifier {

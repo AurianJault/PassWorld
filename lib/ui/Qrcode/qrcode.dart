@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import '../../Classes/storage.dart';
+import 'package:screen_brightness_util_platform_interface/screen_brightness_util_platform_interface.dart';
 
 showQrcode(BuildContext context,String id) async{
 

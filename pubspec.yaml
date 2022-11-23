@@ -49,6 +49,7 @@ dependencies:
   password_strength: ^0.2.0
   sqlite3_flutter_libs: ^0.5.11+1
   aes_crypt: ^0.1.1
+  qr_flutter: ^4.0.0
 
 flutter_icons:
   android: "launcher_icon"

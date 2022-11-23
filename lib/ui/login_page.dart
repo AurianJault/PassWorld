@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:provider/provider.dart';
+import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
+import 'PopUp/popupError.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

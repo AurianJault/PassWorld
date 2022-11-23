@@ -6,8 +6,6 @@ import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:provider/provider.dart';
 
-// test
-import 'package:test/Classes/Datas/try.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

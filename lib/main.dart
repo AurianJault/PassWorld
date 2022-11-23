@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/ui/login_page.dart';
+import 'package:path_provider/path_provider.dart';
+import 'Classes/config.dart';
 
 import 'Classes/account.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (_) => Account.manager(), child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+        create: (_) => Account.manager(), child: const MyApp()),
+    ChangeNotifierProvider(create: (_) => Config()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

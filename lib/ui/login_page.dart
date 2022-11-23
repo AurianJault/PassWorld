@@ -6,6 +6,7 @@ import 'package:test/Classes/account.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
+import '../Classes/config.dart';
 import 'register_page.dart';
 import 'PopUp/popupError.dart';
 
@@ -111,36 +112,36 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      try{
-                        if (await Authentification.authentification(
-                            (emailController.text).trim(),
-                            (passwordController.text).trim())) {
-                          context.read<Account>().setId = emailController.text;
-                          context.read<Account>().fillVault();
-                          // context
-                          //     .read<Account>()
-                          //     .changeMasterPassword(passwordController.text); LIGNE QUI BUG SA MERE LA P*TE
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                  builder: (context) => const NavBar()));
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: const Text('Erreur'),
-                                    content: const Text(
-                                        "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
-                                    actions: [
-                                      TextButton(
-                                        child: const Text('Ok'),
-                                        onPressed: () => Navigator.pop(context),
-                                      )
-                                    ],
-                                  ));
-                        }
-                      }on StorageException catch(e){
-                        showAlertDialog(context, e.message);
+                      if (await Authentification.authentification(
+                          (emailController.text).trim(),
+                          (passwordController.text).trim())) {
+                        context.read<Account>().setId = emailController.text;
+                        context.read<Config>().setAppDirPath();
+                        context
+                            .read<Account>()
+                            .fillVault(context.read<Config>().appDirPath);
+
+                        // context
+                        //     .read<Account>()
+                        //     .changeMasterPassword(passwordController.text); LIGNE QUI BUG SA MERE LA P*TE
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                                builder: (context) => const NavBar()));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Erreur'),
+                                  content: const Text(
+                                      "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () => Navigator.pop(context),
+                                    )
+                                  ],
+                                ));
                       }
                     },
                     child: const Center(

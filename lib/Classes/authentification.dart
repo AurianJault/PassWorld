@@ -3,6 +3,7 @@ import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/account.dart';
 import 'storage.dart';
+import 'config.dart';
 
 class Authentification {
   static Future<bool> authentification(String login, String mdp) async {
@@ -10,14 +11,12 @@ class Authentification {
     var it = list.iterator;
     while (it.moveNext()) {
       if (it.current.id == login) {
-        print(it.current.id);
         // vas chercher key + iv avec Storage.getKey(String id) / Storage.getIV(String id)
         var iv = Storage.getIV(it.current.id);
         var encrypter = Encrypter(AES(await Storage.getKey(it.current.id)));
-        var sel = encrypter.decrypt(it.current.salt, iv:await iv);
+        var sel = encrypter.decrypt(it.current.salt, iv: await iv);
         var tmp = BCrypt.hashpw(mdp, sel);
-        return tmp ==
-            encrypter.decrypt(it.current.hash, iv:await iv);
+        return tmp == encrypter.decrypt(it.current.hash, iv: await iv);
       }
     }
     return false;
@@ -25,7 +24,10 @@ class Authentification {
 
 // Charge les comptes déjà existant pour notre appli depuis un fichier texte (à upgrade)
   static Future<List<Account>> allUser() async {
-    var file = File("./lib/Classes/file.txt");
+    var cf = Config();
+    cf.setAppDirPath();
+    var file =
+        File("${Platform.environment['HOME'].toString()}/.passworld/file.txt");
     List<Account> lst = List.empty(growable: true);
     List<String> stream = file.readAsLinesSync();
     stream.forEach((element) {
@@ -42,9 +44,10 @@ class Authentification {
     for (var i in listCpt) {
       if (i.id == login) return false;
     }
-      listCpt.add(Account(login, mdp));
-      ecriture(listCpt, "./lib/Classes/file.txt");
-      return true;
+    listCpt.add(Account(login, mdp));
+    ecriture(listCpt,
+        "${Platform.environment['HOME'].toString()}/.passworld/file.txt");
+    return true;
   }
 
 // Ecrit dans un fichier

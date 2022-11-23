@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/Classes/config.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:provider/provider.dart';
+
+// test
+import 'package:test/Classes/Datas/try.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,6 +25,9 @@ class _HomePageState extends State<HomePage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+
+    context.read<Config>().setAppDirPath();
+    var config = context.read<Config>();
 
     return Scaffold(
       backgroundColor: Colors.white,

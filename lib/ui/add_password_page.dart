@@ -1,8 +1,11 @@
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/ui/widget/add_password_input.dart';
+
+import '../Classes/config.dart';
 
 // Page to add new passwords to Vault
 class AddPasswordPage extends StatefulWidget {
@@ -185,7 +188,9 @@ class _HealthPageState extends State<AddPasswordPage> {
                               usernameCtrl.text,
                               mailCtrl.text,
                               notesCtrl.text));
-                          context.read<Account>().saveFile();
+                          var path = Config();
+                          path.setAppDirPath();
+                          context.read<Account>().saveFile(path.appDirPath);
                           Navigator.pop(context);
                         },
                         child: Container(

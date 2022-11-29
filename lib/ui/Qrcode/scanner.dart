@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
+import '../../Classes/storage.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class Scanner extends StatefulWidget {
   const Scanner({Key? key}) : super(key: key);
@@ -39,14 +41,16 @@ class _Scanner extends State<Scanner> {
                 );
               },
             ),
-            Text(barcode),
+            Storage.storing(
+                encrypt.Key.fromBase64(barcode.substring(0, 43)),
+                encrypt.IV.fromBase64(barcode.substring(44)),
+                "id"), //Voir pour mettre l'id
           ],
         ),
       ),
     );
   }
 }
-
 
 /// Add this to use the qrcode
 ///

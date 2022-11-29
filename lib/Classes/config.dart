@@ -1,30 +1,38 @@
 import 'dart:io' show Platform;
 import 'dart:io' as io;
-import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
+import 'package:path/path.dart' as p;
 
 class Config extends ChangeNotifier {
-  String appDirPath = "";
+  late io.Directory appDirPath;
 
-  Config();
+  Config()
+  {
+    appDirPath=io.Directory("");
+  }
 
-  void setAppDirPath() async {
+  Future<void> setAppDirPath() async {
     if (Platform.isLinux) {
-      appDirPath = "${Platform.environment['HOME'].toString()}/.passworld/";
-      setDirectory();
+      appDirPath = io.Directory(
+          "${Platform.environment['HOME'].toString()}/.passworld/");
+      await setDirectory();
     } else {
-      var dir = await getApplicationDocumentsDirectory();
-      appDirPath = dir.path;
+      // appDirPath = io.Directory("/data/user/0");
+      appDirPath = await getApplicationDocumentsDirectory();
+      await setDirectory();
     }
   }
 
-  void setDirectory() {
-    if (!io.Directory(appDirPath).existsSync()) {
-      io.Directory(appDirPath).createSync();
+  Future<void> setDirectory() async {
+    if (!io.Directory(appDirPath.path).existsSync()) {
+      io.Directory(appDirPath.path).createSync();
     }
-    if(!io.File("${appDirPath}file.txt").existsSync()) {
-      io.File("${appDirPath}file.txt").createSync();
+    if (!io.File(p.join(appDirPath.path, "file.txt")).existsSync()) {
+      print("LE FICHIER NEXISTE PAS ");
+      io.File("${appDirPath.path}/file.txt").create();
+    } else {
+      print("LE FICHIER EXISTE");
     }
   }
 }

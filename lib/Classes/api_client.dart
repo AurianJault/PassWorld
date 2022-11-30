@@ -1,25 +1,22 @@
-import 'dart:html';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class ClientAPI {
   // Base URL of API
-  String base =
+  static String base =
       'https://codefirst.iut.uca.fr/containers/passworld-api-remiarnal';
-  // GET
+  // POST
 
   // Athenticate user when signing in
-  Future<bool> authenticator() async {
-    Uri url = "$base/auth" as Uri;
-    var mail = ""; // TODO
-    var password = ""; // TODO
+  static Future<Response> authenticator(String mail, String password) async {
+    Uri url = Uri.parse("$base/auth");
     String body = """
     {
-      "mail" : "$mail",
-      "password" : "$password" 
-    }""";
+      "email" : "$mail",
+      "password" : "$password"
+    }
+    """;
     var response = await http.post(url, body: body);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    return true;
+    return response;
   }
 }

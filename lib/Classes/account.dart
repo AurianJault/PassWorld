@@ -86,8 +86,8 @@ class Account with ChangeNotifier {
   }
 
   @override
-  bool operator ==(Object c) {
-    if (identical(this, c)) {
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
       return true;
     }
     return false;

@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: Passworld
 
 trigger:
   event:
@@ -12,20 +12,16 @@ steps:
   - name: build-apk
     image: cirrusci/flutter:stable
     commands:
-      - echo "hahahah"
       - flutter build apk
       - curl -F "file=@./build/app/outputs/flutter-apk/app-release.apk" https://api.anonfiles.com/upload -o link.txt
-      - cat link.txt
       - echo "$(cat link.txt)"
 
   - name: code-analysis
     image: cirrusci/flutter:stable
-    #hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-sonar
     environment:
         SONAR_TOKEN:
           from_secret: sonar_token
     commands:
-      #- apk add zip unzip openjdk11 tree
       - export SONAR_SCANNER_VERSION=4.7.0.2747
       - mkdir .sonar
       - cd .sonar

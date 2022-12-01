@@ -11,7 +11,7 @@ class Scanner extends StatefulWidget {
 }
 
 class _Scanner extends State<Scanner> {
-  String barcode = 'Tap  to scan';
+  String barcode = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

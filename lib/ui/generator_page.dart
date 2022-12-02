@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/config.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
 import 'PopUp/popupError.dart';
+import '../Classes/config.dart';
 
 class GeneratorPage extends StatefulWidget {
   const GeneratorPage({Key? key}) : super(key: key);
@@ -38,11 +41,11 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: const [
-                  CharactereInputWidget(character: "a-z"),
-                  CharactereInputWidget(character: "A-Z"),
-                  CharactereInputWidget(character: "0-9"),
-                  CharactereInputWidget(character: "!@%"),
-                  CharactereInputWidget(character: ",;`\""),
+                  CharactereInputWidget(character: "a-z", no: 0),
+                  CharactereInputWidget(character: "A-Z", no: 1),
+                  CharactereInputWidget(character: "0-9", no: 2),
+                  CharactereInputWidget(character: "!@%", no: 3),
+                  CharactereInputWidget(character: ",;`\"", no: 4),
                 ]),
           ),
           SizedBox(
@@ -88,7 +91,13 @@ class _GeneratorPageState extends State<GeneratorPage> {
           //-----------
           Center(
             child: InkWell(
-              onTap: null,
+              onTap: (() {
+                try {
+                  Generator().generator(2, context.read<Config>().charac, "a");
+                } on UnsupportedError catch (e) {
+                  showAlertDialog(context, e.message ?? "");
+                }
+              }),
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.deepPurple[300],
@@ -107,16 +116,14 @@ class _GeneratorPageState extends State<GeneratorPage> {
               ),
             ),
           ),
+          SizedBox(
+            height: h * 0.02,
+          )
         ],
       ))),
     );
 
     /// A mettre quand on utilise le generator
     // ignore: dead_code
-    try {
-      Generator().generator(2, [1], "a");
-    } on UnsupportedError catch (e) {
-      showAlertDialog(context, e.message ?? "");
-    }
   }
 }

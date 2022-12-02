@@ -10,6 +10,7 @@ class Config extends ChangeNotifier {
 
   Config() {
     appDirPath = io.Directory("");
+    charac = [];
   }
 
   Future<void> setAppDirPath() async {
@@ -34,5 +35,17 @@ class Config extends ChangeNotifier {
     } else {
       print("LE FICHIER EXISTE");
     }
+  }
+
+  void addCharacter(int i) {
+    if (charac.contains(i)) {
+      charac.remove(i);
+    } else {
+      charac.add(i);
+    }
+  }
+
+  void clearCharacter() {
+    charac.clear();
   }
 }

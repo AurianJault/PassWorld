@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../Classes/config.dart';
 
 // Widget for all inputs of addPasswordPage
 class CharactereInputWidget extends StatefulWidget {
   // Variables
   final String character;
+  final int no;
 
-  const CharactereInputWidget({super.key, required this.character});
+  const CharactereInputWidget(
+      {super.key, required this.character, required this.no});
 
   @override
   State<CharactereInputWidget> createState() => _CharactereInputWidgetState();
@@ -29,6 +33,7 @@ class _CharactereInputWidgetState extends State<CharactereInputWidget> {
             onPressed: () => {
                   setState(() {
                     pressAttention = !pressAttention;
+                    context.read<Config>().addCharacter(widget.no);
                   })
                 },
             style: ButtonStyle(

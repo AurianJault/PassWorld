@@ -17,6 +17,7 @@ class GeneratorPage extends StatefulWidget {
 class _GeneratorPageState extends State<GeneratorPage> {
   TextEditingController noneCarac = TextEditingController();
   bool pressAttention = true;
+  double length = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -35,6 +36,32 @@ class _GeneratorPageState extends State<GeneratorPage> {
           Container(
               padding: EdgeInsets.all(w * 0.04),
               child: Row(children: const [PageTitleW(title: "Generator")])),
+          //------------
+          // SLIDER BAR
+          //------------
+          Container(
+              padding: EdgeInsets.all(w * 0.02),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Slider(
+                      value: length,
+                      onChanged: ((double newLength) {
+                        setState(() => length = newLength);
+                      }),
+                      min: 0,
+                      max: 50,
+                      divisions: 50,
+                    ),
+                  ),
+                  Text(length.round().toString(),
+                      style: const TextStyle(fontSize: 25))
+                ],
+              )),
+
+          //---------------------
+          // CHARACTERS' BUTTONS
+          //----------------------
           Container(
             padding: EdgeInsets.all(w * 0.02),
             child: Row(
@@ -51,6 +78,9 @@ class _GeneratorPageState extends State<GeneratorPage> {
           SizedBox(
             height: h * 0.01,
           ),
+          //---------------
+          // INPUT TITLE
+          //---------------
           Container(
               padding: EdgeInsets.all(w * 0.02),
               child: Row(children: [
@@ -93,7 +123,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
             child: InkWell(
               onTap: (() {
                 try {
-                  Generator().generator(2, context.read<Config>().charac, "a");
+                  Generator().generator(
+                      2, context.read<Config>().charac, noneCarac.text);
                 } on UnsupportedError catch (e) {
                   showAlertDialog(context, e.message ?? "");
                 }

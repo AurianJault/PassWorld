@@ -6,10 +6,10 @@ import 'package:path/path.dart' as p;
 
 class Config extends ChangeNotifier {
   late io.Directory appDirPath;
+  late List<int> charac;
 
-  Config()
-  {
-    appDirPath=io.Directory("");
+  Config() {
+    appDirPath = io.Directory("");
   }
 
   Future<void> setAppDirPath() async {

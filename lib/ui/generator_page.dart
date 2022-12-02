@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:io/ansi.dart';
-import 'package:test/ui/widget/add_password_input.dart';
+import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
 import 'PopUp/popupError.dart';
@@ -32,32 +31,19 @@ class _GeneratorPageState extends State<GeneratorPage> {
           //-----------
           Container(
               padding: EdgeInsets.all(w * 0.04),
-              child: Row(children: [const PageTitleW(title: "Generator")])),
+              child: Row(children: const [PageTitleW(title: "Generator")])),
           Container(
             padding: EdgeInsets.all(w * 0.02),
-            child: Row(children: [
-              SizedBox(
-                  height: h * 0.1,
-                  width: w * 0.1,
-                  child: ElevatedButton(
-                      onPressed: () => {
-                            setState(() {
-                              pressAttention = !pressAttention;
-                            })
-                          },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            pressAttention
-                                ? Colors.white
-                                : Colors.deepPurple[300]),
-                      ),
-                      child: Text(
-                        "a-z",
-                        style: TextStyle(
-                            color: pressAttention ? Colors.black : Colors.white,
-                            fontSize: h * 0.04),
-                      )))
-            ]),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  CharactereInputWidget(character: "a-z"),
+                  CharactereInputWidget(character: "A-Z"),
+                  CharactereInputWidget(character: "0-9"),
+                  CharactereInputWidget(character: "!@%"),
+                  CharactereInputWidget(character: ",;`\""),
+                ]),
           ),
           SizedBox(
             height: h * 0.01,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/authentification.dart';
 import 'PopUp/popupError.dart';
+import 'package:password_strength_checker/password_strength_checker.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _RegisterPage extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final passNotifier = ValueNotifier<PasswordStrength?>(null);
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -63,25 +65,35 @@ class _RegisterPage extends State<RegisterPage> {
               //Password Input
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      obscureText: true,
-                      controller: passwordController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Password',
+                child: Column(
+                  children: [
+                    Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        obscureText: true,
+                        controller: passwordController,
+                        onChanged: ((value) {
+                          passNotifier.value = PasswordStrength.calculate(text: passwordController.text);
+                        }),
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Password',
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  PasswordStrengthChecker(
+                    strength: passNotifier,
+                  ),
+                  ]
                 ),
               ),
               const SizedBox(height: 30),
-
               // Sign In Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),

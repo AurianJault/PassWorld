@@ -50,6 +50,7 @@ dependencies:
   path_provider: ^2.0.11
   process_run: ^0.12.3+2
   sqlite3_flutter_libs: ^0.5.11+1
+  password_strength_checker: ^1.2.0
 
 flutter_icons:
   android: "launcher_icon"

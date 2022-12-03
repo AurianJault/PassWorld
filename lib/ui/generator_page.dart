@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/config.dart';
 import 'package:test/ui/widget/character_input.dart';
@@ -23,6 +24,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+    String? output = "";
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -36,6 +38,48 @@ class _GeneratorPageState extends State<GeneratorPage> {
           Container(
               padding: EdgeInsets.all(w * 0.04),
               child: Row(children: const [PageTitleW(title: "Generator")])),
+          //-------------------
+          // OUTPUT
+          //-------------------
+          Container(
+              padding: EdgeInsets.all(w * 0.05),
+              margin: EdgeInsets.all(w * 0.01),
+              child: Row(mainAxisSize: MainAxisSize.max, children: [
+                Container(
+                    color: const Color.fromARGB(255, 204, 204, 204),
+                    child: Text(
+                      "$output",
+                      style: TextStyle(
+                        fontSize: h * 0.05,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                const Spacer(),
+                Container(
+                  color: Colors.deepPurple[300],
+                  child: InkWell(
+                    onTap: () async {
+                      await Clipboard.setData(ClipboardData(text: output));
+                    },
+                    child: Icon(
+                      Icons.copy,
+                      size: w * 0.08,
+                    ),
+                  ),
+                )
+              ])),
+          //-------------------
+          // SLIDER'S TITLE
+          //-------------------
+          Container(
+              padding: EdgeInsets.all(w * 0.02),
+              child: Row(children: [
+                Text(
+                  "Length",
+                  style: TextStyle(
+                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
+                ),
+              ])),
           //------------
           // SLIDER BAR
           //------------
@@ -51,14 +95,28 @@ class _GeneratorPageState extends State<GeneratorPage> {
                       }),
                       min: 0,
                       max: 50,
-                      divisions: 50,
+                      activeColor: Colors.deepPurple[300],
                     ),
                   ),
                   Text(length.round().toString(),
                       style: const TextStyle(fontSize: 25))
                 ],
               )),
-
+          SizedBox(
+            height: h * 0.02,
+          ),
+          //-------------------
+          // CHARACTERS'TITLE
+          //-------------------
+          Container(
+              padding: EdgeInsets.all(w * 0.02),
+              child: Row(children: [
+                Text(
+                  "Characters",
+                  style: TextStyle(
+                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
+                ),
+              ])),
           //---------------------
           // CHARACTERS' BUTTONS
           //----------------------
@@ -87,7 +145,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 Text(
                   "Do not include",
                   style: TextStyle(
-                      fontSize: h * 0.06, fontWeight: FontWeight.bold),
+                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
                 ),
               ])),
           //-----------
@@ -123,8 +181,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
             child: InkWell(
               onTap: (() {
                 try {
-                  Generator().generator(
-                      2, context.read<Config>().charac, noneCarac.text);
+                  output = Generator().generator(length.toInt(),
+                      context.read<Config>().charac, noneCarac.text);
                 } on UnsupportedError catch (e) {
                   showAlertDialog(context, e.message ?? "");
                 }

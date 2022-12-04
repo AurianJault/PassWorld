@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,12 @@ class _GeneratorPageState extends State<GeneratorPage> {
   TextEditingController noneCarac = TextEditingController();
   bool pressAttention = true;
   double length = 0;
+  String? output;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
-    String? output = "";
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -42,20 +43,24 @@ class _GeneratorPageState extends State<GeneratorPage> {
           // OUTPUT
           //-------------------
           Container(
-              padding: EdgeInsets.all(w * 0.05),
-              margin: EdgeInsets.all(w * 0.01),
-              child: Row(mainAxisSize: MainAxisSize.max, children: [
+              padding: EdgeInsets.all(w * 0.02),
+              child: Row(children: <Widget>[
+                Expanded(
+                    child: Container(
+                        padding: EdgeInsets.all(w * 0.02),
+                        color: Colors.grey[300],
+                        child: Text(
+                          "$output",
+                          style: TextStyle(
+                            fontSize: h * 0.06,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ))),
+                SizedBox(
+                  width: w * 0.01,
+                ),
                 Container(
-                    color: const Color.fromARGB(255, 204, 204, 204),
-                    child: Text(
-                      "$output",
-                      style: TextStyle(
-                        fontSize: h * 0.05,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
-                const Spacer(),
-                Container(
+                  padding: EdgeInsets.all(h * 0.01),
                   color: Colors.deepPurple[300],
                   child: InkWell(
                     onTap: () async {
@@ -68,40 +73,58 @@ class _GeneratorPageState extends State<GeneratorPage> {
                   ),
                 )
               ])),
-          //-------------------
-          // SLIDER'S TITLE
-          //-------------------
-          Container(
-              padding: EdgeInsets.all(w * 0.02),
-              child: Row(children: [
-                Text(
-                  "Length",
-                  style: TextStyle(
-                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
-                ),
-              ])),
+          SizedBox(
+            height: h * 0.1,
+          ),
           //------------
           // SLIDER BAR
           //------------
           Container(
               padding: EdgeInsets.all(w * 0.02),
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Slider(
-                      value: length,
-                      onChanged: ((double newLength) {
-                        setState(() => length = newLength);
-                      }),
-                      min: 0,
-                      max: 50,
-                      activeColor: Colors.deepPurple[300],
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Length",
+                      style: TextStyle(
+                          fontSize: h * 0.05, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text(length.round().toString(),
-                      style: const TextStyle(fontSize: 25))
+                  Row(
+                    children: [
+                      SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                              trackHeight: h * 0.057,
+                              thumbShape: RoundSliderThumbShape(
+                                enabledThumbRadius: h * 0.03,
+                              ),
+                              overlappingShapeStrokeColor: Colors.transparent),
+                          child: Container(
+                            width: w * 0.8,
+                            child: Slider(
+                              value: length,
+                              onChanged: ((double newLength) {
+                                setState(() {
+                                  length = newLength;
+                                });
+                              }),
+                              min: 0,
+                              max: 50,
+                              activeColor: Colors.deepPurple[300],
+                              thumbColor: Colors.deepPurple[300],
+                              inactiveColor: Colors.grey[300],
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.all(w * 0.02),
+                          child: Text(length.round().toString(),
+                              style: const TextStyle(fontSize: 30)))
+                    ],
+                  )
                 ],
               )),
+
           SizedBox(
             height: h * 0.02,
           ),
@@ -114,7 +137,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 Text(
                   "Characters",
                   style: TextStyle(
-                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
+                      fontSize: h * 0.05, fontWeight: FontWeight.bold),
                 ),
               ])),
           //---------------------
@@ -145,7 +168,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 Text(
                   "Do not include",
                   style: TextStyle(
-                      fontSize: h * 0.04, fontWeight: FontWeight.bold),
+                      fontSize: h * 0.05, fontWeight: FontWeight.bold),
                 ),
               ])),
           //-----------
@@ -186,6 +209,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 } on UnsupportedError catch (e) {
                   showAlertDialog(context, e.message ?? "");
                 }
+                print(output);
               }),
               child: Container(
                 decoration: BoxDecoration(

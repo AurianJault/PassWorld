@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,6 @@ import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
 import 'PopUp/popupError.dart';
-import '../Classes/config.dart';
 
 class GeneratorPage extends StatefulWidget {
   const GeneratorPage({Key? key}) : super(key: key);
@@ -19,8 +17,10 @@ class GeneratorPage extends StatefulWidget {
 class _GeneratorPageState extends State<GeneratorPage> {
   TextEditingController noneCarac = TextEditingController();
   bool pressAttention = true;
+  bool obcure = true;
   double length = 0;
-  String? output;
+  String? output = "";
+  String obcures = "****************";
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -44,18 +44,32 @@ class _GeneratorPageState extends State<GeneratorPage> {
           //-------------------
           Container(
               padding: EdgeInsets.all(w * 0.02),
-              child: Row(children: <Widget>[
+              child: Row(children: [
                 Expanded(
                     child: Container(
                         padding: EdgeInsets.all(w * 0.02),
                         color: Colors.grey[300],
-                        child: Text(
-                          "$output",
-                          style: TextStyle(
-                            fontSize: h * 0.06,
-                            fontWeight: FontWeight.bold,
+                        child: Row(children: [
+                          Text(
+                            obcure ? obcures : "$output",
+                            style: TextStyle(
+                              fontSize: h * 0.06,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ))),
+                          const Spacer(),
+                          InkWell(
+                              onTap: (() {
+                                setState(() {
+                                  obcure = !obcure;
+                                });
+                              }),
+                              child: Icon(
+                                const IconData(0xe51c,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.06,
+                              ))
+                        ]))),
                 SizedBox(
                   width: w * 0.01,
                 ),
@@ -203,13 +217,14 @@ class _GeneratorPageState extends State<GeneratorPage> {
           Center(
             child: InkWell(
               onTap: (() {
-                try {
-                  output = Generator().generator(length.toInt(),
-                      context.read<Config>().charac, noneCarac.text);
-                } on UnsupportedError catch (e) {
-                  showAlertDialog(context, e.message ?? "");
-                }
-                print(output);
+                setState(() {
+                  try {
+                    output = Generator().generator(length.toInt(),
+                        context.read<Config>().charac, noneCarac.text);
+                  } on UnsupportedError catch (e) {
+                    showAlertDialog(context, e.message ?? "");
+                  }
+                });
               }),
               child: Container(
                 decoration: BoxDecoration(

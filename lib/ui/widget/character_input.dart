@@ -43,9 +43,9 @@ class _CharactereInputWidgetState extends State<CharactereInputWidget> {
             child: Text(
               widget.character,
               style: TextStyle(
-                color: pressAttention ? Colors.black : Colors.white,
-                fontSize: h * 0.04,
-              ),
+                  color: pressAttention ? Colors.black : Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             )));
   }
 }

@@ -39,6 +39,9 @@ class _GeneratorPageState extends State<GeneratorPage> {
           Container(
               padding: EdgeInsets.all(w * 0.04),
               child: Row(children: const [PageTitleW(title: "Generator")])),
+          SizedBox(
+            height: h * 0.05,
+          ),
           //-------------------
           // OUTPUT
           //-------------------
@@ -88,7 +91,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 )
               ])),
           SizedBox(
-            height: h * 0.1,
+            height: h * 0.05,
           ),
           //------------
           // SLIDER BAR
@@ -102,16 +105,16 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     child: Text(
                       "Length",
                       style: TextStyle(
-                          fontSize: h * 0.05, fontWeight: FontWeight.bold),
+                          fontSize: w * 0.05, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Row(
                     children: [
                       SliderTheme(
                           data: SliderTheme.of(context).copyWith(
-                              trackHeight: h * 0.057,
+                              trackHeight: w * 0.057,
                               thumbShape: RoundSliderThumbShape(
-                                enabledThumbRadius: h * 0.03,
+                                enabledThumbRadius: w * 0.03,
                               ),
                               overlappingShapeStrokeColor: Colors.transparent),
                           child: Container(
@@ -133,15 +136,12 @@ class _GeneratorPageState extends State<GeneratorPage> {
                       Container(
                           margin: EdgeInsets.all(w * 0.02),
                           child: Text(length.round().toString(),
-                              style: TextStyle(fontSize: h * 0.05)))
+                              style: TextStyle(fontSize: w * 0.08)))
                     ],
                   )
                 ],
               )),
 
-          SizedBox(
-            height: h * 0.02,
-          ),
           //-------------------
           // CHARACTERS'TITLE
           //-------------------
@@ -151,7 +151,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 Text(
                   "Characters",
                   style: TextStyle(
-                      fontSize: h * 0.05, fontWeight: FontWeight.bold),
+                      fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
               ])),
           //---------------------
@@ -182,7 +182,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 Text(
                   "Do not include",
                   style: TextStyle(
-                      fontSize: h * 0.05, fontWeight: FontWeight.bold),
+                      fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
               ])),
           //-----------
@@ -198,7 +198,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 padding: EdgeInsets.symmetric(
                     horizontal: w * 0.03, vertical: h * 0.01),
                 child: TextField(
-                  style: TextStyle(fontSize: w * 0.02),
+                  style: TextStyle(fontSize: w * 0.04),
                   controller: noneCarac,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -251,8 +251,5 @@ class _GeneratorPageState extends State<GeneratorPage> {
         ],
       ))),
     );
-
-    /// A mettre quand on utilise le generator
-    // ignore: dead_code
   }
 }

@@ -6,10 +6,11 @@ import 'package:path/path.dart' as p;
 
 class Config extends ChangeNotifier {
   late io.Directory appDirPath;
+  late List<int> charac;
 
-  Config()
-  {
-    appDirPath=io.Directory("");
+  Config() {
+    appDirPath = io.Directory("");
+    charac = [];
   }
 
   Future<void> setAppDirPath() async {
@@ -34,5 +35,17 @@ class Config extends ChangeNotifier {
     } else {
       print("LE FICHIER EXISTE");
     }
+  }
+
+  void addCharacter(int i) {
+    if (charac.contains(i)) {
+      charac.remove(i);
+    } else {
+      charac.add(i);
+    }
+  }
+
+  void clearCharacter() {
+    charac.clear();
   }
 }

@@ -14,40 +14,17 @@ class _Scanner extends State<Scanner> {
   String barcode = "";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(' Scanner'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              child: const Text('Scan Barcode'),
-              onPressed: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AiBarcodeScanner(
-                      //    validateText: 'https://', // link to be validated
-                      //   validateType: ValidateType.startsWith,
-                      onScan: (String value) {
-                        debugPrint(value);
-                        setState(() {
-                          barcode = value;
-                        });
-                      },
-                    ),
-                  ),
-                );
-              },
-            ),
-            Storage.storing(
-                encrypt.Key.fromBase64(barcode.substring(0, 43)),
-                encrypt.IV.fromBase64(barcode.substring(44)),
-                "id"), //Voir pour mettre l'id
-          ],
-        ),
-      ),
+    return AiBarcodeScanner(
+      //    validateText: 'https://', // link to be validated
+      //   validateType: ValidateType.startsWith,
+      onScan: (String value) {
+        debugPrint(value);
+        setState(() {
+          barcode = value;
+          Storage.storing(encrypt.Key.fromBase64(barcode.substring(0, 43)),
+              encrypt.IV.fromBase64(barcode.substring(44)), "id");
+        });
+      },
     );
   }
 }
@@ -61,5 +38,7 @@ class _Scanner extends State<Scanner> {
 ///   Navigator.push(
 ///     context,
 ///     MaterialPageRoute<dynamic>(
-///     builder: (context) => const
+///     builder: (context) => const Scanner()
+///     )
+///   )
 /// }

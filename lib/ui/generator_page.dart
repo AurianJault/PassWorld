@@ -19,8 +19,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
   bool pressAttention = true;
   bool obcure = true;
   double length = 0;
-  String? output = "";
-  String obcures = "****************";
+  String output = "";
+  String obcures = "*";
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -51,9 +51,9 @@ class _GeneratorPageState extends State<GeneratorPage> {
                         color: Colors.grey[300],
                         child: Row(children: [
                           Text(
-                            obcure ? obcures : "$output",
+                            obcure ? (obcures * (output.length)) : "$output",
                             style: TextStyle(
-                              fontSize: h * 0.06,
+                              fontSize: w * 0.02,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -133,7 +133,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                       Container(
                           margin: EdgeInsets.all(w * 0.02),
                           child: Text(length.round().toString(),
-                              style: const TextStyle(fontSize: 30)))
+                              style: TextStyle(fontSize: h * 0.05)))
                     ],
                   )
                 ],
@@ -220,7 +220,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 setState(() {
                   try {
                     output = Generator().generator(length.toInt(),
-                        context.read<Config>().charac, noneCarac.text);
+                            context.read<Config>().charac, noneCarac.text) ??
+                        "";
                   } on UnsupportedError catch (e) {
                     showAlertDialog(context, e.message ?? "");
                   }

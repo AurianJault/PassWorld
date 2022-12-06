@@ -18,7 +18,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
   TextEditingController noneCarac = TextEditingController();
   bool pressAttention = true;
   bool obcure = true;
-  double length = 0;
+  double length = 8;
   String output = "";
   String obcures = "*";
   @override
@@ -126,7 +126,22 @@ class _GeneratorPageState extends State<GeneratorPage> {
                                   length = newLength;
                                 });
                               }),
-                              min: 0,
+                              onChangeEnd: ((double newLength) {
+                                setState(() {
+                                  length = newLength;
+                                  try {
+                                    output = Generator().generator(
+                                            length.toInt(),
+                                            context.read<Config>().charac,
+                                            noneCarac.text) ??
+                                        "";
+                                  } on UnsupportedError catch (e) {
+                                    showAlertDialog(context, e.message ?? "");
+                                  }
+                                  obcure = true;
+                                });
+                              }),
+                              min: 8,
                               max: 50,
                               activeColor: Colors.deepPurple[300],
                               thumbColor: Colors.deepPurple[300],
@@ -204,6 +219,20 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     border: InputBorder.none,
                     hintText: 'Type Charaters you don\'t want',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      try {
+                        output = Generator().generator(
+                                length.toInt(),
+                                context.read<Config>().charac,
+                                noneCarac.text) ??
+                            "";
+                      } on UnsupportedError catch (e) {
+                        showAlertDialog(context, e.message ?? "");
+                      }
+                      obcure = true;
+                    });
+                  },
                 ),
               ),
             ),

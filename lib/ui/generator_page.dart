@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/config.dart';
+import 'package:test/ui/PopUp/generator_info.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
@@ -171,6 +172,18 @@ class _GeneratorPageState extends State<GeneratorPage> {
                   style: TextStyle(
                       fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
+                Container(
+                  padding: EdgeInsets.all(h * 0.01),
+                  child: InkWell(
+                    onTap: () {
+                      generatorInfo(context);
+                    },
+                    child: Icon(
+                      const IconData(0xe33d, fontFamily: 'MaterialIcons'),
+                      size: w * 0.03,
+                    ),
+                  ),
+                )
               ])),
           //---------------------
           // CHARACTERS' BUTTONS

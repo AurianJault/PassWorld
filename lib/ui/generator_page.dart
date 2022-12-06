@@ -18,7 +18,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
   TextEditingController noneCarac = TextEditingController();
   bool pressAttention = true;
   bool obcure = true;
-  double length = 0;
+  double length = 8;
   String output = "";
   String obcures = "*";
   @override
@@ -126,7 +126,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                                   length = newLength;
                                 });
                               }),
-                              min: 0,
+                              min: 8,
                               max: 50,
                               activeColor: Colors.deepPurple[300],
                               thumbColor: Colors.deepPurple[300],

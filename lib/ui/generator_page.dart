@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/config.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -137,6 +138,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
                                         "";
                                   } on UnsupportedError catch (e) {
                                     showAlertDialog(context, e.message ?? "");
+                                  } on StorageException catch (e) {
+                                    showAlertDialog(context, e.message);
                                   }
                                   obcure = true;
                                 });
@@ -229,6 +232,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
                             "";
                       } on UnsupportedError catch (e) {
                         showAlertDialog(context, e.message ?? "");
+                      } on StorageException catch (e) {
+                        showAlertDialog(context, e.message);
                       }
                       obcure = true;
                     });

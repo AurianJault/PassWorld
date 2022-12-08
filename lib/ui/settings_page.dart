@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/login_page.dart';
+import 'package:test/ui/setting_key_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:test/ui/widget/setting_button.dart';
 
@@ -35,11 +36,12 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(w * 0.01)),
                   child: SettingButtonWidget(
-                      title: "Account",
-                      content:
-                          "Adresse mail, mot-de-passe maître, suppression de compte",
-                      icon:
-                          const IconData(0xf522, fontFamily: 'MaterialIcons'))),
+                    title: "Account",
+                    content:
+                        "Adresse mail, mot-de-passe maître, suppression de compte",
+                    icon: const IconData(0xf522, fontFamily: 'MaterialIcons'),
+                    page: const LoginPage(),
+                  )),
               SizedBox(
                 height: h * 0.05,
               ),
@@ -51,15 +53,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     SettingButtonWidget(
-                        title: "Méthodes d'authentification",
-                        content: "2 facteurs, Yubikey, biométrique",
-                        icon: const IconData(0xf0553,
-                            fontFamily: 'MaterialIcons')),
+                      title: "Méthodes d'authentification",
+                      content: "2 facteurs, Yubikey, biométrique",
+                      icon:
+                          const IconData(0xf0553, fontFamily: 'MaterialIcons'),
+                      page: const LoginPage(),
+                    ),
                     SettingButtonWidget(
-                        title: "Clé de chiffrement",
-                        content: "Partage de la clé, changer de clé ",
-                        icon: const IconData(0xf052b,
-                            fontFamily: 'MaterialIcons')),
+                      title: "Clé de chiffrement",
+                      content: "Partage de la clé, changer de clé ",
+                      icon:
+                          const IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                      page: const SettingKeyPage(),
+                    ),
                   ],
                 ),
               ),
@@ -74,15 +80,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     SettingButtonWidget(
-                        title: "Thème",
-                        content: "Mode nuit, thème sombre, langue",
-                        icon: const IconData(0xf14f,
-                            fontFamily: 'MaterialIcons')),
+                      title: "Thème",
+                      content: "Mode nuit, thème sombre, langue",
+                      icon: const IconData(0xf14f, fontFamily: 'MaterialIcons'),
+                      page: const LoginPage(),
+                    ),
                     SettingButtonWidget(
-                        title: "About",
-                        content: "Qui sommes-nous, dêpot du projet ",
-                        icon: const IconData(0xe33d,
-                            fontFamily: 'MaterialIcons')),
+                      title: "About",
+                      content: "Qui sommes-nous, dêpot du projet ",
+                      icon: const IconData(0xe33d, fontFamily: 'MaterialIcons'),
+                      page: const LoginPage(),
+                    ),
                   ],
                 ),
               ),
@@ -99,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => const LoginPage()));
                       },
                       child: Padding(
                         padding: EdgeInsets.all(h * 0.02),

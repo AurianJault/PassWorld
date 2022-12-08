@@ -4,12 +4,14 @@ class SettingButtonWidget extends StatelessWidget {
   String title;
   String content;
   IconData icon;
+  StatefulWidget page;
 
   SettingButtonWidget(
       {super.key,
       required this.title,
       required this.content,
-      required this.icon});
+      required this.icon,
+      required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,10 @@ class SettingButtonWidget extends StatelessWidget {
       children: [
         Expanded(
           child: InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute<dynamic>(builder: (context) => page));
+            },
             child: Padding(
               padding: EdgeInsets.all(h * 0.02),
               child: Row(children: [
@@ -47,6 +53,12 @@ class SettingButtonWidget extends StatelessWidget {
                       style: TextStyle(fontSize: w * 0.02, color: Colors.black),
                     )
                   ],
+                ),
+                const Spacer(),
+                Icon(
+                  const IconData(0xe355, fontFamily: 'MaterialIcons'),
+                  size: w * 0.06,
+                  color: Colors.white,
                 )
               ]),
             ),

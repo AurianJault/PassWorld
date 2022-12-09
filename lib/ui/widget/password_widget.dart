@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test/Classes/password.dart';
 import 'package:flutter/services.dart';
 
+import '../password_detail_page.dart';
+
 // Widget for password objects in home page listview
 
 class PasswordWidget extends StatelessWidget {
@@ -21,6 +23,14 @@ class PasswordWidget extends StatelessWidget {
     // Widget
     return Padding(
       padding: EdgeInsets.only(bottom: h * 0.015),
+      child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const PasswordDetail()));
+                },
       child: Container(
         height: h * 0.07,
         decoration: BoxDecoration(
@@ -71,6 +81,7 @@ class PasswordWidget extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

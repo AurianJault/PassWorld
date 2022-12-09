@@ -31,8 +31,10 @@ showShare(BuildContext context) async {
                             .base64,
                     mode: FileMode.writeOnly);
               } else {
-                await Share.share('check out my website https://example.com',
-                    subject: 'Look what I made!');
+                await Share.share(
+                    (await Storage.getKey(context.read<Account>().id)).base64 +
+                        (await Storage.getIV(context.read<Account>().id))
+                            .base64);
               }
             } on StorageException catch (e) {
               showAlertDialog(context, e.message);

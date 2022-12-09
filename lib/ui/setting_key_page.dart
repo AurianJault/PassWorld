@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:process_run/shell.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
@@ -113,8 +114,14 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                     children: [
                       Expanded(
                         child: InkWell(
-                          onTap: () {
-                            showShare(context);
+                          onTap: () async {
+                            try {
+                              await showShare(context);
+                            } on FormatException catch (e) {
+                              showAlertDialog(context, e.message);
+                            } on PlatformException catch (e2) {
+                              showAlertDialog(context, "Platform");
+                            }
                           },
                           child: Padding(
                             padding: EdgeInsets.all(h * 0.02),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/storage.dart';
 import 'package:test/ui/Qrcode/qrcode_password.dart';
+import 'package:test/ui/widget/SettingWidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/Exception/storageException.dart';
 import '../Classes/account.dart';
@@ -113,51 +114,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                    backgroundColor: Colors.white,
-                                    title: const Text(
-                                        "Veuillez entrer-votre mot de passe"),
-                                    content: TextField(
-                                      obscureText: true,
-                                      controller: passwordController,
-                                      onEditingComplete: () async {
-                                        if (await Authentification
-                                            .authentification(
-                                                context.read<Account>().id,
-                                                (passwordController.text)
-                                                    .trim())) {
-                                          Navigator.pop(context);
-                                          try {
-                                            if (Platform.isLinux ||
-                                                Platform.isWindows) {
-                                              File("path").writeAsStringSync(
-                                                  (await Storage.getKey(context
-                                                              .read<Account>()
-                                                              .id))
-                                                          .base64 +
-                                                      (await Storage.getIV(
-                                                              context
-                                                                  .read<
-                                                                      Account>()
-                                                                  .id))
-                                                          .base64,
-                                                  mode: FileMode.writeOnly);
-                                            } else {
-                                              await Share.share(
-                                                  'check out my website https://example.com');
-                                            }
-                                          } on StorageException catch (e) {
-                                            showAlertDialog(context, e.message);
-                                          }
-                                        } else {
-                                          Navigator.pop(context);
-                                          showAlertDialog(context,
-                                              "Le mot de passe est incorrecte");
-                                        }
-                                      },
-                                    )));
+                            showShare(context);
                           },
                           child: Padding(
                             padding: EdgeInsets.all(h * 0.02),

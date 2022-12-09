@@ -1,13 +1,16 @@
+import 'dart:io';
+import 'package:process_run/shell.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test/Classes/Exception/storageException.dart';
-import 'package:test/Classes/account.dart';
-import 'package:test/Classes/config.dart';
-import 'package:test/ui/PopUp/popupError.dart';
+import 'package:test/Classes/storage.dart';
 import 'package:test/ui/Qrcode/qrcode_password.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import 'widget/setting_button.dart';
-import 'Qrcode/qrcode.dart';
+import '../Classes/Exception/storageException.dart';
+import '../Classes/account.dart';
+import '../Classes/authentification.dart';
+import 'PopUp/popupError.dart';
+import 'widget/SettingWidget/setting_button.dart';
 
 class SettingKeyPage extends StatefulWidget {
   const SettingKeyPage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+    var passwordController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -104,14 +108,119 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                       )
                     ],
                   ),
-                  SettingButtonWidget(
-                    title: "Clé de chiffrement",
-                    content: "Partage de la clé, changer de clé ",
-                    icon: const IconData(0xf052b, fontFamily: 'MaterialIcons'),
-                    page: const SettingKeyPage(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                    backgroundColor: Colors.white,
+                                    title: const Text(
+                                        "Veuillez entrer-votre mot de passe"),
+                                    content: TextField(
+                                      obscureText: true,
+                                      controller: passwordController,
+                                      onEditingComplete: () async {
+                                        if (await Authentification
+                                            .authentification(
+                                                context.read<Account>().id,
+                                                (passwordController.text)
+                                                    .trim())) {
+                                          Navigator.pop(context);
+                                          try {
+                                            if (Platform.isLinux ||
+                                                Platform.isWindows) {
+                                              File("path").writeAsStringSync(
+                                                  (await Storage.getKey(context
+                                                              .read<Account>()
+                                                              .id))
+                                                          .base64 +
+                                                      (await Storage.getIV(
+                                                              context
+                                                                  .read<
+                                                                      Account>()
+                                                                  .id))
+                                                          .base64,
+                                                  mode: FileMode.writeOnly);
+                                            } else {
+                                              await Share.share(
+                                                  'check out my website https://example.com');
+                                            }
+                                          } on StorageException catch (e) {
+                                            showAlertDialog(context, e.message);
+                                          }
+                                        } else {
+                                          Navigator.pop(context);
+                                          showAlertDialog(context,
+                                              "Le mot de passe est incorrecte");
+                                        }
+                                      },
+                                    )));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(h * 0.02),
+                            child: Row(children: [
+                              Icon(
+                                const IconData(0xf052b,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.08,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: w * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Fichier de clé",
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: w * 0.05)),
+                                  Text(
+                                    '''Permet de créer un fichier dans [endroit du fichier] \npour la partager sur un autre appareil''',
+                                    style: TextStyle(
+                                        fontSize: w * 0.02,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                              const Spacer(),
+                              Icon(
+                                const IconData(0xe355,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.06,
+                                color: Colors.white,
+                              )
+                            ]),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: h * 0.05,
+            ),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: w * 0.02),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple[300],
+                    borderRadius: BorderRadius.circular(w * 0.01)),
+                child: SettingButtonWidget(
+                  title: "Ré-initialiser sa clé",
+                  content:
+                      '''Permet de ré-initialiser sa clé privée et l'iv. \n Il est conseillé de les changer au moins tous les 6 mois''',
+                  icon: const IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                  page: const SettingKeyPage(),
+                )),
+            SizedBox(
+              height: h * 0.05,
             ),
           ],
         ))));

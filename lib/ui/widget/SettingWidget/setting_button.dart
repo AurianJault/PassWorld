@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SettingButtonWidget extends StatelessWidget {
-  String title;
-  String content;
-  IconData icon;
-  StatefulWidget page;
+  late String title;
+  late String content;
+  late IconData icon;
+  late StatefulWidget page;
 
   SettingButtonWidget(
       {super.key,

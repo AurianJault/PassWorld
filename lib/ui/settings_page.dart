@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/ui/login_page.dart';
 import 'package:test/ui/setting_key_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import 'package:test/ui/widget/setting_button.dart';
+import 'package:test/ui/widget/SettingWidget/setting_button.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);

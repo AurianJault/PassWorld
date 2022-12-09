@@ -23,8 +23,8 @@ class Doctor {
   // Res[0] --> Listes de Passwords "Moyen" (Affichage Orange)
   // Res[1] --> Listes de Passwords "Trop faible" (Affichage Rouge)
   static List strenght(Account user) {
-    var orange = [];
-    var red = [];
+    var orange= <Password>[];
+    var red = <Password>[];
     List<Password> list = user.vault.passwordList;
     list.forEach((element) {
       double strength = estimatePasswordStrength(element.getPassword);

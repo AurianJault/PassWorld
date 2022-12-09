@@ -5,10 +5,11 @@ import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
+import 'package:test/Classes/password.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
-import 'PopUp/popupError.dart';
+import 'PopUp/pop_up_conflict.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -112,7 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      if (await Authentification.authentification(
+                      showConflictDialog(context,Password(2, 'go','fe'),Password(2,'g','pass'));
+                      /*if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;
@@ -143,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                                     )
                                   ],
                                 ));
-                      }
+                      }*/
                     },
                     child: const Center(
                       child: Text(

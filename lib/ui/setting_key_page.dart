@@ -83,7 +83,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                                   Text(
                                     '''Permet d'afficher le QR code de votre clé privée \npour la partager sur un autre appareil''',
                                     style: TextStyle(
-                                        fontSize: h * 0.025,
+                                        fontSize: w * 0.02,
                                         color: Colors.black),
                                   )
                                 ],
@@ -138,7 +138,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                                   Text(
                                     '''Permet de créer un fichier dans [endroit du fichier] \npour la partager sur un autre appareil''',
                                     style: TextStyle(
-                                        fontSize: h * 0.025,
+                                        fontSize: w * 0.02,
                                         color: Colors.black),
                                   )
                                 ],

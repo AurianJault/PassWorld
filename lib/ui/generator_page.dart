@@ -58,7 +58,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                           Text(
                             obcure ? (obcures * (output.length)) : "$output",
                             style: TextStyle(
-                              fontSize: h * 0.045,
+                              fontSize: w * 0.025,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

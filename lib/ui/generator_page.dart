@@ -58,7 +58,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                           Text(
                             obcure ? (obcures * (output.length)) : "$output",
                             style: TextStyle(
-                              fontSize: w * 0.02,
+                              fontSize: h * 0.045,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -146,7 +146,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                                 });
                               }),
                               min: 8,
-                              max: 50,
+                              max: 40,
                               activeColor: Colors.deepPurple[300],
                               thumbColor: Colors.deepPurple[300],
                               inactiveColor: Colors.grey[300],

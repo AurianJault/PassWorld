@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: SettingButtonWidget(
                     title: "Account",
                     content:
-                        "Adresse mail, mot-de-passe maître, suppression de compte",
+                        "Adresse mail, mot-de-passe maître,\nsuppression de compte",
                     icon: const IconData(0xf522, fontFamily: 'MaterialIcons'),
                     page: const LoginPage(),
                   )),

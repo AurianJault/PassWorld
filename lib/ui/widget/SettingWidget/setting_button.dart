@@ -50,7 +50,8 @@ class SettingButtonWidget extends StatelessWidget {
                             fontSize: w * 0.05)),
                     Text(
                       content,
-                      style: TextStyle(fontSize: w * 0.02, color: Colors.black),
+                      style:
+                          TextStyle(fontSize: h * 0.025, color: Colors.black),
                     )
                   ],
                 ),

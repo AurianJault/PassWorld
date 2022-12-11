@@ -1,16 +1,8 @@
-import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:process_run/shell.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:test/Classes/storage.dart';
 import 'package:test/ui/Qrcode/qrcode_password.dart';
 import 'package:test/ui/widget/SettingWidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import '../Classes/Exception/storageException.dart';
-import '../Classes/account.dart';
-import '../Classes/authentification.dart';
 import 'PopUp/popupError.dart';
 import 'widget/SettingWidget/setting_button.dart';
 
@@ -27,7 +19,6 @@ class _SettingKeyPage extends State<SettingKeyPage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
-    var passwordController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -92,7 +83,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                                   Text(
                                     '''Permet d'afficher le QR code de votre clé privée \npour la partager sur un autre appareil''',
                                     style: TextStyle(
-                                        fontSize: w * 0.02,
+                                        fontSize: h * 0.025,
                                         color: Colors.black),
                                   )
                                 ],
@@ -147,7 +138,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                                   Text(
                                     '''Permet de créer un fichier dans [endroit du fichier] \npour la partager sur un autre appareil''',
                                     style: TextStyle(
-                                        fontSize: w * 0.02,
+                                        fontSize: h * 0.025,
                                         color: Colors.black),
                                   )
                                 ],

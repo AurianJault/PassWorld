@@ -50,12 +50,17 @@ dependencies:
   path_provider: ^2.0.11
   process_run: ^0.12.3+2
   sqlite3_flutter_libs: ^0.5.11+1
+  password_strength_checker: ^1.2.0
+  aes_crypt: ^0.1.1
+  pretty_qr_code: ^2.0.2
+  screen_brightness_util_platform_interface: ^0.0.2
+  screen_brightness_util: ^0.0.3
+  ai_barcode_scanner: ^0.0.3
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/ic_launcher.png"
-
 
 dev_dependencies:
   flutter_test:

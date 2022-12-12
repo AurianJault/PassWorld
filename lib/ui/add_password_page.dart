@@ -178,7 +178,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                                 ))),
                       ),
                       InkWell(
-                        onTap: () {
+                        onTap: () async{
                           int id = context.read<Account>().vault.getMaxInt();
                           context.read<Account>().vault.addPassword(Password(
                               id,
@@ -189,8 +189,8 @@ class _HealthPageState extends State<AddPasswordPage> {
                               mailCtrl.text,
                               notesCtrl.text));
                           var path = Config();
-                          path.setAppDirPath();
-                          context.read<Account>().saveFile(path.appDirPath);
+                          await path.setAppDirPath();
+                          context.read<Account>().saveFile(path.appDirPath.path);
                           Navigator.pop(context);
                         },
                         child: Container(

@@ -3,6 +3,7 @@
 *.lock
 *.log
 *.pyc
+*.sqlite
 *.swp
 *.sqlite
 .DS_Store

@@ -117,10 +117,11 @@ class _LoginPageState extends State<LoginPage> {
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;
-                        context.read<Config>().setAppDirPath();
+                        await context.read<Config>().setAppDirPath();
+                        print(context.read<Config>().appDirPath.path);
                         context
                             .read<Account>()
-                            .fillVault(context.read<Config>().appDirPath);
+                            .fillVault(context.read<Config>().appDirPath.path);
 
                         // context
                         //     .read<Account>()

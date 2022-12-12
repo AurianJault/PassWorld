@@ -29,6 +29,20 @@ class ClientAPI {
     return response;
   }
 
+  static Future<Response> register(
+      String email, String password, String salt) async {
+    Uri url = Uri.parse("$base/user/account");
+    String body = """
+    {
+      "email" : "$email",
+      "password" : "$password",
+      "salt" : "$salt"
+    }
+    """;
+    var response = await http.post(url, body: body);
+    return response;
+  }
+
   static Future<StreamedRequest> uploadFile(
       String mail, String password, File password_file) async {
     print(password_file.length());

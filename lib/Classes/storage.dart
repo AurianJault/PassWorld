@@ -3,7 +3,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'storage_item.dart';
 import 'secureStorage.dart';
-import 'fileEncrypt.dart';
 
 class Storage implements Exception {
   static final SecureStorage storage = SecureStorage();

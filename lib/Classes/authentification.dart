@@ -11,7 +11,7 @@ import 'package:path/path.dart' as p; // used in line 31
 String account = "file.txt";
 
 class Authentification {
-  static Future<bool> authentification(String login, String mdp) async {
+  static Future<bool> authentication(String login, String mdp) async {
     var cp = Config();
     await cp.setAppDirPath();
     var list = await allUser(cp.appDirPath.path);
@@ -42,14 +42,24 @@ class Authentification {
     return lst;
   }
 
-  static Future<bool> register(String login, String mdp) async {
+  static Future<bool> register(String email, String password) async {
+    // TODO : add global config to parameter
     var cp = Config();
     await cp.setAppDirPath();
     var listCpt = await allUser(cp.appDirPath.path);
     for (var i in listCpt) {
-      if (i.id == login) return false;
+      if (i.id == email) return false;
     }
-    listCpt.add(Account(login, mdp));
+    Account newAccount = Account(email, password);
+    var requestResponse = await ClientAPI.register(
+        email, newAccount.hash.base64, newAccount.salt.base64);
+
+    if (requestResponse.statusCode != 201) {
+      print("Register status code = ${requestResponse.statusCode}");
+      return false;
+    }
+
+    listCpt.add(newAccount);
     ecriture(listCpt, p.join(cp.appDirPath.path, account));
     return true;
   }
@@ -64,6 +74,7 @@ class Authentification {
   }
 
   static Future<bool> apiAuthentication(String mail, String password) async {
+    // TODO
     Response requestResponse = await ClientAPI.authenticator(mail, password);
 
     if (requestResponse.statusCode != 200) {

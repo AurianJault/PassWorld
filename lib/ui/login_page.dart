@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      if (await Authentification.apiAuthentication(
+                      if (await Authentification.authentication(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;

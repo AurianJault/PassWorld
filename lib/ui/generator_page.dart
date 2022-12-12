@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/config.dart';
-import 'package:test/ui/PopUp/generator_info.dart';
+import 'package:test/ui/popup/generator_info.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
-import 'PopUp/popupError.dart';
+import 'popup/popupError.dart';
 
 class GeneratorPage extends StatefulWidget {
   const GeneratorPage({Key? key}) : super(key: key);

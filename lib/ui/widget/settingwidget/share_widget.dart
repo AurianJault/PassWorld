@@ -10,7 +10,7 @@ import '../../../Classes/Exception/storageException.dart';
 import '../../../Classes/account.dart';
 import '../../../Classes/authentification.dart';
 import '../../../Classes/storage.dart';
-import '../../PopUp/popupError.dart';
+import '../../popup/popupError.dart';
 
 showShare(BuildContext context) async {
   var passwordController = TextEditingController();

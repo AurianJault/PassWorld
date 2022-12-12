@@ -1,19 +1,20 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:test/ui/Qrcode/qrcode_password.dart';
-import 'package:test/ui/widget/SettingWidget/share_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/account.dart';
+import 'package:test/ui/qrcode/qrcode_password.dart';
+import 'package:test/ui/widget/settingwidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import 'PopUp/popupError.dart';
-import 'widget/SettingWidget/setting_button.dart';
+import '../popup/popupError.dart';
 
-class SettingKeyPage extends StatefulWidget {
-  const SettingKeyPage({Key? key}) : super(key: key);
+class SettingAccountPage extends StatefulWidget {
+  const SettingAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingKeyPage> createState() => _SettingKeyPage();
+  State<SettingAccountPage> createState() => _SettingAccountPage();
 }
 
-class _SettingKeyPage extends State<SettingKeyPage> {
+class _SettingAccountPage extends State<SettingAccountPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -28,7 +29,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
             Container(
               padding: const EdgeInsets.all(25),
               child: Row(children: [
-                const PageTitleW(title: 'Clé de chiffrement'),
+                const PageTitleW(title: 'Account'),
                 const Spacer(),
                 InkWell(
                     onTap: () {
@@ -57,13 +58,13 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            showQrcodePassword(context);
+                            //changing email
                           },
                           child: Padding(
                             padding: EdgeInsets.all(h * 0.02),
                             child: Row(children: [
                               Icon(
-                                const IconData(0xe4f6,
+                                const IconData(0xe081,
                                     fontFamily: 'MaterialIcons'),
                                 size: w * 0.08,
                                 color: Colors.white,
@@ -74,14 +75,14 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("QR code",
+                                  Text("Modifier son adresse email",
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''Permet d'afficher le QR code de votre clé privée \npour la partager sur un autre appareil''',
+                                    "Current email : ${context.read<Account>().id}",
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -106,19 +107,13 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            try {
-                              await showShare(context);
-                            } on FormatException catch (e) {
-                              showAlertDialog(context, e.message);
-                            } on PlatformException catch (e2) {
-                              showAlertDialog(context, "Platform");
-                            }
+                            //changement du master password
                           },
                           child: Padding(
                             padding: EdgeInsets.all(h * 0.02),
                             child: Row(children: [
                               Icon(
-                                const IconData(0xf052b,
+                                const IconData(0xe47a,
                                     fontFamily: 'MaterialIcons'),
                                 size: w * 0.08,
                                 color: Colors.white,
@@ -129,14 +124,14 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Fichier de clé",
+                                  Text("Modifier son mot de passe maître",
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''Permet de créer un fichier dans [endroit du fichier] \npour la partager sur un autre appareil''',
+                                    '''Permet de modifier son master password''',
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -167,16 +162,50 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                 decoration: BoxDecoration(
                     color: Colors.deepPurple[300],
                     borderRadius: BorderRadius.circular(w * 0.01)),
-                child: SettingButtonWidget(
-                  title: "Ré-initialiser sa clé",
-                  content:
-                      '''Permet de ré-initialiser sa clé privée et l'iv. \n Il est conseillé de les changer au moins tous les 6 mois''',
-                  icon: const IconData(0xf052b, fontFamily: 'MaterialIcons'),
-                  page: const SettingKeyPage(),
-                )),
-            SizedBox(
-              height: h * 0.05,
-            ),
+                child: Row(children: [
+                  Expanded(
+                      child: InkWell(
+                          onTap: () {
+                            //envoie de l'email
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.all(h * 0.02),
+                              child: Row(children: [
+                                Icon(
+                                  const IconData(0xedc1,
+                                      fontFamily: 'MaterialIcons'),
+                                  size: w * 0.08,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: w * 0.02,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Suppression du compte",
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: w * 0.05)),
+                                    Text(
+                                      '''Vous envoyer un email pour affirmer la suppression définitive du compte''',
+                                      style: TextStyle(
+                                          fontSize: w * 0.02,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                                const Spacer(),
+                                Icon(
+                                  const IconData(0xe355,
+                                      fontFamily: 'MaterialIcons'),
+                                  size: w * 0.06,
+                                  color: Colors.white,
+                                )
+                              ]))))
+                ])),
           ],
         ))));
   }

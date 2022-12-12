@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/authentification.dart';
-import 'PopUp/popupError.dart';
+import 'popup/popupError.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -52,7 +52,7 @@ class _RegisterPage extends State<RegisterPage> {
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
                       controller: emailController,
-                      decoration:const InputDecoration(
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Email',
                       ),
@@ -65,9 +65,8 @@ class _RegisterPage extends State<RegisterPage> {
               //Password Input
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  children: [
-                    Container(
+                child: Column(children: [
+                  Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(12)),
@@ -77,7 +76,8 @@ class _RegisterPage extends State<RegisterPage> {
                         obscureText: true,
                         controller: passwordController,
                         onChanged: ((value) {
-                          passNotifier.value = PasswordStrength.calculate(text: passwordController.text);
+                          passNotifier.value = PasswordStrength.calculate(
+                              text: passwordController.text);
                         }),
                         decoration: const InputDecoration(
                           border: InputBorder.none,
@@ -90,8 +90,7 @@ class _RegisterPage extends State<RegisterPage> {
                   PasswordStrengthChecker(
                     strength: passNotifier,
                   ),
-                  ]
-                ),
+                ]),
               ),
               const SizedBox(height: 30),
               // Sign In Button
@@ -102,42 +101,41 @@ class _RegisterPage extends State<RegisterPage> {
                     decoration: BoxDecoration(
                         color: Colors.deepPurple[300],
                         borderRadius: BorderRadius.circular(12)),
-                    child : InkWell (
-                      onTap: () async{
-                        try{
-                            if(await Authentification.register((emailController.text).trim(),(passwordController.text).trim())){
-                            Navigator.pop(context);
+                    child: InkWell(
+                        onTap: () async {
+                          try {
+                            if (await Authentification.register(
+                                (emailController.text).trim(),
+                                (passwordController.text).trim())) {
+                              Navigator.pop(context);
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: const Text('Erreur'),
+                                        content: const Text(
+                                            "Le nom d'utilisateur existe déjà !!"),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text('Ok'),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          )
+                                        ],
+                                      ));
+                            }
+                          } on StorageException catch (e) {
+                            showAlertDialog(context, e.message);
                           }
-                          else{
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: const Text('Erreur'),
-                                    content: const Text(
-                                        "Le nom d'utilisateur existe déjà !!"),
-                                    actions: [
-                                      TextButton(
-                                        child: const Text('Ok'),
-                                        onPressed: () => Navigator.pop(context),
-                                      )
-                                    ],
-                                  ));
-                          }
-                        }on StorageException catch(e){
-                          showAlertDialog(context, e.message);
-                        }
-                      },
-                      child:const Center(
-                        child: Text(
+                        },
+                        child: const Center(
+                            child: Text(
                           'Sign Up',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
-                        )
-                      )
-                    )
-                    ),
+                        )))),
               ),
               const SizedBox(height: 30),
 

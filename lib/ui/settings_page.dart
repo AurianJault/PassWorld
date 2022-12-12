@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
-import 'package:test/ui/setting_key_page.dart';
+import 'package:test/ui/setting/setting_key_page.dart';
+import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import 'package:test/ui/widget/SettingWidget/setting_button.dart';
+import 'package:test/ui/widget/settingwidget/setting_button.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     content:
                         "Adresse mail, mot-de-passe maître, suppression de compte",
                     icon: const IconData(0xf522, fontFamily: 'MaterialIcons'),
-                    page: const LoginPage(),
+                    page: const SettingAccountPage(),
                   )),
               SizedBox(
                 height: h * 0.05,
@@ -83,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       title: "Thème",
                       content: "Mode nuit, thème sombre, langue",
                       icon: const IconData(0xf14f, fontFamily: 'MaterialIcons'),
-                      page: const LoginPage(),
+                      page: const SettingThemePage(),
                     ),
                     SettingButtonWidget(
                       title: "About",

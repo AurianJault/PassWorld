@@ -29,22 +29,18 @@ class ClientAPI {
     return response;
   }
 
-  static Future<StreamedResponse> uploadFile(
+  static Future<StreamedRequest> uploadFile(
       String mail, String password, File password_file) async {
     print(password_file.length());
     Stream<List<int>> streamFile = password_file.openRead();
     Uri url = Uri.parse("$base/user/password-file");
-    String bodyy = """
+    String body = """
     {
       "email" : "$mail",
       "password" : "$password"
     }
     """;
-    //var response = http.put(url, body: streamFile);
-    var request = http.MultipartRequest("PUT", url);
-    var passwordPart = http.MultipartFile("file", streamFile, 9951);
-    request.files.add(passwordPart);
-    var response = await request.send();
+    var response = await http.StreamedRequest("put", url);
     return response;
   }
 }

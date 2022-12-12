@@ -39,7 +39,7 @@ class Account with ChangeNotifier {
   Account.old(String id, Encrypted salty, Encrypted hashy) : _id = id {
     _masterPassword = Chiffrement.old(salty, hashy);
     // Fonction chargeant _vault
-    //fillVault(); // Maybe uncomment
+    //fillVault(); // Maybe uncomment // TODO
   }
 
   // Methods
@@ -87,6 +87,7 @@ class Account with ChangeNotifier {
 
   @override
   bool operator ==(Object c) {
+    // TODO
     if (identical(this, c)) {
       return true;
     }

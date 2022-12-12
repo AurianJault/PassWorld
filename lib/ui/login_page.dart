@@ -3,6 +3,7 @@ import 'package:bcrypt/bcrypt.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/Classes/api_client.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      if (await Authentification.authentification(
+                      if (await Authentification.apiAuthentication(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;

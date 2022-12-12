@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:http/http.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/Classes/api_client.dart';
 import 'storage.dart';
 import 'config.dart';
 
@@ -58,5 +60,17 @@ class Authentification {
           "${i.id} ${i.salt.base64} ${i.hash.base64}\n",
           mode: FileMode.writeOnlyAppend);
     }
+  }
+
+  static Future<bool> apiAuthentication(String mail, String password) async {
+    Response requestResponse = await ClientAPI.authenticator(mail, password);
+
+    if (requestResponse.statusCode != 200) {
+      print("Problem request status code is ${requestResponse.statusCode}");
+      return false;
+    }
+
+    bool res = requestResponse.body as bool;
+    return res;
   }
 }

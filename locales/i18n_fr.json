@@ -3,5 +3,12 @@
     "search" : "rechercher",
     "generator_title" : "Générateur",
     "heal_title" : "Santé",
-    "setting_title" : "Paramètres"
+    "setting_title" : "Paramètres",
+    "account" : "Compte",
+    "authentification_setting_title" : "Méthodes d'authentification",
+    "key_setting_title" : "Clé de chiffrement",
+    "theme_setting_title" : "Thème",
+    "about_setting_title" : "A propos",
+    "logout_title" : "Déconnexion",
+    "language_select" : "Choisissez une langue"
 }

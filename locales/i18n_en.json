@@ -3,5 +3,12 @@
     "search" : "search",
     "generator_title" : "Generator",
     "heal_title" : "Heal",
-    "setting_title" : "Settings"
+    "setting_title" : "Settings",
+    "account" : "Account", 
+    "authentification_setting_title" : "Authentication methods",
+    "key_setting_title" : "Encryption key",
+    "theme_setting_title" : "Theme",
+    "about_setting_title" : "About",
+    "logout_title" : "Log out",
+    "language_select" : "Choose a language"
 }

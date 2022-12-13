@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
+import '../Classes/localization/translation.dart';
 
 class HealthPage extends StatefulWidget {
   const HealthPage({Key? key}) : super(key: key);
@@ -15,8 +16,10 @@ class _HealthPageState extends State<HealthPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-            padding: const EdgeInsets.all(25),
-            child: const PageTitleW(title: 'Health')),
+          padding: const EdgeInsets.all(25),
+          child: PageTitleW(
+              title: LanguageTranslation.of(context)!.text('heal_title')),
+        ),
       ),
     );
   }

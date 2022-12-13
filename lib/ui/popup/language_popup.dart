@@ -1,37 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flag/flag.dart';
 
 import '../../Classes/localization/translation.dart';
 
 languageSelector(BuildContext context) {
-  // set up the button
+  var size = MediaQuery.of(context).size;
+  double w = size.width; //*
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: const Text("Choisissez une langue"),
-    actions: [
-      InkWell(
-        onTap: () {
-          LanguageTranslation.load(const Locale("fr"));
-          Navigator.pop(context);
-        },
-        child: const Text("FR"),
-      ),
-      InkWell(
-        onTap: () {
-          LanguageTranslation.load(const Locale("en"));
-          Navigator.pop(context);
-        },
-        child: const Text("EN"),
-      ),
-      InkWell(
-        onTap: () {
-          LanguageTranslation.load(const Locale("pt"));
-          Navigator.pop(context);
-        },
-        child: const Text("PT"),
-      ),
-    ],
-  );
+      title: Text(LanguageTranslation.of(context)!.text('language_select')),
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: () {
+              LanguageTranslation.load(const Locale("fr"));
+              Navigator.pop(context);
+            },
+            child: const Flag.fromString('FR',
+                height: 50, width: 75, fit: BoxFit.fill),
+          ),
+          SizedBox(
+            width: w * 0.02,
+          ),
+          InkWell(
+            onTap: () {
+              LanguageTranslation.load(const Locale("en"));
+              Navigator.pop(context);
+            },
+            child: const Flag.fromString('GB',
+                height: 50, width: 75, fit: BoxFit.fill),
+          ),
+          SizedBox(
+            width: w * 0.02,
+          ),
+          InkWell(
+            onTap: () {
+              LanguageTranslation.load(const Locale("pt"));
+              Navigator.pop(context);
+            },
+            child: const Flag.fromString('PT',
+                height: 50, width: 75, fit: BoxFit.fill),
+          ),
+        ],
+      ));
 
   // show the dialog
   showDialog(

@@ -31,7 +31,9 @@ class _SettingThemePage extends State<SettingThemePage> {
             Container(
               padding: const EdgeInsets.all(25),
               child: Row(children: [
-                const PageTitleW(title: 'Thème'),
+                PageTitleW(
+                    title: LanguageTranslation.of(context)!
+                        .text('theme_setting_title')),
                 const Spacer(),
                 InkWell(
                     onTap: () {

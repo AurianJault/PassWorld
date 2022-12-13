@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:test/ui/qrcode/qrcode_password.dart';
 import 'package:test/ui/widget/settingwidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
+import '../../Classes/localization/translation.dart';
 import '../popup/popupError.dart';
 import '../widget/settingwidget/setting_button.dart';
 
@@ -28,7 +29,9 @@ class _SettingKeyPage extends State<SettingKeyPage> {
             Container(
               padding: const EdgeInsets.all(25),
               child: Row(children: [
-                const PageTitleW(title: 'Clé de chiffrement'),
+                PageTitleW(
+                    title: LanguageTranslation.of(context)!
+                        .text('key_setting_title')),
                 const Spacer(),
                 InkWell(
                     onTap: () {

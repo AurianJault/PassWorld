@@ -6,6 +6,8 @@ import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:test/ui/widget/settingwidget/setting_button.dart';
 
+import '../Classes/localization/translation.dart';
+
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -28,7 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Container(
                   padding: const EdgeInsets.all(25),
-                  child: const PageTitleW(title: 'Settings')),
+                  child: PageTitleW(
+                      title: LanguageTranslation.of(context)!
+                          .text('setting_title'))),
               SizedBox(
                 height: h * 0.05,
               ),
@@ -38,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(w * 0.01)),
                   child: SettingButtonWidget(
-                    title: "Account",
+                    title: LanguageTranslation.of(context)!.text('account'),
                     content:
                         "Adresse mail, mot-de-passe maître, suppression de compte",
                     icon: const IconData(0xf522, fontFamily: 'MaterialIcons'),
@@ -55,14 +59,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     SettingButtonWidget(
-                      title: "Méthodes d'authentification",
+                      title: LanguageTranslation.of(context)!
+                          .text('authentification_setting_title'),
                       content: "2 facteurs, Yubikey, biométrique",
                       icon:
                           const IconData(0xf0553, fontFamily: 'MaterialIcons'),
                       page: const LoginPage(),
                     ),
                     SettingButtonWidget(
-                      title: "Clé de chiffrement",
+                      title: LanguageTranslation.of(context)!
+                          .text('key_setting_title'),
                       content: "Partage de la clé, changer de clé ",
                       icon:
                           const IconData(0xf052b, fontFamily: 'MaterialIcons'),
@@ -82,13 +88,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     SettingButtonWidget(
-                      title: "Thème",
+                      title: LanguageTranslation.of(context)!
+                          .text('theme_setting_title'),
                       content: "Mode nuit, thème sombre, langue",
                       icon: const IconData(0xf14f, fontFamily: 'MaterialIcons'),
                       page: const SettingThemePage(),
                     ),
                     SettingButtonWidget(
-                      title: "About",
+                      title: LanguageTranslation.of(context)!
+                          .text('about_setting_title'),
                       content: "Qui sommes-nous, dêpot du projet ",
                       icon: const IconData(0xe33d, fontFamily: 'MaterialIcons'),
                       page: const LoginPage(),
@@ -113,7 +121,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                       child: Padding(
                         padding: EdgeInsets.all(h * 0.02),
-                        child: Text("Déconnexion",
+                        child: Text(
+                            LanguageTranslation.of(context)!
+                                .text('logout_title'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,

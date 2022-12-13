@@ -5,6 +5,7 @@ import 'package:test/Classes/account.dart';
 import 'package:test/ui/qrcode/qrcode_password.dart';
 import 'package:test/ui/widget/settingwidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
+import '../../Classes/localization/translation.dart';
 import '../popup/popupError.dart';
 
 class SettingAccountPage extends StatefulWidget {
@@ -29,7 +30,8 @@ class _SettingAccountPage extends State<SettingAccountPage> {
             Container(
               padding: const EdgeInsets.all(25),
               child: Row(children: [
-                const PageTitleW(title: 'Account'),
+                PageTitleW(
+                    title: LanguageTranslation.of(context)!.text('account')),
                 const Spacer(),
                 InkWell(
                     onTap: () {

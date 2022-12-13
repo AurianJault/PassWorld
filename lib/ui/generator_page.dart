@@ -7,6 +7,7 @@ import 'package:test/ui/popup/generator_info.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
+import '../Classes/localization/translation.dart';
 import 'popup/popupError.dart';
 
 class GeneratorPage extends StatefulWidget {
@@ -40,7 +41,11 @@ class _GeneratorPageState extends State<GeneratorPage> {
           //-----------
           Container(
               padding: EdgeInsets.all(w * 0.04),
-              child: Row(children: const [PageTitleW(title: "Generator")])),
+              child: Row(children: [
+                PageTitleW(
+                    title: LanguageTranslation.of(context)!
+                        .text('generator_title'))
+              ])),
           SizedBox(
             height: h * 0.05,
           ),

@@ -1,4 +1,7 @@
 {
     "home_title" : "Home",
-    "search" : "search"
+    "search" : "search",
+    "generator_title" : "Generator",
+    "heal_title" : "Heal",
+    "setting_title" : "Settings"
 }

@@ -1,4 +1,7 @@
 {
     "home_title" : "Accueil",
-    "search" : "rechercher"
+    "search" : "rechercher",
+    "generator_title" : "Générateur",
+    "heal_title" : "Santé",
+    "setting_title" : "Paramètres"
 }

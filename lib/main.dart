@@ -5,6 +5,9 @@ import 'Classes/config.dart';
 
 import 'Classes/account.dart';
 
+import 'Classes/localization/translation_delegate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -19,9 +22,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      localizationsDelegates: const [
+        TranslationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('fr', ''),
+        Locale('pt', ''),
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocaleLanguage in supportedLocales) {
+          if (supportedLocaleLanguage.languageCode == locale!.languageCode &&
+              supportedLocaleLanguage.countryCode == locale.countryCode) {
+            return supportedLocaleLanguage;
+          }
+        }
+        return supportedLocales.first;
+      },
+      home: const LoginPage(),
     );
   }
 }

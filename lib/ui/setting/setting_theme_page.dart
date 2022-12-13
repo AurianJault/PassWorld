@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/Classes/localization/translation.dart';
+import 'package:test/ui/popup/language_popup.dart';
 import 'package:test/ui/qrcode/qrcode_password.dart';
 import 'package:test/ui/widget/settingwidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -165,9 +167,11 @@ class _SettingThemePage extends State<SettingThemePage> {
                 child: Row(children: [
                   Expanded(
                       child: InkWell(
-                          onTap: () {
-                            //envoie de l'email
-                          },
+                          onTap: (() {
+                            setState(() {
+                              languageSelector(context);
+                            });
+                          }),
                           child: Padding(
                               padding: EdgeInsets.all(h * 0.02),
                               child: Row(children: [

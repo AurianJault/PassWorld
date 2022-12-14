@@ -77,14 +77,17 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("QR code",
+                                  Text(
+                                      LanguageTranslation.of(context)!
+                                          .text('qrcode_title'),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''Permet d'afficher le QR code de votre clé privée \npour la partager sur un autre appareil''',
+                                    LanguageTranslation.of(context)!
+                                        .text('qrcode_decription'),
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -132,14 +135,17 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Fichier de clé",
+                                  Text(
+                                      LanguageTranslation.of(context)!
+                                          .text('file_title'),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''Permet de créer un fichier dans [endroit du fichier] \npour la partager sur un autre appareil''',
+                                    LanguageTranslation.of(context)!
+                                        .text('file_description'),
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -171,9 +177,10 @@ class _SettingKeyPage extends State<SettingKeyPage> {
                     color: Colors.deepPurple[300],
                     borderRadius: BorderRadius.circular(w * 0.01)),
                 child: SettingButtonWidget(
-                  title: "Ré-initialiser sa clé",
-                  content:
-                      '''Permet de ré-initialiser sa clé privée et l'iv. \n Il est conseillé de les changer au moins tous les 6 mois''',
+                  title: LanguageTranslation.of(context)!
+                      .text('key_restore_title'),
+                  content: LanguageTranslation.of(context)!
+                      .text('key_restore_description'),
                   icon: const IconData(0xf052b, fontFamily: 'MaterialIcons'),
                   page: const SettingKeyPage(),
                 )),

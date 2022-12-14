@@ -4,11 +4,24 @@
     "generator_title" : "Générateur",
     "heal_title" : "Santé",
     "setting_title" : "Paramètres",
+
     "account" : "Compte",
     "authentification_setting_title" : "Méthodes d'authentification",
     "key_setting_title" : "Clé de chiffrement",
     "theme_setting_title" : "Thème",
     "about_setting_title" : "A propos",
     "logout_title" : "Déconnexion",
-    "language_select" : "Choisissez une langue"
+
+    "language_select" : "Choisissez une langue",
+    "language_title" : "Changer la langue",
+    "language_description" : "Permet de changer la langue de l'application",
+    "theme_mode_title" : "Mode sombre/clair",
+    "theme_mode_description" : "Change les couleurs de l'application entre claires et sombres",
+
+    "qrcode_title" : "QR code",
+    "qrcode_decription" : "Permet d'afficher le QR code de votre clé privée \npour la partager sur un autre appareil",
+    "file_title" : "Fichier de clé",
+    "file_description" : "Permet de télécharger un fichier avec votre clé \npour la partager sur un autre appareil",
+    "key_restore_title" : "Ré-initialiser sa clé",
+    "key_restore_description" : "Permet de ré-initialiser sa clé privée et l'IV. \nIl est conseillé de les changer au moins tous les 6 mois"
 }

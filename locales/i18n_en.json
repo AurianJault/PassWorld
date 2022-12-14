@@ -4,11 +4,24 @@
     "generator_title" : "Generator",
     "heal_title" : "Heal",
     "setting_title" : "Settings",
+
     "account" : "Account", 
     "authentification_setting_title" : "Authentication methods",
     "key_setting_title" : "Encryption key",
     "theme_setting_title" : "Theme",
     "about_setting_title" : "About",
     "logout_title" : "Log out",
-    "language_select" : "Choose a language"
+
+    "language_select" : "Choose a language",
+    "language_title" : "Change language",
+    "language_description" : "Allows you to change the language of the application",
+    "theme_mode_title" : "Dark/light mode",
+    "theme_mode_description" : "Changes app colors between light and dark",
+
+    "qrcode_title" : "QR code",
+    "qrcode_decription" : "Allows you to display the QR code of your private key \nto share it on another device",
+    "file_title" : "Key file",
+    "file_description" : "Allows you to upload a file with your key \nto share it on another device",
+    "key_restore_title" : "Reset your key",
+    "key_restore_description" : "Allows you to re-initialize your private key and the IV. \nIt is advisable to change them at least every 6 months"
 }

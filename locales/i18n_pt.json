@@ -4,11 +4,25 @@
     "generator_title" : "Gerador",
     "heal_title" : "Saúde",
     "setting_title" : "Configurações",
+
     "account" : "Conta",
     "authentification_setting_title" : "Métodos de autenticação",
     "key_setting_title" : "Chave de encriptação",
     "theme_setting_title" : "Tema",
     "about_setting_title" : "Sobre",
     "logout_title" : "Sair",
-    "language_select" : "Escolha um idioma"
+
+    "language_select" : "Escolha um idioma",
+    "language_title" : "Alterar o idioma",
+    "language_description" : "Permite alterar o idioma do aplicativo",
+    "theme_mode_title" : "Modo escuro/claro",
+    "theme_mode_description" : "Altera as cores do aplicativo entre claro e escuro",
+
+    "qrcode_title" : "Código QR",
+    "qrcode_decription" : "Permite que você exiba o código QR de sua chave privada \npara compartilhá-la com outro dispositivo",
+    "file_title" : "arquivo da chave",
+    "file_description" : "Permite que você carregue um arquivo com a sua chave \npara compartilhá-la em outro dispositivo",
+    "key_restore_title" : "Redefina sua chave",
+    "key_restore_description" : "Permite que você reinicialize sua chave privada e o VI. \nÉ aconselhável trocá-los pelo menos a cada 6 meses"
+
 }

@@ -29,6 +29,11 @@
     "file_title" : "arquivo da chave",
     "file_description" : "Permite que você carregue um arquivo com a sua chave \npara compartilhá-la em outro dispositivo",
     "key_restore_title" : "Redefina sua chave",
-    "key_restore_description" : "Permite que você reinicialize sua chave privada e o VI. \nÉ aconselhável trocá-los pelo menos a cada 6 meses"
+    "key_restore_description" : "Permite que você reinicialize sua chave privada e o VI. \nÉ aconselhável trocá-los pelo menos a cada 6 meses",
+
+    "generator_length" : "Tamanho",
+    "generator_characters" : "Caracteres",
+    "generator_not_include" : "Não inclusos",
+    "generator_not_include_hint" : "Digite os caracteres que você não quer"
 
 }

@@ -110,7 +110,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Length",
+                      LanguageTranslation.of(context)!.text('generator_length'),
                       style: TextStyle(
                           fontSize: w * 0.05, fontWeight: FontWeight.bold),
                     ),
@@ -173,7 +173,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
               padding: EdgeInsets.all(w * 0.02),
               child: Row(children: [
                 Text(
-                  "Characters",
+                  LanguageTranslation.of(context)!.text('generator_characters'),
                   style: TextStyle(
                       fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
@@ -216,7 +216,8 @@ class _GeneratorPageState extends State<GeneratorPage> {
               padding: EdgeInsets.all(w * 0.02),
               child: Row(children: [
                 Text(
-                  "Do not include",
+                  LanguageTranslation.of(context)!
+                      .text('generator_not_include'),
                   style: TextStyle(
                       fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
@@ -236,9 +237,10 @@ class _GeneratorPageState extends State<GeneratorPage> {
                 child: TextField(
                   style: TextStyle(fontSize: w * 0.04),
                   controller: noneCarac,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Type Charaters you don\'t want',
+                    hintText: LanguageTranslation.of(context)!
+                        .text('generator_not_include_hint'),
                   ),
                   onChanged: (value) {
                     setState(() {

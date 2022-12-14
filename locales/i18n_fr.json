@@ -29,5 +29,10 @@
     "file_title" : "Fichier de clé",
     "file_description" : "Permet de télécharger un fichier avec votre clé \npour la partager sur un autre appareil",
     "key_restore_title" : "Ré-initialiser sa clé",
-    "key_restore_description" : "Permet de ré-initialiser sa clé privée et l'IV. \nIl est conseillé de les changer au moins tous les 6 mois"
+    "key_restore_description" : "Permet de ré-initialiser sa clé privée et l'IV. \nIl est conseillé de les changer au moins tous les 6 mois",
+
+    "generator_length" : "Taille",
+    "generator_characters" : "Caractères",
+    "generator_not_include" : "Ne pas include",
+    "generator_not_include_hint" : "Entrez les caractères que vous ne voulez pas"
 }

@@ -30,5 +30,10 @@
     "file_title" : "Key file",
     "file_description" : "Allows you to upload a file with your key \nto share it on another device",
     "key_restore_title" : "Reset your key",
-    "key_restore_description" : "Allows you to re-initialize your private key and the IV. \nIt is advisable to change them at least every 6 months"
+    "key_restore_description" : "Allows you to re-initialize your private key and the IV. \nIt is advisable to change them at least every 6 months",
+
+    "generator_length" : "Length",
+    "generator_characters" : "Characteres",
+    "generator_not_include" : "Do not include",
+    "generator_not_include_hint" : "Type characters you don't want"
 }

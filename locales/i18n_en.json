@@ -5,12 +5,19 @@
     "heal_title" : "Heal",
     "setting_title" : "Settings",
 
-    "account" : "Account", 
+    "account_setting_title" : "Account", 
     "authentification_setting_title" : "Authentication methods",
     "key_setting_title" : "Encryption key",
     "theme_setting_title" : "Theme",
     "about_setting_title" : "About",
     "logout_title" : "Log out",
+
+    "account_setting_description" : "Email address, master password, account deletion",
+    "authentification_setting_description" : "2 factors, Yubikey, biometrics",
+    "key_setting_description" : "Key sharing, changing keys",
+    "theme_setting_description" : "Dark/light theme, language",
+    "about_setting_description" : "Who are we ? , project deposit, common creative licenses",
+
 
     "language_select" : "Choose a language",
     "language_title" : "Change language",

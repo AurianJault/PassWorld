@@ -5,12 +5,18 @@
     "heal_title" : "Santé",
     "setting_title" : "Paramètres",
 
-    "account" : "Compte",
+    "account_setting_title" : "Compte",
     "authentification_setting_title" : "Méthodes d'authentification",
     "key_setting_title" : "Clé de chiffrement",
     "theme_setting_title" : "Thème",
     "about_setting_title" : "A propos",
     "logout_title" : "Déconnexion",
+
+    "account_setting_description" : "Adresse email, mot-de-passe maître, suppression de compte",
+    "authentification_setting_description" : "2 facteurs, Yubikey, biométrie",
+    "key_setting_description" : "Partage de clé, changer de clé",
+    "theme_setting_description" : "Thème combre/clair, langue",
+    "about_setting_description" : "Qui sommes-nous ? , dêpot du  projet, licences créatives communes",
 
     "language_select" : "Choisissez une langue",
     "language_title" : "Changer la langue",

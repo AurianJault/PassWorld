@@ -16,7 +16,7 @@ class CharactereInputWidget extends StatefulWidget {
 }
 
 class _CharactereInputWidgetState extends State<CharactereInputWidget> {
-  bool pressAttention = true;
+  bool pressAttention = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,10 @@ class _CharactereInputWidgetState extends State<CharactereInputWidget> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height;
+
+    if (pressAttention == false) {
+      context.read<Config>().addCharacter(widget.no);
+    }
 
     // Widget
     return SizedBox(

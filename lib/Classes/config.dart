@@ -45,6 +45,12 @@ class Config extends ChangeNotifier {
     }
   }
 
+  void addAll() {
+    for (int i = 0; i < 4; i++) {
+      charac.add(i);
+    }
+  }
+
   void clearCharacter() {
     charac.clear();
   }

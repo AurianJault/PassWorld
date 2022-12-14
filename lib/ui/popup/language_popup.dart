@@ -40,7 +40,7 @@ languageSelector(BuildContext context) {
               LanguageTranslation.load(const Locale("pt"));
               Navigator.pop(context);
             },
-            child: const Flag.fromString('PT',
+            child: const Flag.fromString('BR',
                 height: 50, width: 75, fit: BoxFit.fill),
           ),
         ],

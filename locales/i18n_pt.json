@@ -1,0 +1,14 @@
+{
+    "home_title" : "Inicio",
+    "search" : "busca",
+    "generator_title" : "Gerador",
+    "heal_title" : "Saúde",
+    "setting_title" : "Configurações",
+    "account" : "Conta",
+    "authentification_setting_title" : "Métodos de autenticação",
+    "key_setting_title" : "Chave de encriptação",
+    "theme_setting_title" : "Tema",
+    "about_setting_title" : "Sobre",
+    "logout_title" : "Sair",
+    "language_select" : "Escolha um idioma"
+}

@@ -3,12 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:test/Classes/doctor.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/Classes/strength_password.dart';
-import 'package:test/Classes/vault.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
-import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/red_password.dart';
 
 import '../Classes/account.dart';
+import '../Classes/localization/translation.dart';
 
 class HealthPage extends StatefulWidget {
   const HealthPage({Key? key}) : super(key: key);
@@ -200,8 +199,6 @@ class _HealthPageState extends State<HealthPage> {
                     .toList(),
                 onChanged: ((value) {})),
           ),
-
-
         ],
       )),
     );

@@ -4,12 +4,16 @@ import '../../Classes/storage.dart';
 import 'package:screen_brightness_util/screen_brightness_util.dart';
 
 showQrcode(BuildContext context, String id) async {
+  var size = MediaQuery.of(context).size;
+  double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
+  double h = size.height;
+
   AlertDialog alert = AlertDialog(
     backgroundColor: Colors.deepPurple[300],
     content: PrettyQr(
       image: const AssetImage('assets/bereal.png'), //mettre l'icone de l'app
       typeNumber: 6,
-      size: 500,
+      size: w * 0.6,
       data:
           (await Storage.getKey(id)).base64 + (await Storage.getIV(id)).base64,
       errorCorrectLevel: QrErrorCorrectLevel.M,

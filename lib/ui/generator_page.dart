@@ -24,11 +24,15 @@ class _GeneratorPageState extends State<GeneratorPage> {
   double length = 8;
   String output = "";
   String obcures = "*";
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+    output = Generator().generator(
+            length.toInt(), context.read<Config>().charac, noneCarac.text) ??
+        "";
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -198,12 +202,107 @@ class _GeneratorPageState extends State<GeneratorPage> {
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  CharactereInputWidget(character: "a-z", no: 0),
-                  CharactereInputWidget(character: "A-Z", no: 1),
-                  CharactereInputWidget(character: "0-9", no: 2),
-                  CharactereInputWidget(character: "!@%", no: 3),
-                  CharactereInputWidget(character: ",;`\"", no: 4),
+                children: [
+                  CharactereInputWidget(
+                    character: "a-z",
+                    no: 0,
+                    function: () {
+                      setState(() {
+                        try {
+                          output = Generator().generator(
+                                  length.toInt(),
+                                  context.read<Config>().charac,
+                                  noneCarac.text) ??
+                              "";
+                        } on UnsupportedError catch (e) {
+                          showAlertDialog(context, e.message ?? "");
+                        } on StorageException catch (e) {
+                          showAlertDialog(context, e.message);
+                        }
+                        obcure = true;
+                      });
+                    },
+                  ),
+                  CharactereInputWidget(
+                    character: "A-Z",
+                    no: 1,
+                    function: () {
+                      setState(() {
+                        try {
+                          output = Generator().generator(
+                                  length.toInt(),
+                                  context.read<Config>().charac,
+                                  noneCarac.text) ??
+                              "";
+                        } on UnsupportedError catch (e) {
+                          showAlertDialog(context, e.message ?? "");
+                        } on StorageException catch (e) {
+                          showAlertDialog(context, e.message);
+                        }
+                        obcure = true;
+                      });
+                    },
+                  ),
+                  CharactereInputWidget(
+                    character: "0-9",
+                    no: 2,
+                    function: () {
+                      setState(() {
+                        try {
+                          output = Generator().generator(
+                                  length.toInt(),
+                                  context.read<Config>().charac,
+                                  noneCarac.text) ??
+                              "";
+                        } on UnsupportedError catch (e) {
+                          showAlertDialog(context, e.message ?? "");
+                        } on StorageException catch (e) {
+                          showAlertDialog(context, e.message);
+                        }
+                        obcure = true;
+                      });
+                    },
+                  ),
+                  CharactereInputWidget(
+                    character: "!@%",
+                    no: 3,
+                    function: () {
+                      setState(() {
+                        try {
+                          output = Generator().generator(
+                                  length.toInt(),
+                                  context.read<Config>().charac,
+                                  noneCarac.text) ??
+                              "";
+                        } on UnsupportedError catch (e) {
+                          showAlertDialog(context, e.message ?? "");
+                        } on StorageException catch (e) {
+                          showAlertDialog(context, e.message);
+                        }
+                        obcure = true;
+                      });
+                    },
+                  ),
+                  CharactereInputWidget(
+                    character: ",;`\"",
+                    no: 4,
+                    function: () {
+                      setState(() {
+                        try {
+                          output = Generator().generator(
+                                  length.toInt(),
+                                  context.read<Config>().charac,
+                                  noneCarac.text) ??
+                              "";
+                        } on UnsupportedError catch (e) {
+                          showAlertDialog(context, e.message ?? "");
+                        } on StorageException catch (e) {
+                          showAlertDialog(context, e.message);
+                        }
+                        obcure = true;
+                      });
+                    },
+                  ),
                 ]),
           ),
           SizedBox(
@@ -265,43 +364,6 @@ class _GeneratorPageState extends State<GeneratorPage> {
           SizedBox(
             height: h * 0.10,
           ),
-          //-----------
-          // BUTTON
-          //-----------
-          Center(
-            child: InkWell(
-              onTap: (() {
-                setState(() {
-                  try {
-                    output = Generator().generator(length.toInt(),
-                            context.read<Config>().charac, noneCarac.text) ??
-                        "";
-                  } on UnsupportedError catch (e) {
-                    showAlertDialog(context, e.message ?? "");
-                  }
-                });
-              }),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(w * 0.04)),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: w * 0.33, vertical: h * 0.01),
-                  child: Text(
-                    'Generate',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: w * 0.065),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: h * 0.02,
-          )
         ],
       ))),
     );

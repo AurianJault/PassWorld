@@ -10,7 +10,13 @@ class Config extends ChangeNotifier {
 
   Config() {
     appDirPath = io.Directory("");
-    charac = [];
+    charac = [
+      0,
+      1,
+      2,
+      3,
+      4,
+    ];
   }
 
   Future<void> setAppDirPath() async {

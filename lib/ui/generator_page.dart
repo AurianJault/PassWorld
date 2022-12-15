@@ -30,9 +30,6 @@ class _GeneratorPageState extends State<GeneratorPage> {
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
-    output = Generator().generator(
-            length.toInt(), context.read<Config>().charac, noneCarac.text) ??
-        "";
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -361,11 +358,21 @@ class _GeneratorPageState extends State<GeneratorPage> {
               ),
             ),
           ),
-          SizedBox(
-            height: h * 0.10,
-          ),
         ],
       ))),
     );
   }
+}
+
+String generation(BuildContext context, double length, String noneCarac) {
+  try {
+    return Generator().generator(
+            length.toInt(), context.read<Config>().charac, noneCarac) ??
+        "";
+  } on UnsupportedError catch (e) {
+    showAlertDialog(context, e.message ?? "");
+  } on StorageException catch (e) {
+    showAlertDialog(context, e.message);
+  }
+  return "";
 }

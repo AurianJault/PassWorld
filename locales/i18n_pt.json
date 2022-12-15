@@ -34,6 +34,8 @@
     "generator_length" : "Tamanho",
     "generator_characters" : "Caracteres",
     "generator_not_include" : "Não inclusos",
-    "generator_not_include_hint" : "Digite os caracteres que você não quer"
+    "generator_not_include_hint" : "Digite os caracteres que você não quer",
+    "generator_info" : "Os personagens são divididos em 5 botões : \n- Alfabeto minúsculo \n- Alfabeto maiúsculo \n- Números \n- Caracteres básicos ( ) \n- Caracteres especiais ( ) "
+
 
 }

@@ -35,5 +35,7 @@
     "generator_length" : "Length",
     "generator_characters" : "Characteres",
     "generator_not_include" : "Do not include",
-    "generator_not_include_hint" : "Type characters you don't want"
+    "generator_not_include_hint" : "Type characters you don't want",
+    "generator_info" : "The characters are divided into 5 buttons: \n- Lowercase alphabet \n- Uppercase alphabet \n- Numbers \n- The basic characters ( ) \n- Special characters ( ) "
+
 }

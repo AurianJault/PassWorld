@@ -31,7 +31,7 @@ class _SettingKeyPage extends State<SettingKeyPage> {
               child: Row(children: [
                 PageTitleW(
                     title: LanguageTranslation.of(context)!
-                        .text('key_setting_title')),
+                        .text('key_setting_page_title')),
                 const Spacer(),
                 InkWell(
                     onTap: () {

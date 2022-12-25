@@ -7,7 +7,9 @@
 
     "account_setting_title" : "Conta",
     "authentification_setting_title" : "Métodos de autenticação",
+    "authentification_setting_page_title" : "Métodos de\nautenticação",
     "key_setting_title" : "Chave de encriptação",
+    "key_setting_page_title" : "Chave de \nencriptação",
     "theme_setting_title" : "Tema",
     "about_setting_title" : "Sobre",
     "logout_title" : "Sair",

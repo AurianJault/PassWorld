@@ -7,7 +7,9 @@
 
     "account_setting_title" : "Compte",
     "authentification_setting_title" : "Méthodes d'authentification",
+    "authentification_setting_page_title" : "Méthodes \nd'authentification",
     "key_setting_title" : "Clé de chiffrement",
+    "key_setting_page_title" : "Clé de chiffrement",
     "theme_setting_title" : "Thème",
     "about_setting_title" : "A propos",
     "logout_title" : "Déconnexion",

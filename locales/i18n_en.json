@@ -7,7 +7,9 @@
 
     "account_setting_title" : "Account", 
     "authentification_setting_title" : "Authentication methods",
+    "authentification_setting_page_title" : "Authentication \nmethods",
     "key_setting_title" : "Encryption key",
+    "key_setting_page_title" : "Encryption key",
     "theme_setting_title" : "Theme",
     "about_setting_title" : "About",
     "logout_title" : "Log out",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
+import 'package:test/ui/setting/setting_authentification_page.dart';
 import 'package:test/ui/setting/setting_key_page.dart';
 import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -66,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           .text('authentification_setting_description'),
                       icon:
                           const IconData(0xf0553, fontFamily: 'MaterialIcons'),
-                      page: const LoginPage(),
+                      page: const SettingAuthentificationPage(),
                     ),
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!

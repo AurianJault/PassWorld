@@ -10,5 +10,13 @@
     "theme_setting_title" : "Tema",
     "about_setting_title" : "Sobre",
     "logout_title" : "Sair",
-    "language_select" : "Escolha um idioma"
+    "language_select" : "Escolha um idioma",
+
+
+    "health_care" : "Saúde",
+    "subtitle" : "Estamos cuidando de suas senhas",
+    "critical_passwords" : "Força da(s) senha(s) crítica(s)",
+    "medium_passwords" : "Senha(s) de força média",
+    "reused_passwords" : "Senha(s) reutilizada(s)",
+    "old_passwords" : "Senha(s) muito antiga(s)"
 }

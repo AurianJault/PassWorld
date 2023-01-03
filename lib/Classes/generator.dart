@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:test/Classes/Exception/storageException.dart';
 
 class Generator {

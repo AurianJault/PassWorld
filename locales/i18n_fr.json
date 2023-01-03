@@ -10,5 +10,12 @@
     "theme_setting_title" : "Thème",
     "about_setting_title" : "A propos",
     "logout_title" : "Déconnexion",
-    "language_select" : "Choisissez une langue"
+    "language_select" : "Choisissez une langue",
+
+    "health_care" : "Santé",
+    "subtitle" : "Nous prenons soin de vos mots de passe",
+    "critical_passwords" : "Force des mots de passe de niveau critique",
+    "medium_passwords" : "Force des mots de passe de niveau insuffisant",
+    "reused_passwords" : "Mots de passe réutilisé",
+    "old_passwords" : "Mots de passe trop anciens"
 }

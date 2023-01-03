@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:test/Classes/password.dart';
 import 'package:flutter/services.dart';
 
-class DoctorPassword extends StatelessWidget {
+class DoctorPasswordWidget extends StatelessWidget {
 
   Password password;
   
-  var color;
+  Color color;
 
-  DoctorPassword({super.key, required this.password,required this.color});
-  
+  DoctorPasswordWidget({super.key, required this.password,required this.color});
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -18,7 +18,7 @@ class DoctorPassword extends StatelessWidget {
     // Widget
     return Container(
       height: h * 1,
-      width: w * 0.80,
+      width: w * 0.70,
         decoration: BoxDecoration(
             color: color,
         ),

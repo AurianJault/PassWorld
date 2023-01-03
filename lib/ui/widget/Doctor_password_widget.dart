@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/password.dart';
 import 'package:flutter/services.dart';
+import '../password_detail_page.dart';
 
 class DoctorPasswordWidget extends StatelessWidget {
 
@@ -22,7 +23,16 @@ class DoctorPasswordWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: color,
         ),
-          child: Row(
+        child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        PasswordDetailPage(p: password),),);
+                },
+                child: 
+        Row(
             children: [
               Image.asset(
                 'assets/${password.getWebsiteImage}.png',
@@ -55,6 +65,7 @@ class DoctorPasswordWidget extends StatelessWidget {
               )
             ],
           ),
+          )
           );
   }
 }

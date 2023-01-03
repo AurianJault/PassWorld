@@ -23,7 +23,6 @@ class _HealthPageState extends State<HealthPage> {
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -71,7 +70,7 @@ class _HealthPageState extends State<HealthPage> {
                   ),
                 ),
                 icon: const Icon(Icons.arrow_drop_down),
-                items: list[0].map<DropdownMenuItem<Password>>(
+                items: list[1].map<DropdownMenuItem<Password>>(
                   (val) => DropdownMenuItem<Password>(
                     value: val,
                     child: Padding(
@@ -102,7 +101,7 @@ class _HealthPageState extends State<HealthPage> {
                     fontSize: w * 0.035),
                   ),
                 icon: const Icon(Icons.arrow_drop_down),
-                items: list[1].map<DropdownMenuItem<Password>>((val) =>
+                items: list[0].map<DropdownMenuItem<Password>>((val) =>
                   DropdownMenuItem<Password>(
                     value: val,
                     child: Padding(

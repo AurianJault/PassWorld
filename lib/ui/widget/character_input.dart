@@ -42,9 +42,10 @@ class _CharactereInputWidgetState extends State<CharactereInputWidget> {
             ),
             child: Text(
               widget.character,
+              textAlign: TextAlign.justify,
               style: TextStyle(
                   color: pressAttention ? Colors.black : Colors.white,
-                  fontSize: w * 0.045,
+                  fontSize: w * 0.03,
                   fontWeight: FontWeight.bold),
             )));
   }

@@ -32,7 +32,9 @@ class Config extends ChangeNotifier {
     if (!io.File(p.join(appDirPath.path, "file.txt")).existsSync()) {
       print("LE FICHIER NEXISTE PAS ");
       io.File("${appDirPath.path}/file.txt").create();
-    } else {
+    }
+    else 
+    {
       print("LE FICHIER EXISTE");
     }
   }

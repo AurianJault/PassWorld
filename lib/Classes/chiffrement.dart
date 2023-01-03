@@ -19,12 +19,14 @@ class Chiffrement {
     salt = ec.encrypt(sel, iv: iv);
     hash = ec.encrypt(chat, iv: iv);
     // Stockage de clé dans storage
-    Storage.storing(key,iv, id);
+    Storage.storing(key, iv, id);
   }
+
   Chiffrement.old(encrypt.Encrypted salty, encrypt.Encrypted hashy) {
     salt = salty;
     hash = hashy;
   }
+
   @override
   bool operator ==(Object c) {
     if (identical(this, c)) return true;

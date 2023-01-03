@@ -8,23 +8,25 @@ import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
+import 'login_page.dart';
 import 'register_page.dart';
 import 'PopUp/popupError.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ConnectionPage extends StatefulWidget {
+  const ConnectionPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ConnectionPage> createState() => _ConnectionPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ConnectionPageState extends State<ConnectionPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    context.read<Config>().setAppDirPath();
   }
 
   @override
@@ -32,11 +34,18 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  String? dropDownValue;
+
   @override
   Widget build(BuildContext context) {
+    List<Account> users = Authentification.allUser(
+        context.read<Config>().appDirPath.path); // TODO c'est de la merde
+
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height;
+
+    var users1 = ["rearnal", "tilevadoux", "aujault", "corichard", "nifranco"];
 
     return Scaffold(
         backgroundColor: Colors.grey[300],
@@ -51,24 +60,21 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 50),
 
-              // Email Input
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Email',
-                      ),
-                    ),
-                  ),
-                ),
+              // User Selection
+              DropdownButton(
+                hint: Text("Select User"),
+                value: dropDownValue,
+                items: users.map((Account user) {
+                  return DropdownMenuItem(
+                    value: user.id,
+                    child: Text(user.id),
+                  );
+                }).toList(),
+                onChanged: (String? newVal) {
+                  setState(() {
+                    dropDownValue = newVal!;
+                  });
+                },
               ),
               const SizedBox(height: 10),
 
@@ -105,7 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: InkWell(
                     onTap: () async {
                       if (await Authentification.authentication(
-                          (emailController.text).trim(),
+                          // check if empty
+                          dropDownValue!,
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;
                         await context.read<Config>().setAppDirPath();
@@ -139,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Center(
                       child: Text(
-                        'Sign In',
+                        'Unlock',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -176,6 +183,31 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Already a member? ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                                builder: (context) => const LoginPage()));
+                      },
+                      child: const Text(
+                        'Sign in',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
                 ],
               ),
             ]),

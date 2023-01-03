@@ -8,13 +8,13 @@ import 'storage.dart';
 import 'config.dart';
 import 'package:path/path.dart' as p; // used in line 31
 
-String account = "file.txt";
-
 class Authentification {
+  static String accountFile = "file.txt";
+
   static Future<bool> authentication(String login, String mdp) async {
     var cp = Config();
     await cp.setAppDirPath();
-    var list = await allUser(cp.appDirPath.path);
+    var list = allUser(cp.appDirPath.path);
     var it = list.iterator;
     while (it.moveNext()) {
       if (it.current.id == login) {
@@ -29,8 +29,8 @@ class Authentification {
   }
 
 // Charge les comptes déjà existant pour notre appli depuis un fichier texte (à upgrade)
-  static Future<List<Account>> allUser(String path) async {
-    var file = File(p.join(path, account));
+  static List<Account> allUser(String path) {
+    var file = File(p.join(path, accountFile));
     List<Account> lst = List.empty(growable: true);
     List<String> stream = file.readAsLinesSync();
     for (var element in stream) {
@@ -60,7 +60,7 @@ class Authentification {
     }
 
     listCpt.add(newAccount);
-    ecriture(listCpt, p.join(cp.appDirPath.path, account));
+    ecriture(listCpt, p.join(cp.appDirPath.path, accountFile));
     return true;
   }
 

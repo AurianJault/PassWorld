@@ -3,6 +3,7 @@ import 'dart:io' as io;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
+import 'package:test/Classes/account.dart';
 
 class Config extends ChangeNotifier {
   late io.Directory appDirPath;

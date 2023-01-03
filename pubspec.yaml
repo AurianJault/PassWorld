@@ -56,6 +56,7 @@ dependencies:
   screen_brightness_util_platform_interface: ^0.0.2
   screen_brightness_util: ^0.0.3
   ai_barcode_scanner: ^0.0.3
+  intl: ^0.17.0
 
 flutter_icons:
   android: "launcher_icon"
@@ -80,6 +81,7 @@ dev_dependencies:
 flutter:
   assets: 
     - assets/
+  
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

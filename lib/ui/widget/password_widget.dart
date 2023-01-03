@@ -29,7 +29,7 @@ class PasswordWidget extends StatelessWidget {
                                 context,
                                 MaterialPageRoute<dynamic>(
                                     builder: (context) =>
-                                        const PasswordDetail()));
+                                        PasswordDetailPage(p: password),),);
                 },
       child: Container(
         height: h * 0.07,

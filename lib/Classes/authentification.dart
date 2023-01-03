@@ -17,11 +17,10 @@ class Authentification {
     while (it.moveNext()) {
       if (it.current.id == login) {
         // vas chercher key + iv avec Storage.getKey(String id) / Storage.getIV(String id)
-        var iv = Storage.getIV(it.current.id);
+        var iv = await Storage.getIV(it.current.id);
         var encrypter = Encrypter(AES(await Storage.getKey(it.current.id)));
-        var sel = encrypter.decrypt(it.current.salt, iv: await iv);
-        var tmp = BCrypt.hashpw(mdp, sel);
-        return tmp == encrypter.decrypt(it.current.hash, iv: await iv);
+        var hash = encrypter.decrypt(it.current.hash, iv: iv);
+        return BCrypt.checkpw(mdp, hash);
       }
     }
     return false;

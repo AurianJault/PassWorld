@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:test/ui/edit_password_page.dart';
 
 import '../Classes/password.dart';
 class PasswordDetailPage extends StatefulWidget {
@@ -286,7 +287,13 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          int idp = p.getId;
+                          Navigator.push(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            EditPasswordPage(p: p)))
+                                .then((_) => setState(() {}));
                         },
                         child: Container(
                             width: w * 0.2,

@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:test/ui/edit_password_page.dart';
-import 'package:test/ui/home_page.dart';
 
 import '../Classes/password.dart';
 class PasswordDetailPage extends StatefulWidget {
@@ -194,12 +195,12 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
             SizedBox(height: h * 0.04),
 
             Container(
-                color: Color.fromARGB(255, 186, 166, 221),
+                //color: Color.fromARGB(255, 186, 166, 221),
                 padding: EdgeInsets.all(w * 0.02),
 
-              child: Row(     
+              child: Wrap(     
                 children: [
-                  SizedBox(width: w * 0.1),
+                  //SizedBox(width: w * 0.1),
                   Text('Password: ',
                   style: TextStyle(fontWeight: FontWeight.bold,
                   fontSize: w * 0.05)),
@@ -208,7 +209,7 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                   style: TextStyle(       
                           fontSize: w * 0.05,
                         )),
-                  SizedBox(width: w * 0.35),
+                  SizedBox(width: w * 0.05),
                         InkWell(
                             onTap: (() {
                               setState(() {
@@ -227,13 +228,13 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                         },
                         child: Icon(
                           Icons.copy,
-                          size: w * 0.08,
+                          size: w * 0.06,
                         ),
                         )
                 ],
               ),
             ),
-            SizedBox(height: h * 0.04),
+            SizedBox(height: h * 0.01),
 
             Container(
               decoration: BoxDecoration(
@@ -265,12 +266,7 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                        builder: (context) =>
-                                            const HomePage()))
-                                .then((_) => setState(() {}));
+                          Navigator.pop(context);
                         },
                         child: Container(
                             width: w * 0.2,

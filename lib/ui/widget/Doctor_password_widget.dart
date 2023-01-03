@@ -18,26 +18,23 @@ class DoctorPasswordWidget extends StatelessWidget {
     var h = size.height;
     // Widget
     return Container(
-      height: h * 1,
-      width: w * 0.70,
+        height: h * 1,
+        width: w * 0.70, 
         decoration: BoxDecoration(
-            color: color,
+            color: this.color,
+            borderRadius: BorderRadius.circular(w * 0.02)
         ),
         child: InkWell(
                 onTap: (){
-                  Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        PasswordDetailPage(p: password),),);
+                    Navigator.push(context,MaterialPageRoute<dynamic>(
+                            builder: (context) =>PasswordDetailPage(p: password),),);
                 },
-                child: 
-        Row(
-            children: [
-              Image.asset(
-                'assets/${password.getWebsiteImage}.png',
-              ),
-              Column(
+                child:Row(
+                    children: [
+                        Image.asset(
+                            'assets/${password.getWebsiteImage}.png',
+                        ),
+                        Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(

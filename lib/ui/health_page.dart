@@ -57,7 +57,10 @@ class _HealthPageState extends State<HealthPage> {
               width: 20,
             ),
             Container(
-              color: Colors.red,
+            decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(w * 0.02)
+            ),
               height: 50,
               width: w * 0.80,
               child: DropdownButton<Password>(
@@ -89,9 +92,12 @@ class _HealthPageState extends State<HealthPage> {
               height: 20,
             ),
             Container(
-              color: Colors.orange,
-              height: 50,
-              width: w * 0.80,
+        decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius: BorderRadius.circular(w * 0.02)
+        ),
+            height: 50,
+            width: w * 0.80,
               child: DropdownButton<Password>(
                 hint:Text(
                   LanguageTranslation.of(context)!.text('medium_passwords'),
@@ -105,8 +111,8 @@ class _HealthPageState extends State<HealthPage> {
                   DropdownMenuItem<Password>(
                     value: val,
                     child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: DoctorPasswordWidget(
+                    padding: const EdgeInsets.all(5),
+                    child: DoctorPasswordWidget(
                         password: val, color: Colors.orange)
                     )
                   )
@@ -117,7 +123,10 @@ class _HealthPageState extends State<HealthPage> {
               height: 20,
             ),
             Container(
-              color: Colors.blueGrey,
+            decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(w * 0.02)
+            ),
               height: 50,
               width: w * 0.80,
               child: DropdownButton<Password>(
@@ -146,7 +155,10 @@ class _HealthPageState extends State<HealthPage> {
               height: 20,
             ),
             Container(
-              color: Colors.lightGreen,
+        decoration: BoxDecoration(
+            color: Colors.lightGreen,
+            borderRadius: BorderRadius.circular(w * 0.02)
+        ),
               height: 50,
               width: w * 0.80,
               child: DropdownButton<Password>(

@@ -36,6 +36,12 @@ class _EditPasswordPage extends State<EditPasswordPage> {
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
+    nameCtrl.text = p.getName;
+    mailCtrl.text = p.getEmail as String;
+    websiteCtrl.text = p.getWebsite as String;
+    usernameCtrl.text = p.getUsername as String;
+    notesCtrl.text = p.getNote as String;
+    passwordCtrl.text = p.getPassword;
 
     // Widget
     return Scaffold(
@@ -107,7 +113,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: w * 0.065),
+                                      fontSize: w * 0.035),
                                 ),
                               ),
                             ),
@@ -128,7 +134,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                         borderRadius: BorderRadius.circular(w * 0.01)),
                     child: Padding(
                       padding: EdgeInsets.all(w * 0.02),
-                      child: TextFormField(
+                      child: TextFormField(                        
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         style: TextStyle(
@@ -163,7 +169,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            width: w * 0.35,
+                            width: w * 0.25,
                             decoration: BoxDecoration(
                                 color: Colors.red[400],
                                 borderRadius: BorderRadius.circular(w * 0.04)),
@@ -176,7 +182,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: w * 0.065),
+                                        fontSize: w * 0.035),
                                   ),
                                 ))),
                       ),
@@ -197,7 +203,7 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            width: w * 0.35,
+                            width: w * 0.25,
                             decoration: BoxDecoration(
                                 color: Colors.green[400],
                                 borderRadius: BorderRadius.circular(w * 0.04)),
@@ -206,11 +212,11 @@ class _EditPasswordPage extends State<EditPasswordPage> {
                                     horizontal: w * 0.03, vertical: h * 0.01),
                                 child: Center(
                                   child: Text(
-                                    'Save',
+                                    'Apply',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: w * 0.065),
+                                        fontSize: w * 0.035),
                                   ),
                                 ))),
                       ),

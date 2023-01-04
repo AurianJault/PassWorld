@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD
 import 'package:test/ui/demo/demo_yubikey_page.dart';
-=======
 import 'package:test/ui/login_page.dart';
 import 'Classes/config.dart';
->>>>>>> master
 import 'Classes/account.dart';
 import 'Classes/localization/translation_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

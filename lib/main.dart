@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'package:test/ui/demo/demo_yubikey_page.dart';
+=======
+import 'package:test/ui/login_page.dart';
+import 'Classes/config.dart';
+>>>>>>> master
 import 'Classes/account.dart';
+import 'Classes/localization/translation_delegate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (_) => Account.manager(), child: const MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+        create: (_) => Account.manager(), child: const MyApp()),
+    ChangeNotifierProvider(create: (_) => Config()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +24,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: YubikeyDemoPage(),
+      localizationsDelegates: const [
+        TranslationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('fr', ''),
+        Locale('pt', ''),
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocaleLanguage in supportedLocales) {
+          if (supportedLocaleLanguage.languageCode == locale!.languageCode &&
+              supportedLocaleLanguage.countryCode == locale.countryCode) {
+            return supportedLocaleLanguage;
+          }
+        }
+        return supportedLocales.first;
+      },
+      home: const LoginPage(),
     );
   }
 }

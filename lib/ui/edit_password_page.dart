@@ -8,15 +8,18 @@ import 'package:test/ui/widget/add_password_input.dart';
 import '../Classes/config.dart';
 
 // Page to add new passwords to Vault
-class AddPasswordPage extends StatefulWidget {
-  const AddPasswordPage({Key? key}) : super(key: key);
+class EditPasswordPage extends StatefulWidget {
+  const EditPasswordPage({super.key, required this.p});
+  final Password p;
 
   @override
-  State<AddPasswordPage> createState() => _HealthPageState();
+  State<EditPasswordPage> createState() => _EditPasswordPage(p: this.p);
 }
 
-class _HealthPageState extends State<AddPasswordPage> {
+class _EditPasswordPage extends State<EditPasswordPage> {
   // Array of TextFormField labelText
+  _EditPasswordPage({required this.p});
+  Password p;
   final name = ['Name', 'E-Mail', 'Username', 'Password', 'Notes', 'Website'];
 
   // Controllers for all inputs
@@ -33,6 +36,12 @@ class _HealthPageState extends State<AddPasswordPage> {
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
+    nameCtrl.text = p.getName;
+    mailCtrl.text = p.getEmail as String;
+    websiteCtrl.text = p.getWebsite as String;
+    usernameCtrl.text = p.getUsername as String;
+    notesCtrl.text = p.getNote as String;
+    passwordCtrl.text = p.getPassword;
 
     // Widget
     return Scaffold(
@@ -104,7 +113,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: w * 0.065),
+                                      fontSize: w * 0.035),
                                 ),
                               ),
                             ),
@@ -125,7 +134,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                         borderRadius: BorderRadius.circular(w * 0.01)),
                     child: Padding(
                       padding: EdgeInsets.all(w * 0.02),
-                      child: TextFormField(
+                      child: TextFormField(                        
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         style: TextStyle(
@@ -160,7 +169,7 @@ class _HealthPageState extends State<AddPasswordPage> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            width: w * 0.35,
+                            width: w * 0.25,
                             decoration: BoxDecoration(
                                 color: Colors.red[400],
                                 borderRadius: BorderRadius.circular(w * 0.04)),
@@ -173,28 +182,28 @@ class _HealthPageState extends State<AddPasswordPage> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: w * 0.065),
+                                        fontSize: w * 0.035),
                                   ),
                                 ))),
                       ),
                       InkWell(
                         onTap: () async{
-                          int id = context.read<Account>().vault.getMaxInt();
-                          context.read<Account>().vault.addPassword(Password(
+                          int id = p.getId;
+                          context.read<Account>().vault.editPassword(
                               id,
                               nameCtrl.text,
                               passwordCtrl.text,
                               websiteCtrl.text,
                               usernameCtrl.text,
                               mailCtrl.text,
-                              notesCtrl.text));
+                              notesCtrl.text);
                           var path = Config();
                           await path.setAppDirPath();
                           context.read<Account>().saveFile(path.appDirPath.path);
                           Navigator.pop(context);
                         },
                         child: Container(
-                            width: w * 0.35,
+                            width: w * 0.25,
                             decoration: BoxDecoration(
                                 color: Colors.green[400],
                                 borderRadius: BorderRadius.circular(w * 0.04)),
@@ -203,11 +212,11 @@ class _HealthPageState extends State<AddPasswordPage> {
                                     horizontal: w * 0.03, vertical: h * 0.01),
                                 child: Center(
                                   child: Text(
-                                    'Save',
+                                    'Apply',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: w * 0.065),
+                                        fontSize: w * 0.035),
                                   ),
                                 ))),
                       ),

@@ -2,11 +2,14 @@ import 'package:sqlite3/sqlite3.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/Classes/Datas/i_data_strategy.dart';
 import 'package:test/Classes/vault.dart';
+import 'package:path/path.dart' as p;
 
 class PassFile extends IDataStrategy {
   var db;
-  PassFile(String identifiant) {
-    db = sqlite3.open("lib/Classes/Datas/passwords/$identifiant.sqlite");
+  PassFile(String identifiant, String docPath) {
+    String file = "$identifiant.sqlite";
+    String path = p.join(docPath, file);
+    db = sqlite3.open(path);
   }
 
   void initPass() {
@@ -29,11 +32,11 @@ class PassFile extends IDataStrategy {
   Vault loadPasswords() {
     initPass();
     // Faire un vault a lieu d'une liste de passworlds
-    var vaul = Vault();
+    var vault = Vault();
     final ResultSet resultSet = db.select('SELECT * FROM Passwords');
     for (final Row row in resultSet) {
       if (row['creationDate'].toString() != 'null') {
-        vaul.addPassword(Password.load(
+        vault.addPassword(Password.load(
             row['id'],
             row['name'].toString(),
             row['password'],
@@ -45,7 +48,7 @@ class PassFile extends IDataStrategy {
             row['note'].toString()));
       }
     }
-    return vaul;
+    return vault;
   }
 
   @override

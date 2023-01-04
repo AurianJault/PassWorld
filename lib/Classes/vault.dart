@@ -1,6 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:test/Classes/Datas/pass_file.dart';
-
 import 'password.dart';
 
 class Vault with ChangeNotifier {
@@ -56,8 +54,20 @@ class Vault with ChangeNotifier {
     }
   }
 
-  //Operator
+  //Operatordart
   Password operator [](int i) {
     return _passwordList[i];
+  }
+
+  // Edit a password
+  void editPassword(id, name, password,
+      website, username, email, note){
+    int idx = searchPassword(id);
+    _passwordList[idx].setName = name;
+    _passwordList[idx].setPassword = password;
+    _passwordList[idx].setWebsite = website;
+    _passwordList[idx].setUsername = username;
+    _passwordList[idx].setEmail = email;
+    _passwordList[idx].setNote = note;
   }
 }

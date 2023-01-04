@@ -1,19 +1,28 @@
 import 'dart:math';
+import 'package:test/Classes/Exception/storageException.dart';
 
-class Generator{
+class Generator {
+  Map<int, String> carac = {
+    0: "abcdefghijklmnopqrstuvwxyz",
+    1: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    2: "0123456789",
+    3: "%*\$&#{([\\@)]=}+",
+    4: "~\"'-|`_^°£µ!§:;.,?œ"
+  };
 
-  Map<int,String> carac = {0:"abcdefghijklmnopqrstuvwxyz",1:"ABCDEFGHIJKLMNOPQRSTUVWXYZ",2:"0123456789",3:"%*\$&#{([\\@)]=}+",4:"~\"'-|`_^°£µ!§:;.,?œ"};
-
-  String? generator(int length,List<int> caracIn, String caracOut){
-    String chars="";
-    for(var num in caracIn) {
-      chars =chars+(carac[num]??"");
+  String? generator(int length, List<int> caracIn, String caracOut) {
+    if (caracIn.isEmpty) {
+      throw StorageException(" Veuillez-selectionner des caractères !!");
     }
-    for(int i=0;i<caracOut.length;i++){
+    String chars = "";
+    for (var num in caracIn) {
+      chars = chars + (carac[num] ?? "");
+    }
+    for (int i = 0; i < caracOut.length; i++) {
       chars = chars.replaceAll(caracOut[i], "");
     }
-    Random rnd = Random();
-    return List.generate(length, (index) => chars[rnd.nextInt(chars.length)]).join();
+    Random rnd = Random.secure();
+    return List.generate(length, (index) => chars[rnd.nextInt(chars.length)])
+        .join();
   }
-  
 }

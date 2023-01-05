@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
+import 'package:test/ui/setting/setting_auth_methods_page.dart';
 import 'package:test/ui/setting/setting_key_page.dart';
 import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -51,6 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SizedBox(
                 height: h * 0.05,
               ),
+
               Container(
                 margin: EdgeInsets.symmetric(horizontal: w * 0.02),
                 decoration: BoxDecoration(
@@ -64,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       content: "2 facteurs, Yubikey, biométrique",
                       icon:
                           const IconData(0xf0553, fontFamily: 'MaterialIcons'),
-                      page: const LoginPage(),
+                      page: const SettingAuthPage(),
                     ),
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!
@@ -80,6 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SizedBox(
                 height: h * 0.05,
               ),
+
               Container(
                 margin: EdgeInsets.symmetric(horizontal: w * 0.02),
                 decoration: BoxDecoration(

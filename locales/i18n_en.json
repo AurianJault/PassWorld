@@ -5,12 +5,13 @@
     "heal_title" : "Heal",
     "setting_title" : "Settings",
     "account" : "Account", 
-    "authentification_setting_title" : "Authentication methods",
+    "authentification_setting_title" : "Login",
     "key_setting_title" : "Encryption key",
     "theme_setting_title" : "Theme",
     "about_setting_title" : "About",
     "logout_title" : "Log out",
     "language_select" : "Choose a language",
+    "yubikey" : "Yubikeys",
 
 
     "health_care" : "Health",

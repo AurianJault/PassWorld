@@ -7,7 +7,7 @@ class ClientAPI {
   // static String base =
   //     'https://codefirst.iut.uca.fr/containers/passworld-api-remiarnal';
 
-  static String base = 'http://172.27.8.45:8989';
+  static String base = 'http://172.20.10.3:8989';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);
@@ -43,10 +43,33 @@ class ClientAPI {
     return response;
   }
 
-  static Future<StreamedRequest> uploadFile(
-      String mail, String password, File password_file) async {
-    print(password_file.length());
-    Stream<List<int>> streamFile = password_file.openRead();
+  static Future<Response> deleteAccount(String email, String password) async {
+    Uri url = Uri.parse("$base/user/account");
+    String body = """
+    {
+      "email" : "$email",
+      "password" : "$password"
+    }
+    """;
+    var response = await http.delete(url, body: body);
+    return response;
+  }
+
+  static Future<Response> updateMail(String email, String newMail) async {
+    Uri url = Uri.parse("$base/user/change-mail");
+    String body = """
+    {
+      "email" : "$email",
+      "newMail" : "$newMail"
+    }
+    """;
+    var response = await http.put(url, body: body);
+    return response;
+  }
+
+  static Future<StreamedResponse> uploadFile(
+      String mail, String password, File passwordFile) async {
+    Stream<List<int>> streamFile = passwordFile.openRead();
     Uri url = Uri.parse("$base/user/password-file");
     String body = """
     {
@@ -54,7 +77,11 @@ class ClientAPI {
       "password" : "$password"
     }
     """;
-    var response = await http.StreamedRequest("put", url);
+    var request = http.MultipartRequest('POST', url);
+    var requestFile = http.MultipartFile(body, streamFile, 4814386);
+    request.files.add(requestFile);
+    var response = await request.send();
+    if (response.statusCode == 200) print("File Uploaded");
     return response;
   }
 }

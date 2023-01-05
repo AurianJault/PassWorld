@@ -1,29 +1,45 @@
 import 'dart:io';
-
 import 'package:test/Classes/api_client.dart';
 
-void test_api_auth() async {
-  var req1 = await ClientAPI.authenticator("remrem@gmail.com", "password123");
-  print(req1.statusCode);
-  print(req1.body);
+Future<void> testAuth() async {
+  print("Testing Authentication...");
+  var req = await ClientAPI.authenticator("remrem@gmail.com", "password123");
+  print(req.statusCode);
+  print(req.body);
 }
 
-Future<int> test_api_file_upload() async {
-  print("TEST: API FILE UPLOAD BEGIN");
-  File file = File("/home/hel/Projets/PassWorld/assets/bereal.png");
-  print("Phone: uploading file");
-  var req1 =
-      await ClientAPI.uploadFile("remrem@gmail.com", "password123", file);
-  print("Phone: file uploaded");
-  //print(req1.statusCode);
-  //print(req1.stream);
-  print("TEST: API FILE UPLOAD END");
-  return 6;
+Future<void> testAccountCreation() async {
+  print("Testing Account Creation...");
+  var req = await ClientAPI.register("mailTest1", "hashTest1", "saltTest1");
+  print(req.statusCode);
+  print(req.body);
+}
+
+Future<void> testAccountDeletion() async {
+  print("Testing Account Deletion...");
+  var req = await ClientAPI.deleteAccount('mailhaahhihi', "hashTest1");
+  print(req.statusCode);
+  print(req.body);
+}
+
+Future<void> testMailUpdate() async {
+  print("Testing Mail Update...");
+  var req = await ClientAPI.updateMail("mail3", "mail@+${DateTime.now()}+.com");
+  print(req.statusCode);
+  print(req.body);
+}
+
+Future<Null> testFileUpload() async {
+  print("Testing File Upload...");
+  File file = await File("/home/hel/Medias/Pictures/Wallpapers/vaporwave.png");
+  var req = await ClientAPI.uploadFile("remrem@gmail.com", "password123", file);
+  print(req.statusCode);
+  return null;
 }
 
 void main() async {
-  // var res = await ClientAPI.root();
-  // print(res.body);
-  var haha = await test_api_file_upload();
-  // autentication test
+  //await testAccountCreation();
+  await testAccountDeletion();
+  //await testMailUpdate();
+  return;
 }

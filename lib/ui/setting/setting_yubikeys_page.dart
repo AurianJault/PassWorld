@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test/ui/setting/setting_resgister_yubikey_page.dart';
 import 'package:test/ui/widget/2fa_widget.dart';
-import 'package:test/ui/widget/page_title_widget.dart';
 import '../../Classes/account.dart';
-import '../../Classes/localization/translation.dart';
 
 
 class SettingYubikeyPage extends StatefulWidget {
@@ -39,10 +39,82 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                    return ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: account.vault.lenght(),
+                          itemCount: account.secondFactors.isEmpty ? 1 : account.secondFactors.length,
                           itemBuilder: (context, index) {
-                            return twoFaWidget(
-                                password: account.vault.access(index));
+                            if(account.secondFactors.isEmpty){
+                              return Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text("No 2FA methods are configured",
+                                      style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: h * 0.02),
+                                      child: CupertinoButton(
+                                        color: Colors.green[400],
+                                        borderRadius: BorderRadius.circular(w * 0.04),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: const [
+                                              Icon(Icons.add, color: Colors.white),
+                                              Text("Add 2FA", style: TextStyle(color: Colors.white)),
+                                            ],
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                           showCupertinoModalPopup(
+                                            context: context,
+                                            builder: (context) {
+                                              return CupertinoActionSheet(
+                                                title: const Text("Select 2FA method"),
+                                                actions: [
+                                                  CupertinoActionSheetAction(
+                                                    child: const Text("Yubikey"),
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute<dynamic>(
+                                                          builder: (context) =>
+                                                              const RegisterYubikeyPage()))
+                                                  .then((_) => setState(() {}));
+                                                    },
+                                                  ),
+                                                  CupertinoActionSheetAction(
+                                                    child: const Text("Fingerprint"),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                      // Navigate to the fingerprint registration page
+                                                    },
+                                                  ),
+                                                ],
+                                                cancelButton: CupertinoActionSheetAction(
+                                                  isDefaultAction: true,
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text("Cancel"),
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ); 
+                            } else {
+                              return twoFaWidget(
+                                factor: account.accessTfa(index));
+                            }
 
                          });
                   }),

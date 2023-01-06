@@ -1,12 +1,7 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:test/ui/qrcode/qrcode_password.dart';
 import 'package:test/ui/setting/setting_yubikeys_page.dart';
-import 'package:test/ui/widget/settingwidget/share_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../../Classes/localization/translation.dart';
-import '../popup/popupError.dart';
-import '../widget/settingwidget/setting_button.dart';
 
 class SettingAuthPage extends StatefulWidget {
   const SettingAuthPage({Key? key}) : super(key: key);

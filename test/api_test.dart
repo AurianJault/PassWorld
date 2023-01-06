@@ -29,6 +29,13 @@ Future<void> testMailUpdate() async {
   print(req.body);
 }
 
+Future<void> testPasswordUpdate() async {
+  print("Testing Password Update...");
+  var req = await ClientAPI.updatePassword("remrem", "newHash", "newSalt");
+  print(req.statusCode);
+  print(req.body);
+}
+
 Future<Null> testFileUpload() async {
   print("Testing File Upload...");
   File file = await File("/home/hel/Medias/Pictures/Wallpapers/vaporwave.png");
@@ -39,7 +46,8 @@ Future<Null> testFileUpload() async {
 
 void main() async {
   //await testAccountCreation();
-  await testAccountDeletion();
+  //await testAccountDeletion();
   //await testMailUpdate();
+  await testPasswordUpdate();
   return;
 }

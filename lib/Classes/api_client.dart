@@ -7,7 +7,7 @@ class ClientAPI {
   // static String base =
   //     'https://codefirst.iut.uca.fr/containers/passworld-api-remiarnal';
 
-  static String base = 'http://172.20.10.3:8989';
+  static String base = 'http://172.27.170.182:8989';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);
@@ -61,6 +61,20 @@ class ClientAPI {
     {
       "email" : "$email",
       "newMail" : "$newMail"
+    }
+    """;
+    var response = await http.put(url, body: body);
+    return response;
+  }
+
+  static Future<Response> updatePassword(
+      String email, String newPassword, String newSalt) async {
+    Uri url = Uri.parse("$base/user/password");
+    String body = """
+    {
+      "email" : "$email",
+      "newPassword" : "$newPassword",
+      "newSalt" : "$newSalt"
     }
     """;
     var response = await http.put(url, body: body);

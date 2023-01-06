@@ -10,14 +10,15 @@ Future<void> testAuth() async {
 
 Future<void> testAccountCreation() async {
   print("Testing Account Creation...");
-  var req = await ClientAPI.register("mailTest1", "hashTest1", "saltTest1");
+  var req =
+      await ClientAPI.register("remrem@gmail.com", "remremHash", "remremSalt");
   print(req.statusCode);
   print(req.body);
 }
 
 Future<void> testAccountDeletion() async {
   print("Testing Account Deletion...");
-  var req = await ClientAPI.deleteAccount('mailhaahhihi', "hashTest1");
+  var req = await ClientAPI.deleteAccount('remrem@gmail.com', "remremHash");
   print(req.statusCode);
   print(req.body);
 }
@@ -46,8 +47,8 @@ Future<Null> testFileUpload() async {
 
 void main() async {
   //await testAccountCreation();
-  //await testAccountDeletion();
+  await testAccountDeletion();
   //await testMailUpdate();
-  await testPasswordUpdate();
+  //await testPasswordUpdate();
   return;
 }

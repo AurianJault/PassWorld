@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
@@ -85,35 +86,6 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
                   SizedBox(
                     height: h * 0.03,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(w * 0.01)),
-                    child: Padding(
-                      padding: EdgeInsets.all(w * 0.02),
-                      child: TextFormField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: w * 0.032),
-                        cursorColor: Colors.black,
-                        decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: w * 0.004)),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.green, width: w * 0.004)),
-                            labelText: 'Notes',
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[500],
-                            )),
-                      ),
-                    ),
-                  ),
                   SizedBox(height: h * 0.04),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -144,11 +116,24 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
                       ),
                       InkWell(
                         onTap: () async{
-                          int id = context.read<Account>().vault.getMaxInt();
-                          var path = Config();
-                          await path.setAppDirPath();
-                          context.read<Account>().saveFile(path.appDirPath.path);
-                          Navigator.pop(context);
+                          showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: const Text("Insert or tap your Yubikey"),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  SizedBox(height: 16),
+                                  Text("Please wait while we detect your Yubikey..."),
+                                  SizedBox(height: 16),
+                                  CupertinoActivityIndicator(),
+                                  SizedBox(height: 16),
+                                ],
+                              ),
+                            );
+                          },
+                        );
                         },
                         child: Container(
                             width: w * 0.25,

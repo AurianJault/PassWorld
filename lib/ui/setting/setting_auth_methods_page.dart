@@ -74,14 +74,14 @@ class _SettingAuthPage extends State<SettingAuthPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Yubikeys",
+                                  Text("2FA",
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''renforcer la securité de vos mots de passe en rajoutant une yubikey''',
+                                    '''reeinforce security by adding a second factor to login''',
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -107,6 +107,66 @@ class _SettingAuthPage extends State<SettingAuthPage> {
 
             SizedBox(
               height: h * 0.05,
+            ),
+
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: w * 0.02),
+              decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(w * 0.01)),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            // selection de methode d'authentification (nouvelle page?)
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(h * 0.02),
+                            child: Row(children: [
+                              Icon(
+                                const IconData(0xe4f6,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.08,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: w * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Select login method",
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: w * 0.05)),
+                                  Text(
+                                    '''chose your type of authentification''',
+                                    style: TextStyle(
+                                        fontSize: w * 0.02,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                              const Spacer(),
+                              Icon(
+                                const IconData(0xe355,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.06,
+                                color: Colors.white,
+                              )
+                            ]),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ))));

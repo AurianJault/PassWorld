@@ -76,7 +76,7 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                                                 title: const Text("Select 2FA method"),
                                                 actions: [
                                                   CupertinoActionSheetAction(
-                                                    child: const Text("Yubikey"),
+                                                    child: const Text("twoFA"),
                                                     onPressed: () {
                                                       Navigator.push(
                                                       context,

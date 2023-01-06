@@ -22,16 +22,19 @@ class Doctor {
   // retourne une liste de deux tableaux
   // Res[0] --> Listes de Passwords "Moyen" (Affichage Orange)
   // Res[1] --> Listes de Passwords "Trop faible" (Affichage Rouge)
-  static List strenght(Account user) {
-    var orange = [];
-    var red = [];
+  static List<List<Password>> strenght(Account user) {
+    var orange= <Password>[];
+    var red = <Password>[];
     List<Password> list = user.vault.passwordList;
     list.forEach((element) {
       double strength = estimatePasswordStrength(element.getPassword);
-      if (strength < 0.5) {
+      print(strength);
+      if (strength < 0.3) {
         red.add(element);
-      } else {
-        if (strength < 0.7) {
+      } 
+      else 
+      {
+        if (strength < 0.8) {
           orange.add(element);
         }
       }
@@ -40,9 +43,9 @@ class Doctor {
     return res;
   }
 
-  static List timeUsed(Account user) {
+  static List<Password> timeUsed(Account user) {
     List<Password> list = user.vault.passwordList;
-    var res = [];
+    List<Password> res = [];
     var toDay = DateTime.now();
     list.forEach((element) {
       var date = element.getModifDate!;

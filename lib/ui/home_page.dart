@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/config.dart';
+import 'package:test/Classes/localization/translation.dart';
 import 'package:test/ui/add_password_page.dart';
 import 'package:test/ui/widget/password_widget.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:provider/provider.dart';
-
+import '../Classes/localization/translation.dart';
+import '../Classes/localization/translation_delegate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +41,9 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(w * 0.04),
               child: Row(
                 children: [
-                  const PageTitleW(title: "Home"),
+                  PageTitleW(
+                      title:
+                          LanguageTranslation.of(context)!.text('home_title')),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -89,14 +93,15 @@ class _HomePageState extends State<HomePage> {
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       controller: searchCtrl,
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
                           Icons.search,
                           color: Colors.white,
                         ),
                         border: InputBorder.none,
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.white),
+                        hintText:
+                            LanguageTranslation.of(context)!.text('search'),
+                        hintStyle: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -123,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, index) {
                           return PasswordWidget(
                               password: account.vault.access(index));
+
                         });
                   }),
                 ),

@@ -9,7 +9,7 @@ import 'package:test/Classes/cle.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
-import 'PopUp/popupError.dart';
+import 'popup/popupError.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -109,7 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = emailController.text;
                         await context.read<Config>().setAppDirPath();
-                        print(context.read<Config>().appDirPath.path);
                         context
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);

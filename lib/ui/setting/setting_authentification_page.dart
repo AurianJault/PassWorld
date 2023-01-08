@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/biometric/biometric.dart';
+import 'package:test/ui/popup/mode_authentification_password.dart';
 import 'package:test/ui/popup/popup.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../../Classes/localization/translation.dart';
@@ -188,7 +189,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                               padding: EdgeInsets.all(h * 0.02),
                               child: Row(children: [
                                 Icon(
-                                  const IconData(0xedc1,
+                                  const IconData(0xe42b,
                                       fontFamily: 'MaterialIcons'),
                                   size: w * 0.08,
                                   color: Colors.white,
@@ -199,14 +200,14 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Suppression du compte",
+                                    Text("Enregistrement yubikey",
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: w * 0.05)),
                                     Text(
-                                      '''Vous envoyer un email pour affirmer la suppression définitive du compte''',
+                                      "Permet d'enregistrer une ou plusieur yubikey pour se connecter avec",
                                       style: TextStyle(
                                           fontSize: w * 0.02,
                                           color: Colors.black),
@@ -222,6 +223,61 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                                 )
                               ]))))
                 ])),
+            SizedBox(
+              height: h * 0.05,
+            ),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: w * 0.02),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple[300],
+                    borderRadius: BorderRadius.circular(w * 0.01)),
+                child: Row(children: [
+                  Expanded(
+                      child: InkWell(
+                          onTap: () {
+                            showAuthentificationPassword(context);
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.all(h * 0.02),
+                              child: Row(children: [
+                                Icon(
+                                  const IconData(0xe3b2,
+                                      fontFamily: 'MaterialIcons'),
+                                  size: w * 0.08,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: w * 0.02,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Mode d'authentification",
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: w * 0.05)),
+                                    Text(
+                                      "Permet de choisir son mode d'authentification",
+                                      style: TextStyle(
+                                          fontSize: w * 0.02,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                                const Spacer(),
+                                Icon(
+                                  const IconData(0xe355,
+                                      fontFamily: 'MaterialIcons'),
+                                  size: w * 0.06,
+                                  color: Colors.white,
+                                )
+                              ]))))
+                ])),
+            SizedBox(
+              height: h * 0.05,
+            )
           ],
         ))));
   }

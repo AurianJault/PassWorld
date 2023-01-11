@@ -200,14 +200,14 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Enregistrement yubikey",
+                                    Text("Manager ses yubikey",
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: w * 0.05)),
                                     Text(
-                                      "Permet d'enregistrer une ou plusieur yubikey pour se connecter avec",
+                                      "Permet d'ajouter ou supprimer une yubikey pour se connecter avec",
                                       style: TextStyle(
                                           fontSize: w * 0.02,
                                           color: Colors.black),

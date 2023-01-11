@@ -27,7 +27,7 @@ class AuthentificationSelector extends StatelessWidget {
           child: Column(children: [
             Icon(
               icon,
-              size: w * 0.05,
+              size: w * 0.04,
               color: Colors.white,
             ),
             SizedBox(

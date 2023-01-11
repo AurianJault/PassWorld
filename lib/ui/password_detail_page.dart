@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:test/ui/edit_password_page.dart';
 
 import '../Classes/password.dart';
 class PasswordDetailPage extends StatefulWidget {
@@ -23,7 +26,12 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
       var size = MediaQuery.of(context).size;
       var w = size.width;
       var h = size.height;
-
+      String notes;
+      if(p.getNote != null && p.getNote != ''){
+        notes = p.getNote!;
+      } else {
+        notes = '...';
+      }
 
       // Widget
       return Scaffold(
@@ -192,13 +200,18 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
             SizedBox(height: h * 0.04),
 
             Container(
-                color: Color.fromARGB(255, 186, 166, 221),
+                //color: Color.fromARGB(255, 186, 166, 221),
                 padding: EdgeInsets.all(w * 0.02),
 
-              child: Row(     
+              child: Wrap(     
                 children: [
-                  SizedBox(width: w * 0.1),
+
+                  // ----- TEXT
+                  SizedBox(width: w * 0.074),
                   Text('Password: ',
+
+
+                  // ----- PASSWORD 
                   style: TextStyle(fontWeight: FontWeight.bold,
                   fontSize: w * 0.05)),
                   Text(
@@ -206,7 +219,9 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                   style: TextStyle(       
                           fontSize: w * 0.05,
                         )),
-                  SizedBox(width: w * 0.35),
+
+                  // ----- ICONS 
+                  SizedBox(width: w * 0.05),
                         InkWell(
                             onTap: (() {
                               setState(() {
@@ -225,34 +240,58 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                         },
                         child: Icon(
                           Icons.copy,
-                          size: w * 0.08,
+                          size: w * 0.06,
                         ),
                         )
                 ],
               ),
             ),
-            SizedBox(height: h * 0.04),
+            SizedBox(height: h * 0.03),
+            Text(
+              'Notes',
+            style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: w * 0.05,
+                  decoration: TextDecoration.underline)),
 
             Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+                
+              // height should be fixed for vertical scrolling
+              height: 150.0,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(w * 0.02),
+                  
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2.5,
+                ),
               ),
-
-              child: Row(     
-                children: [
-                  SizedBox(width: w * 0.1),
-                  Text('Note: ',
+              // SingleChildScrollView should be
+              // wrapped in an Expanded Widget
+              child: Expanded(
+                  
+              // SingleChildScrollView contains a
+              // single child which is scrollable
+              child: SingleChildScrollView(
+              
+              // for Vertical scrolling
+              scrollDirection: Axis.vertical,
+              child: Text(
+                notes,
+                style: TextStyle(
+                  fontSize: w * 0.05,
+                ),
+              )))),
+            /*
+            Text('Email: ',
                   style: TextStyle(fontWeight: FontWeight.bold,
                   fontSize: w * 0.05)),
-                  Text(p.getNote!,
+                  Text(p.getEmail!,
                   style: TextStyle(
                           fontSize: w * 0.05,
                         ))
-                ],
-              ),
-            ),
-            SizedBox(height: h * 0.04),
+            */
 
             //-------------
             // Back button
@@ -286,7 +325,13 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          int idp = p.getId;
+                          Navigator.push(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            EditPasswordPage(p: p)))
+                                .then((_) => setState(() {}));
                         },
                         child: Container(
                             width: w * 0.2,

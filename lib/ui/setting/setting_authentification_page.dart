@@ -4,6 +4,7 @@ import 'package:test/Classes/account.dart';
 import 'package:test/Classes/biometric/biometric.dart';
 import 'package:test/ui/popup/mode_authentification_password.dart';
 import 'package:test/ui/popup/popup.dart';
+import 'package:test/ui/setting/setting_yubikeys_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../../Classes/localization/translation.dart';
 
@@ -183,7 +184,8 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                   Expanded(
                       child: InkWell(
                           onTap: () {
-                            //envoie de l'email
+                            Navigator.push(context, MaterialPageRoute<dynamic>(
+                                builder: (context) => const SettingYubikeyPage()));
                           },
                           child: Padding(
                               padding: EdgeInsets.all(h * 0.02),

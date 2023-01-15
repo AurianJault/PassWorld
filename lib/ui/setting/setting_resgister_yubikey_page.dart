@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/password.dart';
 import 'package:test/ui/widget/add_password_input.dart';
-
 import '../../Classes/config.dart';
 
 // Page to add new passwords to Vault

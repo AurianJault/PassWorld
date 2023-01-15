@@ -46,7 +46,7 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Text("No 2FA methods are configured",
+                                    const Text("NO YUBIKEYS REGISTERED",
                                       style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -64,47 +64,13 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: const [
                                               Icon(Icons.add, color: Colors.white),
-                                              Text("Add 2FA", style: TextStyle(color: Colors.white)),
+                                              Text("New yubikey", style: TextStyle(color: Colors.white)),
                                             ],
                                           ),
                                         ),
                                         onPressed: () {
-                                           showCupertinoModalPopup(
-                                            context: context,
-                                            builder: (context) {
-                                              return CupertinoActionSheet(
-                                                title: const Text("Select 2FA method"),
-                                                actions: [
-                                                  CupertinoActionSheetAction(
-                                                    child: const Text("twoFA"),
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute<dynamic>(
-                                                          builder: (context) =>
-                                                              const RegisterYubikeyPage()))
-                                                  .then((_) => setState(() {}));
-                                                    },
-                                                  ),
-                                                  CupertinoActionSheetAction(
-                                                    child: const Text("Fingerprint"),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                      // Navigate to the fingerprint registration page
-                                                    },
-                                                  ),
-                                                ],
-                                                cancelButton: CupertinoActionSheetAction(
-                                                  isDefaultAction: true,
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text("Cancel"),
-                                                ),
-                                              );
-                                            },
-                                          );
-
+                                          Navigator.push(context, MaterialPageRoute<dynamic>(
+                                          builder: (context) => const RegisterYubikeyPage()));
                                         },
                                       ),
                                     ),

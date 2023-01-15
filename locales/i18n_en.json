@@ -4,18 +4,40 @@
     "generator_title" : "Generator",
     "heal_title" : "Heal",
     "setting_title" : "Settings",
-    "account" : "Account", 
-    "authentification_setting_title" : "Login",
+
+    "account_setting_title" : "Account", 
+    "authentification_setting_title" : "Authentication methods",
+    "authentification_setting_page_title" : "Authentication \nmethods",
     "key_setting_title" : "Encryption key",
+    "key_setting_page_title" : "Encryption key",
     "theme_setting_title" : "Theme",
     "about_setting_title" : "About",
     "logout_title" : "Log out",
-    "language_select" : "Choose a language",
 
-    "health_care" : "Health",
-    "subtitle" : "We are taking care of your passwords",
-    "critical_passwords" : "Critical password(s) strenght",
-    "medium_passwords" : "Medium password(s) strenght",
-    "reused_passwords" : "Reused password(s)",
-    "old_passwords" : "Too old password(s)"
+    "account_setting_description" : "Email address, master password, account deletion",
+    "authentification_setting_description" : "2 factors, Yubikey, biometrics",
+    "key_setting_description" : "Key sharing, changing keys",
+    "theme_setting_description" : "Dark/light theme, language",
+    "about_setting_description" : "Who are we ? , project deposit, common creative licenses",
+
+
+    "language_select" : "Choose a language",
+    "language_title" : "Change language",
+    "language_description" : "Allows you to change the language of the application",
+    "theme_mode_title" : "Dark/light mode",
+    "theme_mode_description" : "Changes app colors between light and dark",
+
+    "qrcode_title" : "QR code",
+    "qrcode_decription" : "Allows you to display the QR code of your private key \nto share it on another device",
+    "file_title" : "Key file",
+    "file_description" : "Allows you to upload a file with your key \nto share it on another device",
+    "key_restore_title" : "Reset your key",
+    "key_restore_description" : "Allows you to re-initialize your private key and the IV. \nIt is advisable to change them at least every 6 months",
+
+    "generator_length" : "Length",
+    "generator_characters" : "Characteres",
+    "generator_not_include" : "Do not include",
+    "generator_not_include_hint" : "Type characters you don't want",
+    "generator_info" : "The characters are divided into 5 buttons: \n- Lowercase alphabet \n- Uppercase alphabet \n- Numbers \n- The basic characters ( ) \n- Special characters ( ) "
+
 }

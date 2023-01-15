@@ -4,18 +4,40 @@
     "generator_title" : "Gerador",
     "heal_title" : "Saúde",
     "setting_title" : "Configurações",
-    "account" : "Conta",
+
+    "account_setting_title" : "Conta",
     "authentification_setting_title" : "Métodos de autenticação",
+    "authentification_setting_page_title" : "Métodos de\nautenticação",
     "key_setting_title" : "Chave de encriptação",
+    "key_setting_page_title" : "Chave de \nencriptação",
     "theme_setting_title" : "Tema",
     "about_setting_title" : "Sobre",
     "logout_title" : "Sair",
-    "language_select" : "Escolha um idioma",
 
-    "health_care" : "Saúde",
-    "subtitle" : "Estamos cuidando de suas senhas",
-    "critical_passwords" : "Força da(s) senha(s) crítica(s)",
-    "medium_passwords" : "Senha(s) de força média",
-    "reused_passwords" : "Senha(s) reutilizada(s)",
-    "old_passwords" : "Senha(s) muito antiga(s)"
+    "account_setting_description" : "Endereço de e-mail, senha mestra, exclusão de conta",
+    "authentification_setting_description" : "2 fatores, Yubikey, biometria",
+    "key_setting_description" : "Compartilhamento de chave, trocar de chave",
+    "theme_setting_description" : "Tema claro/escuro, idioma",
+    "about_setting_description" : "Quem somos nós ? , depósito de projeto, licenças criativas comuns",
+
+    "language_select" : "Escolha um idioma",
+    "language_title" : "Alterar o idioma",
+    "language_description" : "Permite alterar o idioma do aplicativo",
+    "theme_mode_title" : "Modo escuro/claro",
+    "theme_mode_description" : "Altera as cores do aplicativo entre claro e escuro",
+
+    "qrcode_title" : "Código QR",
+    "qrcode_decription" : "Permite que você exiba o código QR de sua chave privada \npara compartilhá-la com outro dispositivo",
+    "file_title" : "arquivo da chave",
+    "file_description" : "Permite que você carregue um arquivo com a sua chave \npara compartilhá-la em outro dispositivo",
+    "key_restore_title" : "Redefina sua chave",
+    "key_restore_description" : "Permite que você reinicialize sua chave privada e o VI. \nÉ aconselhável trocá-los pelo menos a cada 6 meses",
+
+    "generator_length" : "Tamanho",
+    "generator_characters" : "Caracteres",
+    "generator_not_include" : "Não inclusos",
+    "generator_not_include_hint" : "Digite os caracteres que você não quer",
+    "generator_info" : "Os personagens são divididos em 5 botões : \n- Alfabeto minúsculo \n- Alfabeto maiúsculo \n- Números \n- Caracteres básicos ( ) \n- Caracteres especiais ( ) "
+
+
 }

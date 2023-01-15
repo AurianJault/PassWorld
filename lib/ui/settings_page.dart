@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
 import 'package:test/ui/setting/setting_auth_methods_page.dart';
+import 'package:test/ui/setting/setting_authentification_page.dart';
 import 'package:test/ui/setting/setting_key_page.dart';
 import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
@@ -43,9 +44,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(w * 0.01)),
                   child: SettingButtonWidget(
-                    title: LanguageTranslation.of(context)!.text('account'),
-                    content:
-                        "Adresse mail, mot-de-passe maître, suppression de compte",
+                    title: LanguageTranslation.of(context)!
+                        .text('account_setting_title'),
+                    content: LanguageTranslation.of(context)!
+                        .text('account_setting_description'),
                     icon: const IconData(0xf522, fontFamily: 'MaterialIcons'),
                     page: const SettingAccountPage(),
                   )),
@@ -63,15 +65,17 @@ class _SettingsPageState extends State<SettingsPage> {
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!
                           .text('authentification_setting_title'),
-                      content: "2 facteurs, Yubikey, biométrique",
+                      content: LanguageTranslation.of(context)!
+                          .text('authentification_setting_description'),
                       icon:
                           const IconData(0xf0553, fontFamily: 'MaterialIcons'),
-                      page: const SettingAuthPage(),
+                      page: const SettingAuthentificationPage(),
                     ),
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!
                           .text('key_setting_title'),
-                      content: "Partage de la clé, changer de clé ",
+                      content: LanguageTranslation.of(context)!
+                          .text('key_setting_description'),
                       icon:
                           const IconData(0xf052b, fontFamily: 'MaterialIcons'),
                       page: const SettingKeyPage(),
@@ -93,14 +97,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!
                           .text('theme_setting_title'),
-                      content: "Mode nuit, thème sombre, langue",
+                      content: LanguageTranslation.of(context)!
+                          .text('theme_setting_description'),
                       icon: const IconData(0xf14f, fontFamily: 'MaterialIcons'),
                       page: const SettingThemePage(),
                     ),
                     SettingButtonWidget(
                       title: LanguageTranslation.of(context)!
                           .text('about_setting_title'),
-                      content: "Qui sommes-nous, dêpot du projet ",
+                      content: LanguageTranslation.of(context)!
+                          .text('about_setting_description'),
                       icon: const IconData(0xe33d, fontFamily: 'MaterialIcons'),
                       page: const LoginPage(),
                     ),

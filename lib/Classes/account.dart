@@ -21,7 +21,9 @@ class Account with ChangeNotifier {
     authMethod = {
       "conventional": true,
       "yubikey_only": false,
-      "twoFA_with_yubikey": false
+      "twoFA_with_yubikey": false,
+      "twoFA_with_biometric": false,
+      "biometric_only": false
     };
   }
 
@@ -32,7 +34,9 @@ class Account with ChangeNotifier {
     authMethod = {
       "conventional": true,
       "yubikey_only": false,
-      "twoFA_with_yubikey": false
+      "twoFA_with_yubikey": false,
+      "twoFA_with_biometric": false,
+      "biometric_only": false
     };
   }
 

@@ -37,7 +37,12 @@
     "generator_characters" : "Caracteres",
     "generator_not_include" : "Não inclusos",
     "generator_not_include_hint" : "Digite os caracteres que você não quer",
-    "generator_info" : "Os personagens são divididos em 5 botões : \n- Alfabeto minúsculo \n- Alfabeto maiúsculo \n- Números \n- Caracteres básicos ( ) \n- Caracteres especiais ( ) "
+    "generator_info" : "Os personagens são divididos em 5 botões : \n- Alfabeto minúsculo \n- Alfabeto maiúsculo \n- Números \n- Caracteres básicos ( ) \n- Caracteres especiais ( ) ",
 
-
+    "health_care" : "Saúde",
+    "subtitle" : "Estamos cuidando de suas senhas",
+    "critical_passwords" : "Força da(s) senha(s) crítica(s)",
+    "medium_passwords" : "Senha(s) de força média",
+    "reused_passwords" : "Senha(s) reutilizada(s)",
+    "old_passwords" : "Senha(s) muito antiga(s)"
 }

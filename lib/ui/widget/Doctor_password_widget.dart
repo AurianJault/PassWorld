@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/password.dart';
 import 'package:flutter/services.dart';
+import '../password_detail_page.dart';
 
-class DoctorPassword extends StatelessWidget {
+class DoctorPasswordWidget extends StatelessWidget {
 
   Password password;
   
-  var color;
+  Color color;
 
-  DoctorPassword({super.key, required this.password,required this.color});
-  
+  DoctorPasswordWidget({super.key, required this.password,required this.color});
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -17,17 +18,23 @@ class DoctorPassword extends StatelessWidget {
     var h = size.height;
     // Widget
     return Container(
-      height: h * 1,
-      width: w * 0.80,
+        height: h * 1,
+        width: w * 0.70, 
         decoration: BoxDecoration(
-            color: color,
+            color: this.color,
+            borderRadius: BorderRadius.circular(w * 0.02)
         ),
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/${password.getWebsiteImage}.png',
-              ),
-              Column(
+        child: InkWell(
+                onTap: (){
+                    Navigator.push(context,MaterialPageRoute<dynamic>(
+                            builder: (context) =>PasswordDetailPage(p: password),),);
+                },
+                child:Row(
+                    children: [
+                        Image.asset(
+                            'assets/${password.getWebsiteImage}.png',
+                        ),
+                        Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -55,6 +62,7 @@ class DoctorPassword extends StatelessWidget {
               )
             ],
           ),
+          )
           );
   }
 }

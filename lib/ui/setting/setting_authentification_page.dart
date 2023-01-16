@@ -207,7 +207,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: w * 0.05)),
                                     Text(
-                                      "Permet d'ajouter ou supprimer une yubikey pour se connecter avec",
+                                      "Permet d'ajouter ou supprimer une   yubikey pour se connecter avec",
                                       style: TextStyle(
                                           fontSize: w * 0.02,
                                           color: Colors.black),

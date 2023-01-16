@@ -37,5 +37,12 @@
     "generator_characters" : "Caractères",
     "generator_not_include" : "Ne pas include",
     "generator_not_include_hint" : "Entrez les caractères que vous ne voulez pas",
-    "generator_info" : "Les caractères sont divisés en 5 boutons : \n- L'alphabet en minuscule \n- L'alphabet en majuscule \n- Les chiffres \n- Les caractères de base ( ) \n- Les caractères spéciaux ( ) "
+    "generator_info" : "Les caractères sont divisés en 5 boutons : \n- L'alphabet en minuscule \n- L'alphabet en majuscule \n- Les chiffres \n- Les caractères de base ( ) \n- Les caractères spéciaux ( ) ",
+
+    "health_care" : "Santé",
+    "subtitle" : "Nous prenons soin de vos mots de passe",
+    "critical_passwords" : "Force des mots de passe de niveau critique",
+    "medium_passwords" : "Force des mots de passe de niveau insuffisant",
+    "reused_passwords" : "Mots de passe réutilisé",
+    "old_passwords" : "Mots de passe trop anciens"
 }

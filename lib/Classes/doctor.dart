@@ -28,9 +28,12 @@ class Doctor {
     List<Password> list = user.vault.passwordList;
     list.forEach((element) {
       double strength = estimatePasswordStrength(element.getPassword);
+      print(strength);
       if (strength < 0.3) {
         red.add(element);
-      } else {
+      } 
+      else 
+      {
         if (strength < 0.8) {
           orange.add(element);
         }

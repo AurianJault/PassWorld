@@ -22,7 +22,7 @@ showShare(BuildContext context) async {
         obscureText: true,
         controller: passwordController,
         onEditingComplete: () async {
-          if (await Authentification.authentification(
+          if (await Authentification.authentication(
               context.read<Account>().id, (passwordController.text).trim())) {
             Navigator.pop(context);
             try {

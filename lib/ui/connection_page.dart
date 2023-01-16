@@ -10,7 +10,6 @@ import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'login_page.dart';
 import 'register_page.dart';
-import 'PopUp/popupError.dart';
 
 class ConnectionPage extends StatefulWidget {
   const ConnectionPage({Key? key}) : super(key: key);

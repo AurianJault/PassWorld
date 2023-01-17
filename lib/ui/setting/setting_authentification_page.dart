@@ -30,6 +30,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
           children: [
             Container(
               padding: const EdgeInsets.all(25),
+              margin: EdgeInsets.symmetric(horizontal: w * 0.3),
               child: Row(children: [
                 PageTitleW(
                     title: LanguageTranslation.of(context)!
@@ -184,8 +185,11 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                   Expanded(
                       child: InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute<dynamic>(
-                                builder: (context) => const SettingYubikeyPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const SettingYubikeyPage()));
                           },
                           child: Padding(
                               padding: EdgeInsets.all(h * 0.02),
@@ -209,7 +213,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                                             fontWeight: FontWeight.bold,
                                             fontSize: w * 0.05)),
                                     Text(
-                                      "Permet d'ajouter ou supprimer une   yubikey pour se connecter avec",
+                                      "Permet de gérer ses yubikeys",
                                       style: TextStyle(
                                           fontSize: w * 0.02,
                                           color: Colors.black),

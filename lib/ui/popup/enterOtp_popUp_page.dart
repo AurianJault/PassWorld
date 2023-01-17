@@ -20,7 +20,7 @@ void registerYubikey(){
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text(currentUser.id),
+      title: const Text("Pess OTP button"),
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(10),
@@ -38,6 +38,9 @@ void registerYubikey(){
               CupertinoButton(
               child: const Text("Done"),
               onPressed: () {
+                  AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                   Navigator.pop(context);
               },
             ),

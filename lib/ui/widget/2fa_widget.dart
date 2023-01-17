@@ -2,11 +2,8 @@ import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:test/Classes/yubikey_related/yubikey.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-// Widget for password objects in home page listview
 
 class twoFaWidget extends StatelessWidget {
-  // Variable for data binding -- will change when list of password
-
   TwoFA? factor;
 
   twoFaWidget({super.key, required this.factor});

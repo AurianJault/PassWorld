@@ -25,6 +25,7 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController otpCtrl = TextEditingController();
 
+
   void showRegistrationPopup(BuildContext context) {
     showDialog(
         context: context,
@@ -36,9 +37,9 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     const Text("Press the button below, once the yubikey has been inserted"),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     CupertinoButton(
                     child: const Text("I have inserted"),
                     onPressed: () {
@@ -162,7 +163,35 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
                       // Save Button
                       InkWell(
                         onTap: () async{
-                          showRegistrationPopup(context);
+                          if(nameCtrl.text == ""){
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return SimpleDialog(
+                                  title: const Text("Error"),
+                                  children: <Widget>[
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 16),
+                                          const Text("You have to name your yubikey"),
+                                          const SizedBox(height: 16),
+                                          CupertinoButton(
+                                          child: const Text("Ok"),
+                                          onPressed: () {
+                                              Navigator.pop(context);
+                                          },
+                                        )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              });
+                          } else {
+                            showRegistrationPopup(context);
+                          }
                         },
                         child: Container(
                             width: w * 0.55,

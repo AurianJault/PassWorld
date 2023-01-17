@@ -46,8 +46,8 @@ Future<Null> testFileUpload() async {
 }
 
 void main() async {
-  //await testAccountCreation();
-  await testAccountDeletion();
+  await testAccountCreation();
+  //await testAccountDeletion();
   //await testMailUpdate();
   //await testPasswordUpdate();
   return;

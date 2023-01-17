@@ -19,7 +19,6 @@ class ConnectionPage extends StatefulWidget {
 }
 
 class _ConnectionPageState extends State<ConnectionPage> {
-  var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
   @override
@@ -59,24 +58,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
               ),
               const SizedBox(height: 50),
 
-              // User Selection
-              DropdownButton(
-                hint: Text("Select User"),
-                value: dropDownValue,
-                items: users.map((Account user) {
-                  return DropdownMenuItem(
-                    value: user.id,
-                    child: Text(user.id),
-                  );
-                }).toList(),
-                onChanged: (String? newVal) {
-                  setState(() {
-                    dropDownValue = newVal!;
-                  });
-                },
-              ),
-              const SizedBox(height: 10),
-
               //Password Input
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -110,10 +91,9 @@ class _ConnectionPageState extends State<ConnectionPage> {
                   child: InkWell(
                     onTap: () async {
                       if (await Authentification.authentication(
-                          // check if empty
-                          dropDownValue!,
+                          "remrem@gmail2.com",
                           (passwordController.text).trim())) {
-                        context.read<Account>().setId = emailController.text;
+                        context.read<Account>().setId = "remrem@gmail2.com";
                         await context.read<Config>().setAppDirPath();
                         print(context.read<Config>().appDirPath.path);
                         context
@@ -133,7 +113,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
                             builder: (context) => AlertDialog(
                                   title: const Text('Erreur'),
                                   content: const Text(
-                                      "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+                                      "Le mot de passe est incorrect !"),
                                   actions: [
                                     TextButton(
                                       child: const Text('Ok'),
@@ -156,59 +136,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
                 ),
               ),
               const SizedBox(height: 30),
-
-              // Register
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Not a member? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                              builder: (context) => const RegisterPage()));
-                    },
-                    child: const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Already a member? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<dynamic>(
-                                builder: (context) => const LoginPage()));
-                      },
-                      child: const Text(
-                        'Sign in',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                ],
-              ),
             ]),
           ),
         ));

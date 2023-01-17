@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/authentification.dart';
+import 'package:test/ui/home_page.dart';
+import 'package:test/ui/nav_bar.dart';
 import 'popup/popupError.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 
@@ -107,7 +109,10 @@ class _RegisterPage extends State<RegisterPage> {
                             if (await Authentification.register(
                                 (emailController.text).trim(),
                                 (passwordController.text).trim())) {
-                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                      builder: (context) => const NavBar()));
                             } else {
                               showDialog(
                                   context: context,

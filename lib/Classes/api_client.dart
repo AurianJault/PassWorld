@@ -5,9 +5,9 @@ import 'package:http/http.dart';
 class ClientAPI {
   // Base URL of API
   // static String base =
-  //     'https://codefirst.iut.uca.fr/containers/passworld-api-remiarnal';
+  //     'https://codefirst.iut.uca.fr/containers/PassWorld-passworld-api';
 
-  static String base = 'http://172.27.170.182:8989';
+  static String base = 'http://172.27.171.157:8080';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);

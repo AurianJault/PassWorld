@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/ui/login_page.dart';
+import 'package:test/ui/startup.dart';
 import 'Classes/config.dart';
 import 'Classes/account.dart';
 import 'Classes/localization/translation_delegate.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         }
         return supportedLocales.first;
       },
-      home: const LoginPage(),
+      home: const Startup(),
     );
   }
 }

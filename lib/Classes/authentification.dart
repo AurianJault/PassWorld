@@ -11,6 +11,17 @@ import 'package:path/path.dart' as p; // used in line 31
 class Authentification {
   static String accountFile = "file.txt";
 
+  static Future<bool> checkAlreadySignedIn() async {
+    var cp = Config();
+    await cp.setAppDirPath();
+    var list = allUser(cp.appDirPath.path);
+
+    if (list.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
   static Future<bool> authentication(String login, String mdp) async {
     var cp = Config();
     await cp.setAppDirPath();
@@ -66,12 +77,11 @@ class Authentification {
 
 // Ecrit dans un fichier
   static void ecriture(List<Account> list, String fichier) async {
-      File(fichier).writeAsStringSync("");
+    File(fichier).writeAsStringSync("");
     for (var i in list) {
       File(fichier).writeAsStringSync(
           "${i.id} ${i.salt.base64} ${i.hash.base64}\n",
-          mode: FileMode.writeOnlyAppend
-      );
+          mode: FileMode.writeOnlyAppend);
     }
   }
 
@@ -83,8 +93,6 @@ class Authentification {
       print("Problem request status code is ${requestResponse.statusCode}");
       return false;
     }
-
-    bool res = requestResponse.body as bool;
-    return res;
+    return true;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:test/Classes/yubikey_related/nonce.dart';
 import 'package:http/http.dart' as http;
+import 'package:nfc_manager/nfc_manager.dart';
 
 class Authentificator {
   // static Future<bool> conventionalAuth(string id, string psswd)
@@ -12,6 +13,7 @@ class Authentificator {
       - si les 12 premiers characteres de otp ne correspondent a aucun id
       - erreur operation annulé car yubikey n'appartient pas a l'user
       */
+      
       Nonce n = Nonce();
 
       final http.Response responseHttp = await http.get(
@@ -33,13 +35,4 @@ class Authentificator {
       return false;
     }
   }
-  /*
-  static Future<bool> twoFactorYubikeyAuth(String id, String psswd, String otp){
-  if(conventionalAuth(id,psswd)) {
-      if(yubikeyAuth(id,otp) {
-        return true;
-      }   
-    }
-    return false;
-    */
 }

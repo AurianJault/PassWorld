@@ -14,7 +14,7 @@ class AccountManager {
   static void chooseAuthentificationMethod(Account a, int i) {
     switch (i) {
       case 1:
-        switch_auth_method(a.authMethod, "conventionalsss");
+        switch_auth_method(a.authMethod, "conventional");
         break;
       case 2:
         switch_auth_method(a.authMethod, "yubikey_only");

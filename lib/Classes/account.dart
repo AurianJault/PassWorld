@@ -89,6 +89,14 @@ class Account with ChangeNotifier {
     _id = s;
   }
 
+  TwoFA? accessTfa(int i) {
+    if (_secondFactors.isEmpty) {
+      return null;
+    } else {
+      return _secondFactors[i];
+    }
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

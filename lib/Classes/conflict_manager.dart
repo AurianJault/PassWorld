@@ -81,8 +81,7 @@ class ConflictManager {
   }
 
   static Future<Vault> loadSaved(id, path) async {
-    IDataStrategy dbSaved =
-        PassFile(id, "lib/Classes/Datas/passwords/"); // change path
+    IDataStrategy dbSaved = PassFile(id, path); // change path
     var vaultSaved = dbSaved.loadPasswords();
     return vaultSaved;
   }

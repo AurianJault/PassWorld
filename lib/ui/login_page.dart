@@ -113,18 +113,11 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      /*var list = await ConflictManager.manager(
-                          context, 'aurian', 'lib/Classes/Datas/passwords/');
-                      for (var e in list.passwordList) {
-                        print(e);
-                      }*/
-
-                      if (await Authentification.authentification(
+                                            if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = (emailController.text);
                         await context.read<Config>().setAppDirPath();
-                        print(context.read<Config>().appDirPath.path);
                         context.read<Account>().fillVault(
                             context.read<Config>().appDirPath.path, context);
 

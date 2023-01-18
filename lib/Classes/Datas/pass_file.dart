@@ -59,6 +59,7 @@ class PassFile extends IDataStrategy {
 
   @override
   void savePasswords(Vault passwords) {
+    initPass();
     db.execute("DELETE FROM Passwords");
     for (var element in passwords.passwordList) {
       insertValue(

@@ -6,9 +6,20 @@ import 'account.dart';
 class AccountManager {
   // static void changeMasterPassword(Account a, string m)
 
-  static void addYubikey(Account a, String name, String id) {
-    TwoFA yubikey = Yubikey(name, id);
+  static void addYubikey(Account a, String name, String id, String sp) {
+    TwoFA yubikey = Yubikey(name, id,sp);
     a.secondFactors.add(yubikey);
+  }
+
+  static bool isNewYubikey(Account a, String id){
+    for (TwoFA y in a.secondFactors) {
+      if(y is Yubikey){
+        if(y.id == id){
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   static void removeYubikey(Yubikey y, Account a) {

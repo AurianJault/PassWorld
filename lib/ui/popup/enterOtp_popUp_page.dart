@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
 import 'dart:io' show Platform;
 
 import 'package:test/Classes/accountManager.dart';
+import 'package:test/Classes/yubikey_related/yubiValidator.dart';
+import 'package:test/Classes/yubikey_related/yubikey.dart';
 
+import '../../Classes/config.dart';
 import '../setting/setting_yubikeys_page.dart';
 
 class EnterOtpPage extends StatelessWidget {
@@ -16,7 +20,7 @@ class EnterOtpPage extends StatelessWidget {
 
 
 void registerYubikey(){
-  AccountManager.addYubikey(currentUser, name, otpCtrl.text);
+  AccountManager.addYubikey(currentUser, name, otpCtrl.text,"");
 }
 
   @override
@@ -39,7 +43,7 @@ void registerYubikey(){
               const SizedBox(height: 10),
               CupertinoButton(
               child: const Text("Done"),
-              onPressed: () {
+              onPressed: () async{
                   if(otpCtrl.text.length < 44) {
                     showDialog(
                       context: context,
@@ -59,14 +63,25 @@ void registerYubikey(){
                       },
                     );
                   } else {
-                    AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute<dynamic>(
-                                builder: (context) => const SettingYubikeyPage()));
-                  }
+                    //AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
+                    // if(!await YubiValidator.validadeOtp(otpCtrl.text)){
+                    //   // error : Yubikey not valid
+                    // } 
+                    // if(AccountManager.isNewYubikey(context.read<Account>(),otpCtrl.text.substring(0,12))){
+                    //     // error: Already exists
+                    // }
+                    context.read<Account>().secondFactors.add(Yubikey(name, otpCtrl.text.substring(0,12),""));
+                        var path = Config();
+                        await path.setAppDirPath();
+                        context.read<Account>().saveFile(path.appDirPath.path);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute<dynamic>(
+                                    builder: (context) => const SettingYubikeyPage()));
+                    }
+                    
               },
             ),
               CupertinoButton(

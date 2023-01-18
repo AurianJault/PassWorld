@@ -3,6 +3,8 @@ import 'package:test/Classes/password.dart';
 import 'package:test/Classes/Datas/i_data_strategy.dart';
 import 'package:test/Classes/vault.dart';
 import 'package:path/path.dart' as p;
+import 'package:test/Classes/yubikey_related/two_fa.dart';
+import 'package:test/Classes/yubikey_related/yubikey.dart';
 
 class PassFile extends IDataStrategy {
   var db;
@@ -26,6 +28,14 @@ class PassFile extends IDataStrategy {
         modifDate TEXT
       );
     ''');
+
+    db.execute('''
+        CREATE TABLE IF NOT EXISTS Yubikey(
+          id TEXT PRIMARY KEY,
+          name TEXT,
+          staticPassword TEXT
+        );
+     ''');
   }
 
   @override
@@ -55,7 +65,7 @@ class PassFile extends IDataStrategy {
   void savePasswords(Vault passwords) {
     db.execute("DELETE FROM Passwords");
     for (var element in passwords.passwordList) {
-      insertValue(
+      insertValueP(
           element.getId,
           element.getName,
           element.getWebsite,
@@ -68,7 +78,21 @@ class PassFile extends IDataStrategy {
     }
   }
 
-  void insertValue(
+  @override
+  void saveSecondFactors(List<TwoFA> secondFactors) {
+    db.execute("DELETE FROM Yubikey");
+    for (var element in secondFactors) {
+      if(element is Yubikey) {
+        insertValueY(
+        element.id,
+        element.nom,
+        element.staticPassword,
+        );
+      }
+    }
+  }
+
+  void insertValueP(
       int id,
       String? name,
       String? website,
@@ -90,4 +114,54 @@ class PassFile extends IDataStrategy {
       modifDate
     ]);
   }
+
+  @override
+  List<TwoFA> loadSecondFactors() {
+    initPass();
+    List<TwoFA> secondFactors = List.empty(growable: true);
+    final ResultSet resultSet = db.select('SELECT * FROM Yubikey');
+    for (final Row row in resultSet) {
+      secondFactors.add(
+        Yubikey( 
+          row['id'].toString(), 
+          row['name'].toString(), 
+          row['staticPassword'].toString())
+      );
+    }
+    return secondFactors;
+  }
+
+    void insertValueY(
+      String? id,
+      String? name,
+      String? sp) {
+    db.execute("INSERT INTO Yubikey VALUES (?,?,?)", [
+      id,
+      name,
+      sp
+    ]);
+  }
 }
+
+/*void insertValueP(
+      int id,
+      String? name,
+      String? website,
+      String? username,
+      String? email,
+      String? note,
+      String? password,
+      String? creationDate,
+      String? modifDate) {
+    db.execute("INSERT INTO Passwords VALUES (?,?,?,?,?,?,?,?,?)", [
+      id,
+      name,
+      website,
+      username,
+      email,
+      note,
+      password,
+      creationDate,
+      modifDate
+    ]);
+  }*/

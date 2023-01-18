@@ -7,8 +7,10 @@ import 'package:test/Classes/yubikey_related/two_fa.dart';
 
 class Yubikey extends TwoFA{
   late String id;
+  late String staticPassword;
 
-  Yubikey(String name, String i): super(name){
+  Yubikey(String name, String i, String sp): super(name){
     id = i;
+    staticPassword = sp;
   }
 }

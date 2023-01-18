@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../Classes/account.dart';
+import '../../Classes/config.dart';
 import '../setting/setting_yubikeys_page.dart';
 
 class twoFaWidget extends StatelessWidget {
@@ -75,8 +76,11 @@ class twoFaWidget extends StatelessWidget {
                           actions: <Widget>[
                             TextButton(
                               child: const Text("Yes"),
-                              onPressed: () {
+                              onPressed: () async {
                                 AccountManager.removeYubikey(factor as Yubikey,context.read<Account>() );
+                                var path = Config();
+                                await path.setAppDirPath();
+                                context.read<Account>().saveFile(path.appDirPath.path);
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                                 Navigator.push(context, MaterialPageRoute<dynamic>(

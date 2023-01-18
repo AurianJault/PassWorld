@@ -50,12 +50,14 @@ class Account with ChangeNotifier {
   void fillVault(String appDirPath) {
     PassFile base = PassFile(_id, appDirPath);
     _vault = base.loadPasswords();
+    _secondFactors = base.loadSecondFactors();
   }
 
   void saveFile(String appDirPath) {
     PassFile base = PassFile(_id, appDirPath);
     // Check File ?
     base.savePasswords(_vault);
+    base.saveSecondFactors(secondFactors);
   }
 
   void changeMasterPassword(String mdp) {

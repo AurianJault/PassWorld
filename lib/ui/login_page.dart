@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
-                        context.read<Account>().setId = emailController.text;
+                        context.read<Account>().setId = (emailController.text).trim();
                         await context.read<Config>().setAppDirPath();
                         context
                             .read<Account>()

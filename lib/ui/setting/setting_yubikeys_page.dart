@@ -28,7 +28,6 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
             Container(
               padding: const EdgeInsets.all(25),
               child: 
-
                Flexible(
                child: Padding(
                  padding: EdgeInsets.symmetric(horizontal: w * 0.04),
@@ -45,74 +44,79 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                               return Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text("NO YUBIKEYS REGISTERED",
+                                  children: const [
+                                    Text("NO YUBIKEYS REGISTERED",
                                       style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: h * 0.02),
-                                      child: CupertinoButton(
-                                        color: Colors.green[400],
-                                        borderRadius: BorderRadius.circular(w * 0.04),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: const [
-                                              Icon(Icons.add, color: Colors.white),
-                                              Text("New yubikey", style: TextStyle(color: Colors.white)),
-                                            ],
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute<dynamic>(
-                                          builder: (context) => const RegisterYubikeyPage()));
-                                        },
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ); 
                             } else {
-                              return twoFaWidget(
-                                factor: account.accessTfa(index));
+                              return Center(
+                                child: Column (children: [
+                                  twoFaWidget(
+                                factor: account.accessTfa(index)),
+                                ],)
+                              );
                             }
-
                          });
                   }),
                 ),
               ),
              ),
             ),
-
-            Container(
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
+            Padding(
+              padding: EdgeInsets.only(top: h * 0.02),
+              child: CupertinoButton(
+                color: Colors.green[400],
+                borderRadius: BorderRadius.circular(w * 0.04),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.add, color: Colors.white),
+                      Text("New yubikey", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute<dynamic>(
+                  builder: (context) => const RegisterYubikeyPage()));
                 },
-                child: Container(
-                    width: w * 0.2,
-                    height: h * 0.05,
-                    decoration: BoxDecoration(
-                        color: Colors.red[400],
-                        borderRadius: BorderRadius.circular(w * 0.04)),
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: w * 0.03, vertical: h * 0.01),
-                        child: Center(
-                          child: Text(
-                            'Back',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: w * 0.04),
-                          ),
-                        ))),
               ),
+            ),
+
+            SizedBox(
+              height: h * 0.03,
+            ),
+            // Back button
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                  width: w * 0.2,
+                  height: h * 0.05,
+                  decoration: BoxDecoration(
+                      color: Colors.red[400],
+                      borderRadius: BorderRadius.circular(w * 0.04)),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: w * 0.03, vertical: h * 0.01),
+                      child: Center(
+                        child: Text(
+                          'Back',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: w * 0.04),
+                        ),
+                      ))),
             )
           ]
         )

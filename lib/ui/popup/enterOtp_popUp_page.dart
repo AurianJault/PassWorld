@@ -5,6 +5,8 @@ import 'dart:io' show Platform;
 
 import 'package:test/Classes/accountManager.dart';
 
+import '../setting/setting_yubikeys_page.dart';
+
 class EnterOtpPage extends StatelessWidget {
   final TextEditingController otpCtrl;
   final String name;
@@ -38,10 +40,33 @@ void registerYubikey(){
               CupertinoButton(
               child: const Text("Done"),
               onPressed: () {
-                  AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  if(otpCtrl.text.length < 44) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Error"),
+                          content: const Text("Please enter a valid OTP"),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute<dynamic>(
+                                builder: (context) => const SettingYubikeyPage()));
+                  }
               },
             ),
               CupertinoButton(

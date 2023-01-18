@@ -11,6 +11,10 @@ class AccountManager {
     a.secondFactors.add(yubikey);
   }
 
+  static void removeYubikey(Yubikey y, Account a) {
+    a.secondFactors.remove(y);
+  }
+
   static void chooseAuthentificationMethod(Account a, int i) {
     switch (i) {
       case 1:

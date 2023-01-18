@@ -1,7 +1,12 @@
+import 'package:provider/provider.dart';
+import 'package:test/Classes/accountManager.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:test/Classes/yubikey_related/yubikey.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../Classes/account.dart';
+import '../setting/setting_yubikeys_page.dart';
 
 class twoFaWidget extends StatelessWidget {
   TwoFA? factor;
@@ -57,9 +62,35 @@ class twoFaWidget extends StatelessWidget {
                 const Spacer(),
                 InkWell(
                   child: Icon(
-                    Icons.copy,
+                    Icons.delete,
                     size: w * 0.08,
                   ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Confirmation"),
+                          content: const Text("Are you sure you want to delete your yubikey?"),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("Yes"),
+                              onPressed: () {
+                                AccountManager.removeYubikey(factor as Yubikey,context.read<Account>() );
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                Navigator.push(context, MaterialPageRoute<dynamic>(
+                                builder: (context) => const SettingYubikeyPage()));
+                              },
+                            ),
+                            TextButton(onPressed:
+                            (){Navigator.of(context).pop();}, 
+                            child: const Text("Cancel"))
+                          ],
+                        );
+                      },
+                    );
+                  },
                 )
               ],
             ),

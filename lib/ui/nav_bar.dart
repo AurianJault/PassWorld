@@ -4,6 +4,7 @@ import 'package:test/Classes/account.dart';
 import 'package:test/ui/home_page.dart' show HomePage;
 import 'package:test/ui/settings_page.dart' show SettingsPage;
 
+import '../Classes/localization/translation.dart';
 import 'generator_page.dart';
 import 'health_page.dart';
 
@@ -53,22 +54,22 @@ class _NavBarState extends State<NavBar> {
                 EdgeInsets.symmetric(horizontal: w * 0.04, vertical: h * 0.015),
             gap: w * 0.012,
             iconSize: w * 0.06,
-            tabs: const [
+            tabs: [
               GButton(
                 icon: Icons.home,
-                text: 'Home',
+                text: LanguageTranslation.of(context)!.text('home_title'),
               ),
               GButton(
                 icon: Icons.password,
-                text: 'Generator',
+                text: LanguageTranslation.of(context)!.text('generator_title'),
               ),
               GButton(
                 icon: Icons.health_and_safety,
-                text: 'Health',
+                text: LanguageTranslation.of(context)!.text('heal_title'),
               ),
               GButton(
                 icon: Icons.settings,
-                text: 'Settings',
+                text: LanguageTranslation.of(context)!.text('setting_title'),
               ),
             ],
             selectedIndex: _selectedIndex,

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/config.dart';
+import 'package:test/ui/popup/generator_info.dart';
 import 'package:test/ui/widget/character_input.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../Classes/generator.dart';
-import 'PopUp/popupError.dart';
+import '../Classes/localization/translation.dart';
+import 'popup/popupError.dart';
 
 class GeneratorPage extends StatefulWidget {
   const GeneratorPage({Key? key}) : super(key: key);
@@ -38,7 +41,11 @@ class _GeneratorPageState extends State<GeneratorPage> {
           //-----------
           Container(
               padding: EdgeInsets.all(w * 0.04),
-              child: Row(children: const [PageTitleW(title: "Generator")])),
+              child: Row(children: [
+                PageTitleW(
+                    title: LanguageTranslation.of(context)!
+                        .text('generator_title'))
+              ])),
           SizedBox(
             height: h * 0.05,
           ),
@@ -56,7 +63,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                           Text(
                             obcure ? (obcures * (output.length)) : "$output",
                             style: TextStyle(
-                              fontSize: w * 0.02,
+                              fontSize: w * 0.025,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -126,8 +133,25 @@ class _GeneratorPageState extends State<GeneratorPage> {
                                   length = newLength;
                                 });
                               }),
+                              onChangeEnd: ((double newLength) {
+                                setState(() {
+                                  length = newLength;
+                                  try {
+                                    output = Generator().generator(
+                                            length.toInt(),
+                                            context.read<Config>().charac,
+                                            noneCarac.text) ??
+                                        "";
+                                  } on UnsupportedError catch (e) {
+                                    showAlertDialog(context, e.message ?? "");
+                                  } on StorageException catch (e) {
+                                    showAlertDialog(context, e.message);
+                                  }
+                                  obcure = true;
+                                });
+                              }),
                               min: 8,
-                              max: 50,
+                              max: 40,
                               activeColor: Colors.deepPurple[300],
                               thumbColor: Colors.deepPurple[300],
                               inactiveColor: Colors.grey[300],
@@ -153,6 +177,18 @@ class _GeneratorPageState extends State<GeneratorPage> {
                   style: TextStyle(
                       fontSize: w * 0.05, fontWeight: FontWeight.bold),
                 ),
+                Container(
+                  padding: EdgeInsets.all(h * 0.01),
+                  child: InkWell(
+                    onTap: () {
+                      generatorInfo(context);
+                    },
+                    child: Icon(
+                      const IconData(0xe33d, fontFamily: 'MaterialIcons'),
+                      size: w * 0.03,
+                    ),
+                  ),
+                )
               ])),
           //---------------------
           // CHARACTERS' BUTTONS
@@ -204,6 +240,22 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     border: InputBorder.none,
                     hintText: 'Type Charaters you don\'t want',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      try {
+                        output = Generator().generator(
+                                length.toInt(),
+                                context.read<Config>().charac,
+                                noneCarac.text) ??
+                            "";
+                      } on UnsupportedError catch (e) {
+                        showAlertDialog(context, e.message ?? "");
+                      } on StorageException catch (e) {
+                        showAlertDialog(context, e.message);
+                      }
+                      obcure = true;
+                    });
+                  },
                 ),
               ),
             ),

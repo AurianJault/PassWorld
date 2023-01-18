@@ -10,7 +10,11 @@ import 'package:test/Classes/password.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
+<<<<<<< HEAD
 import 'PopUp/pop_up_conflict.dart';
+=======
+import 'popup/popupError.dart';
+>>>>>>> 8b0c83c05dcd0f6d8244cc219be37fbe6ef69b3f
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -123,11 +127,17 @@ class _LoginPageState extends State<LoginPage> {
                       if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
-                        context.read<Account>().setId = emailController.text;
+                        context.read<Account>().setId = (emailController.text).trim();
                         await context.read<Config>().setAppDirPath();
+<<<<<<< HEAD
                         print(context.read<Config>().appDirPath.path);
                         context.read<Account>().fillVault(
                             context.read<Config>().appDirPath.path, context);
+=======
+                        context
+                            .read<Account>()
+                            .fillVault(context.read<Config>().appDirPath.path);
+>>>>>>> 8b0c83c05dcd0f6d8244cc219be37fbe6ef69b3f
 
                         // context
                         //     .read<Account>()

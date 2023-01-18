@@ -1,0 +1,22 @@
+{
+    "home_title" : "Home",
+    "search" : "search",
+    "generator_title" : "Generator",
+    "heal_title" : "Heal",
+    "setting_title" : "Settings",
+    "account" : "Account", 
+    "authentification_setting_title" : "Authentication methods",
+    "key_setting_title" : "Encryption key",
+    "theme_setting_title" : "Theme",
+    "about_setting_title" : "About",
+    "logout_title" : "Log out",
+    "language_select" : "Choose a language",
+
+
+    "health_care" : "Health",
+    "subtitle" : "We are taking care of your passwords",
+    "critical_passwords" : "Critical password(s) strenght",
+    "medium_passwords" : "Medium password(s) strenght",
+    "reused_passwords" : "Reused password(s)",
+    "old_passwords" : "Too old password(s)"
+}

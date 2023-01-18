@@ -10,7 +10,8 @@ import 'dart:io' as io;
 class ConflictManager {
   static Future<Vault> manager(
       BuildContext context, String id, String path) async {
-    if (await Connectivity().checkConnectivity() == ConnectivityResult.none) {
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none ||
+        !await io.File("$path$id.sqlite.down").exists()) {
       //adding when there is no file in db
       if (!await io.File("$path$id.sqlite").exists()) {
         // no db file and no local file

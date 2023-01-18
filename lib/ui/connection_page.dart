@@ -91,9 +91,10 @@ class _ConnectionPageState extends State<ConnectionPage> {
                   child: InkWell(
                     onTap: () async {
                       if (await Authentification.authentication(
-                          "remrem@gmail2.com",
+                          await Authentification.getUser(),
                           (passwordController.text).trim())) {
-                        context.read<Account>().setId = "remrem@gmail2.com";
+                        context.read<Account>().setId =
+                            await Authentification.getUser();
                         await context.read<Config>().setAppDirPath();
                         print(context.read<Config>().appDirPath.path);
                         context

@@ -22,6 +22,19 @@ class Authentification {
     return true;
   }
 
+  static Future<String> getUser() async {
+    var cp = Config();
+    await cp.setAppDirPath();
+    var file = File(p.join(cp.appDirPath.path, accountFile));
+    List<Account> lst = List.empty(growable: true);
+    List<String> stream = file.readAsLinesSync();
+    for (var element in stream) {
+      var arr = element.split(' ');
+      return arr[0];
+    }
+    return "empty";
+  }
+
   static Future<bool> authentication(String login, String mdp) async {
     var cp = Config();
     await cp.setAppDirPath();

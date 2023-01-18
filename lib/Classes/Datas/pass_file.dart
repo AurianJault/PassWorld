@@ -12,12 +12,18 @@ class PassFile extends IDataStrategy {
     db = sqlite3.open(path);
   }
 
+  PassFile.down(String identifiant, String docPath) {
+    String file = "$identifiant.sqlite.down";
+    String path = p.join(docPath, file);
+    db = sqlite3.open(path);
+  }
+
   void initPass() {
     db.execute('''
       CREATE TABLE IF NOT EXISTS Passwords(
         id INTEGER PRIMARY KEY,
         name TEXT,
-        website TEXT NOT NULL,
+        website TEXT,
         username TEXT,
         email TEXT,
         note TEXT,

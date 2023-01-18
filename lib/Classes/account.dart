@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:test/Classes/conflict_manager.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'chiffrement.dart';
@@ -43,9 +44,10 @@ class Account with ChangeNotifier {
   }
 
   // Methods
-  void fillVault(String appDirPath) {
+  void fillVault(String appDirPath, BuildContext context) async {
     PassFile base = PassFile(_id, appDirPath);
-    _vault = base.loadPasswords();
+    _vault = await ConflictManager.manager(
+        context, id, appDirPath); //base.loadPasswords();
   }
 
   void saveFile(String appDirPath) {

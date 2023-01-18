@@ -3,7 +3,7 @@ import 'package:io/ansi.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:test/Classes/password.dart';
 
-int showConflictDialog(
+Future<int> showConflictDialog(
     BuildContext context, Password passDown, Password passSaved) {
   var frstState = false;
   var fSign = '❌';
@@ -14,6 +14,7 @@ int showConflictDialog(
 
   //✔️❌
 
+  int selectedButton = 0;
   // set up the button
   var col = Column(mainAxisAlignment: MainAxisAlignment.center, children: [
     Padding(
@@ -70,7 +71,11 @@ int showConflictDialog(
               onPressed: () => {
                 if (frstState == true || scndState == true)
                   {
-                    Navigator.pop(context, {'saved': frstState})
+                    if (frstState == true)
+                      {selectedButton = 1}
+                    else if (scndState == true)
+                      {selectedButton = 2},
+                    Navigator.pop(context, selectedButton)
                   }
                 else
                   {
@@ -90,12 +95,12 @@ int showConflictDialog(
   );
 
   // show the dialog
-  showDialog(
+  return showDialog(
     context: context,
     builder: (BuildContext context) {
       return alert;
     },
-  );
-
-  return 0;
+  ).then((value) {
+    return value;
+  });
 }

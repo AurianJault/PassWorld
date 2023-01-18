@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:test/Classes/vault.dart';
-import 'package:test/ui/PopUp/pop_up_conflict.dart';
+import '../ui/popup/pop_up_conflict.dart';
 import 'Datas/i_data_strategy.dart';
 import 'Datas/pass_file.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -17,10 +17,10 @@ class ConflictManager {
         return Vault();
       } else {
         // no no db file
-        return await loadDown(id);
+        return await loadDown(id, path);
       }
     } else {
-      Vault downVault = await loadDown(id);
+      Vault downVault = await loadDown(id, path);
 
       if (!await io.File("$path$id.sqlite").exists()) {
         File("$path$id.sqlite.down").rename(path + id);
@@ -28,7 +28,7 @@ class ConflictManager {
       } else {
         bool found = false;
         Vault finalVault = Vault();
-        var savedVault = await loadSaved(id);
+        var savedVault = await loadSaved(id, path);
         for (var element in downVault.passwordList) {
           found = false;
           for (var sav in savedVault.passwordList) {
@@ -79,19 +79,18 @@ class ConflictManager {
     }
   }
 
-  static Future<Vault> loadSaved(id) async {
+  static Future<Vault> loadSaved(id, path) async {
     IDataStrategy dbSaved =
         PassFile(id, "lib/Classes/Datas/passwords/"); // change path
     var vaultSaved = dbSaved.loadPasswords();
     return vaultSaved;
   }
 
-  static Future<Vault> loadDown(id) async {
+  static Future<Vault> loadDown(id, path) async {
     /*
       Load list of passwords and save it in "id".sqlite.down
     */
-    IDataStrategy dbDown =
-        PassFile.down(id, "lib/Classes/Datas/passwords/"); // change path
+    IDataStrategy dbDown = PassFile.down(id, path); // change path
     var vaultDown = dbDown.loadPasswords();
     return vaultDown;
   }

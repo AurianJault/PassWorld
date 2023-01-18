@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:http/http.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/api_client.dart';
+import 'package:test/Classes/cle.dart';
 import 'storage.dart';
 import 'config.dart';
 import 'package:path/path.dart' as p; // used in line 31
@@ -67,7 +70,6 @@ class Authentification {
   }
 
   static Future<bool> register(String email, String password) async {
-    // TODO : add global config to parameter
     var cp = Config();
     await cp.setAppDirPath();
     var listCpt = await allUser(cp.appDirPath.path);
@@ -98,9 +100,23 @@ class Authentification {
     }
   }
 
-  static Future<bool> apiAuthentication(String mail, String password) async {
-    // TODO
-    Response requestResponse = await ClientAPI.authenticator(mail, password);
+  static Future<bool> apiAuthentication(
+      String mail, String password, String encryptionKey) async {
+    var keyArray = encryptionKey.split(' '); // sépare key + iv
+    Key key = encrypt.Key.fromBase64(keyArray[0]);
+    IV iv = encrypt.IV.fromBase64(keyArray[1]);
+    var encrypter = encrypt.Encrypter(AES(key));
+
+    // Récupere le salt
+    var response = await ClientAPI.getSalt(mail);
+    if (response.statusCode != 200) return false;
+    Encrypted salt = Encrypted.fromBase64(response.body);
+    String trueSalt = encrypter.decrypt(salt, iv: iv);
+
+    String passwordHash = BCrypt.hashpw(password, trueSalt);
+    String encryptedPassword = encrypter.encrypt(passwordHash, iv: iv).base64;
+    Response requestResponse =
+        await ClientAPI.authenticator(mail, encryptedPassword);
 
     if (requestResponse.statusCode != 200) {
       print("Problem request status code is ${requestResponse.statusCode}");

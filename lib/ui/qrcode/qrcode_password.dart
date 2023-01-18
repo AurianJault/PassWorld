@@ -11,7 +11,7 @@ showQrcodePassword(BuildContext context) {
 
   AlertDialog alert = AlertDialog(
     backgroundColor: Colors.white,
-    title: const Text("Veuillez entrer-votre mot de passe"),
+    title: const Text("Veuillez entrer votre mot de passe"),
     content: TextField(
       obscureText: true,
       controller: passwordController,
@@ -26,7 +26,7 @@ showQrcodePassword(BuildContext context) {
           }
         } else {
           Navigator.pop(context);
-          showAlertDialog(context, "Le mot de passe est incorrecte");
+          showAlertDialog(context, "Le mot de passe est incorrect");
         }
       },
     ),

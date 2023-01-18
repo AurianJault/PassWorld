@@ -8,6 +8,13 @@ Future<void> testAuth() async {
   print(req.body);
 }
 
+Future<void> testSalt() async {
+  print("Testing getSalt...");
+  var req = await ClientAPI.getSalt("aurian@23.com");
+  print(req.statusCode);
+  print(req.body);
+}
+
 Future<void> testAccountCreation() async {
   print("Testing Account Creation...");
   var req =
@@ -46,7 +53,8 @@ Future<Null> testFileUpload() async {
 }
 
 void main() async {
-  await testAccountCreation();
+  //await testAccountCreation();
+  await testSalt();
   //await testAccountDeletion();
   //await testMailUpdate();
   //await testPasswordUpdate();

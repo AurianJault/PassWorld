@@ -29,6 +29,17 @@ class ClientAPI {
     return response;
   }
 
+  static Future<Response> getSalt(String mail) async {
+    Uri url = Uri.parse("$base/user/salt");
+    String body = """
+    {
+      "email" : "$mail"
+    }
+    """;
+    var response = await http.post(url, body: body);
+    return response;
+  }
+
   static Future<Response> register(
       String email, String password, String salt) async {
     Uri url = Uri.parse("$base/user/account");

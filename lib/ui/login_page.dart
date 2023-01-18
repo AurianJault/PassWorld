@@ -21,6 +21,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var keyController = TextEditingController();
 
   @override
   void initState() {
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               // Title
               const Text(
-                'Welcome Back !',
+                'Welcome !',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
               const SizedBox(height: 50),
@@ -92,8 +93,45 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Colors.deepPurple[300],
+                          borderRadius: BorderRadius.circular(12)),
+                      child: InkWell(
+                          onTap: (() {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text(
+                                        'Please add your encryption key'),
+                                    actions: [
+                                      TextField(
+                                        controller: keyController,
+                                        decoration: InputDecoration(
+                                            hintText: "Paste your key here "),
+                                      ),
+                                      TextButton(
+                                        child: const Text('Ok'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          }),
+                          child: const Center(
+                              child: Text(
+                            'Add Encryption Key',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ))))),
               const SizedBox(height: 30),
-
               // Sign In Button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -106,8 +144,10 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: () async {
                       if (await Authentification.apiAuthentication(
                           (emailController.text).trim(),
-                          (passwordController.text).trim())) {
-                        context.read<Account>().setId = emailController.text;
+                          (passwordController.text).trim(),
+                          keyController.text)) {
+                        context.read<Account>().setId =
+                            (emailController.text).trim();
                         await context.read<Config>().setAppDirPath();
                         context
                             .read<Account>()
@@ -148,9 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
-
-              // Register
+              const SizedBox(height: 30), // Register
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

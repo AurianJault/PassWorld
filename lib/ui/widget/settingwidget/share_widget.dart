@@ -36,6 +36,7 @@ showShare(BuildContext context) async {
                   File(output).writeAsStringSync(
                       (await Storage.getKey(context.read<Account>().id))
                               .base64 +
+                          " " +
                           (await Storage.getIV(context.read<Account>().id))
                               .base64,
                       mode: FileMode.writeOnly);

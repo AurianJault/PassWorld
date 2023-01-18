@@ -11,11 +11,12 @@ showQrcode(BuildContext context, String id) async {
   AlertDialog alert = AlertDialog(
     backgroundColor: Colors.deepPurple[300],
     content: PrettyQr(
-      image: const AssetImage('assets/bereal.png'), //mettre l'icone de l'app
+      image: const AssetImage('assets/null.png'), //mettre l'icone de l'app
       typeNumber: 6,
       size: w * 0.6,
-      data:
-          (await Storage.getKey(id)).base64 + (await Storage.getIV(id)).base64,
+      data: (await Storage.getKey(id)).base64 +
+          " " +
+          (await Storage.getIV(id)).base64,
       errorCorrectLevel: QrErrorCorrectLevel.M,
       roundEdges: false,
     ),

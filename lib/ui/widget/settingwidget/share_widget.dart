@@ -53,7 +53,7 @@ showShare(BuildContext context) async {
             }
           } else {
             Navigator.pop(context);
-            showAlertDialog(context, "Le mot de passe est incorrecte");
+            showAlertDialog(context, "Le mot de passe est incorrect");
           }
         }),
   );

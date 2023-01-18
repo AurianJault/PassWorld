@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/ui/home_page.dart';
+import 'package:provider/provider.dart';
 import 'package:test/ui/nav_bar.dart';
+import '../Classes/account.dart';
+import '../Classes/config.dart';
 import 'popup/popupError.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 
@@ -109,6 +112,11 @@ class _RegisterPage extends State<RegisterPage> {
                             if (await Authentification.register(
                                 (emailController.text).trim(),
                                 (passwordController.text).trim())) {
+                              context.read<Account>().setId =
+                                  (emailController.text).trim();
+                              await context.read<Config>().setAppDirPath();
+                              context.read<Account>().fillVault(
+                                  context.read<Config>().appDirPath.path);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute<dynamic>(

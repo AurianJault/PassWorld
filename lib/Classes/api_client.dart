@@ -7,7 +7,7 @@ class ClientAPI {
   // static String base =
   //     'https://codefirst.iut.uca.fr/containers/PassWorld-passworld-api';
 
-  static String base = 'http://172.27.171.157:8080';
+  static String base = 'http://192.168.1.64:8080';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);

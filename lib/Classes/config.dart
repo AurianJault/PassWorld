@@ -25,7 +25,6 @@ class Config extends ChangeNotifier {
           "${Platform.environment['HOME'].toString()}/.passworld/");
       await setDirectory();
     } else {
-      // appDirPath = io.Directory("/data/user/0");
       appDirPath = await getApplicationDocumentsDirectory();
       await setDirectory();
     }
@@ -36,12 +35,10 @@ class Config extends ChangeNotifier {
       io.Directory(appDirPath.path).createSync();
     }
     if (!io.File(p.join(appDirPath.path, "file.txt")).existsSync()) {
-      print("LE FICHIER NEXISTE PAS ");
       io.File("${appDirPath.path}/file.txt").create();
     }
     else 
     {
-      print("LE FICHIER EXISTE");
     }
   }
 

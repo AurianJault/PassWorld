@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/account.dart';
 import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
 import 'package:test/ui/setting/setting_auth_methods_page.dart';
@@ -9,6 +11,7 @@ import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:test/ui/widget/settingwidget/setting_button.dart';
 
 import '../Classes/localization/translation.dart';
+import '../Classes/vault.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -123,6 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(w * 0.01)),
                   child: InkWell(
                       onTap: () {
+                        context.read<Account>().setVault = Vault();
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:test/Classes/conflict_manager.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:test/Classes/yubikey_related/yubikey.dart';
@@ -48,11 +49,12 @@ class Account with ChangeNotifier {
   }
 
   // Methods
-  void fillVault(String appDirPath) {
+  void fillVault(String appDirPath, BuildContext context) async {
     PassFile base = PassFile(_id, appDirPath);
-    _vault = base.loadPasswords();
     _secondFactors = base.loadSecondFactors();
     authMethod = base.loadAuth();
+    _vault = await ConflictManager.manager(
+        context, id, appDirPath); //base.loadPasswords();
   }
 
   void saveFile(String appDirPath) {
@@ -112,6 +114,10 @@ class Account with ChangeNotifier {
     } else {
       return _secondFactors[i];
     }
+  }
+  
+  set setVault(Vault vault) {
+    _vault = vault;
   }
 
   @override

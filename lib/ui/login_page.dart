@@ -7,10 +7,11 @@ import 'package:test/Classes/accountManager.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/demo/demo_yubikey_page.dart';
+import 'package:test/Classes/conflict_manager.dart';
+import 'package:test/Classes/password.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
-import 'popup/popupError.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -114,14 +115,13 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                      if (await Authentification.authentification(
+                                            if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
-                        context.read<Account>().setId = emailController.text;
+                        context.read<Account>().setId = (emailController.text);
                         await context.read<Config>().setAppDirPath();
-                        context
-                            .read<Account>()
-                            .fillVault(context.read<Config>().appDirPath.path);
+                        context.read<Account>().fillVault(
+                            context.read<Config>().appDirPath.path, context);
                             if(AccountManager.getAuthMethod(context.read<Account>()) == 'twoFA_with_yubikey'){
                               Navigator.push(context, 
                               MaterialPageRoute(

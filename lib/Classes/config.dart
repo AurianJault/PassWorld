@@ -10,7 +10,13 @@ class Config extends ChangeNotifier {
 
   Config() {
     appDirPath = io.Directory("");
-    charac = [];
+    charac = [
+      0,
+      1,
+      2,
+      3,
+      4,
+    ];
   }
 
   Future<void> setAppDirPath() async {
@@ -40,6 +46,12 @@ class Config extends ChangeNotifier {
     if (charac.contains(i)) {
       charac.remove(i);
     } else {
+      charac.add(i);
+    }
+  }
+
+  void addAll() {
+    for (int i = 0; i < 4; i++) {
       charac.add(i);
     }
   }

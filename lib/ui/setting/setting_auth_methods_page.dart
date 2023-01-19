@@ -1,21 +1,16 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:test/Classes/account.dart';
-import 'package:test/ui/qrcode/qrcode_password.dart';
-import 'package:test/ui/widget/settingwidget/share_widget.dart';
+import 'package:test/ui/setting/setting_yubikeys_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import '../../Classes/localization/translation.dart';
-import '../popup/popupError.dart';
 
-class SettingAccountPage extends StatefulWidget {
-  const SettingAccountPage({Key? key}) : super(key: key);
+class SettingAuthPage extends StatefulWidget {
+  const SettingAuthPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingAccountPage> createState() => _SettingAccountPage();
+  State<SettingAuthPage> createState() => _SettingAuthPage();
 }
 
-class _SettingAccountPage extends State<SettingAccountPage> {
+class _SettingAuthPage extends State<SettingAuthPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -32,7 +27,7 @@ class _SettingAccountPage extends State<SettingAccountPage> {
               child: Row(children: [
                 PageTitleW(
                     title: LanguageTranslation.of(context)!
-                        .text('account_setting_title')),
+                        .text('authentification_setting_title')),
                 const Spacer(),
                 InkWell(
                     onTap: () {
@@ -61,13 +56,14 @@ class _SettingAccountPage extends State<SettingAccountPage> {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            //changing email
+                            Navigator.push(context, MaterialPageRoute<dynamic>(
+                                builder: (context) => const SettingYubikeyPage()));
                           },
                           child: Padding(
                             padding: EdgeInsets.all(h * 0.02),
                             child: Row(children: [
                               Icon(
-                                const IconData(0xe081,
+                                const IconData(0xe4f6,
                                     fontFamily: 'MaterialIcons'),
                                 size: w * 0.08,
                                 color: Colors.white,
@@ -78,63 +74,14 @@ class _SettingAccountPage extends State<SettingAccountPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Modifier son adresse email",
+                                  Text("2FA",
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    "Current email : ${context.read<Account>().id}",
-                                    style: TextStyle(
-                                        fontSize: w * 0.02,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                              const Spacer(),
-                              Icon(
-                                const IconData(0xe355,
-                                    fontFamily: 'MaterialIcons'),
-                                size: w * 0.06,
-                                color: Colors.white,
-                              )
-                            ]),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () async {
-                            //changement du master password
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(h * 0.02),
-                            child: Row(children: [
-                              Icon(
-                                const IconData(0xe47a,
-                                    fontFamily: 'MaterialIcons'),
-                                size: w * 0.08,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: w * 0.02,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Changer son mot de passe",
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: w * 0.05)),
-                                  Text(
-                                    '''Permet de modifier son master password''',
+                                    '''reeinforce security by adding a second factor to login''',
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -157,58 +104,70 @@ class _SettingAccountPage extends State<SettingAccountPage> {
                 ],
               ),
             ),
+
             SizedBox(
               height: h * 0.05,
             ),
+
             Container(
-                margin: EdgeInsets.symmetric(horizontal: w * 0.02),
-                decoration: BoxDecoration(
-                    color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(w * 0.01)),
-                child: Row(children: [
-                  Expanded(
-                      child: InkWell(
+              margin: EdgeInsets.symmetric(horizontal: w * 0.02),
+              decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(w * 0.01)),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
                           onTap: () {
-                            //envoie de l'email
+                            // selection de methode d'authentification (nouvelle page?)
                           },
                           child: Padding(
-                              padding: EdgeInsets.all(h * 0.02),
-                              child: Row(children: [
-                                Icon(
-                                  const IconData(0xedc1,
-                                      fontFamily: 'MaterialIcons'),
-                                  size: w * 0.08,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: w * 0.02,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Suppression du compte",
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: w * 0.05)),
-                                    Text(
-                                      '''Vous envoyer un email pour affirmer la suppression définitive du compte''',
+                            padding: EdgeInsets.all(h * 0.02),
+                            child: Row(children: [
+                              Icon(
+                                const IconData(0xe4f6,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.08,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: w * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Select login method",
+                                      textAlign: TextAlign.right,
                                       style: TextStyle(
-                                          fontSize: w * 0.02,
-                                          color: Colors.black),
-                                    )
-                                  ],
-                                ),
-                                const Spacer(),
-                                Icon(
-                                  const IconData(0xe355,
-                                      fontFamily: 'MaterialIcons'),
-                                  size: w * 0.06,
-                                  color: Colors.white,
-                                )
-                              ]))))
-                ])),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: w * 0.05)),
+                                  Text(
+                                    '''chose your type of authentification''',
+                                    style: TextStyle(
+                                        fontSize: w * 0.02,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                              const Spacer(),
+                              Icon(
+                                const IconData(0xe355,
+                                    fontFamily: 'MaterialIcons'),
+                                size: w * 0.06,
+                                color: Colors.white,
+                              )
+                            ]),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ))));
   }

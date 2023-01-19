@@ -1,28 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:bcrypt/bcrypt.dart';
-import 'package:provider/provider.dart';
-import 'package:test/Classes/Exception/storageException.dart';
-import 'package:test/Classes/account.dart';
-import 'package:test/Classes/accountManager.dart';
-import 'package:test/Classes/authentification.dart';
-import 'package:test/Classes/cle.dart';
-import 'package:test/ui/demo/demo_yubikey_page.dart';
-import 'package:test/Classes/conflict_manager.dart';
-import 'package:test/Classes/password.dart';
-import 'package:test/ui/nav_bar.dart';
-import '../Classes/config.dart';
-import 'register_page.dart';
+import 'dart:ffi';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:test/ui/nfc/tagReader_page.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+import 'package:test/Classes/yubikey_related/yubiValidator.dart';
+
+import '../nav_bar.dart';
+//import 'package:ndef/ndef.dart' as ndef;
+
+class NfcPage extends StatefulWidget {
+  const NfcPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<NfcPage> createState() => _NfcPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _NfcPageState extends State<NfcPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  String otp = 'flop';
+  bool valid = false;
 
   @override
   void initState() {
@@ -36,19 +34,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    const String login = "Pierre";
-    const String password = 'password123';
-    final String salt = BCrypt.gensalt();
-    final String hash = BCrypt.hashpw(
-      password,
-      salt,
-    );
-    final crypt = encrypt(hash);
-
-    var size = MediaQuery.of(context).size;
-    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
-    double h = size.height;
-
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -114,32 +99,22 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.deepPurple[300],
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
-                    onTap: () async {
-                                            if (await Authentification.authentification(
-                          (emailController.text).trim(),
-                          (passwordController.text).trim())) {
-                        context.read<Account>().setId = (emailController.text);
-                        await context.read<Config>().setAppDirPath();
-                        context.read<Account>().fillVault(
-                            context.read<Config>().appDirPath.path, context);
-                            if(AccountManager.getAuthMethod(context.read<Account>()) == 'twoFA_with_yubikey'){
-                              Navigator.push(context, 
-                              MaterialPageRoute(
-                                builder: (context) => const YubikeyDemoPage(),
-                            ),);
-                            } else {
-                               Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => const NavBar()));
-                            }
+                    onTap: () {
+                      tagRead2();
+                      if (otp != 'flop') {
+                        validate();
+                        if(valid){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                                builder: (context) => const NavBar()));
+                        }       
                       } else {
                         showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
                                   title: const Text('Erreur'),
-                                  content: const Text(
-                                      "Le mot de passe ou le nom de l'utilisateur est incorrect !!"),
+                                  content: Text(otp),
                                   actions: [
                                     TextButton(
                                       child: const Text('Ok'),
@@ -151,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Center(
                       child: Text(
-                        'Sign In',
+                        'NFC GET OTP',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -168,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Not a member? ',
+                    'READ NFC',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -178,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<dynamic>(
-                              builder: (context) => const RegisterPage()));
+                              builder: (context) => TagReader()));
                     },
                     child: const Text(
                       'Register now',
@@ -194,4 +169,28 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ));
   }
+
+  void tagRead2() async {
+    var tag = await FlutterNfcKit.poll(timeout: Duration(seconds: 10),
+    iosMultipleTagMessage: "Multiple tags found!", iosAlertMessage: "Scan your tag");
+    for (var record in await FlutterNfcKit.readNDEFRecords(cached: false)) {
+      otp = (record.toString());
+    }
+  }
+  void validate() async {
+    var rep = await YubiValidator.validadeNfcTag(otp);
+    valid = rep;
+  }
 }
+
+
+
+/* 
+// read NDEF records if available
+if (tag.ndefAvailable){
+  /// decoded NDEF records (see [ndef.NDEFRecord] for details)
+  /// `UriRecord: id=(empty) typeNameFormat=TypeNameFormat.nfcWellKnown type=U uri=https://github.com/nfcim/ndef`
+  for (var record in await FlutterNfcKit.readNDEFRecords(cached: false)) {
+    print(record.toString());
+  }
+ */

@@ -4,17 +4,9 @@
 */
 
 abstract class TwoFA{
-  late String _nom;
-
-  String? get Nom{
-    return _nom;
-  }
-  
-  set nom(String n){
-    _nom = n;
-  }
+  late String nom;
 
   TwoFA(String n){
-    _nom = n;
+    nom = n;
   }
 }

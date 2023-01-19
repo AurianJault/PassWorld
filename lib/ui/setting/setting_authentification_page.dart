@@ -31,7 +31,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
           children: [
             Container(
               padding: const EdgeInsets.all(25),
-              margin: EdgeInsets.symmetric(horizontal: w * 0.3),
+              margin: EdgeInsets.symmetric(horizontal: w * 0.03),
               child: Row(children: [
                 PageTitleW(
                     title: LanguageTranslation.of(context)!
@@ -285,13 +285,14 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
             SizedBox(
               height: h * 0.05,
             ),
-            Padding(
+            /*Padding(
               padding: EdgeInsets.only(top: h * 0.02),
               child: CupertinoButton(
                 color: Colors.red[400],
                 borderRadius: BorderRadius.circular(w * 0.04),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: w * 0.03, vertical: h * 0.01),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
@@ -303,7 +304,7 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                   Navigator.pop(context);
                 },
               ),
-            ),
+            )*/
           ],
         ))));
   }

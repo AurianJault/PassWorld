@@ -99,6 +99,10 @@ class Account with ChangeNotifier {
     _id = s;
   }
 
+  set setVault(Vault vault) {
+    _vault = vault;
+  }
+
   @override
   bool operator ==(Object c) {
     // TODO

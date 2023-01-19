@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:test/Classes/yubikey_related/yubikey.dart';
 import 'chiffrement.dart';
 import 'vault.dart';
 import 'Datas/pass_file.dart';
@@ -64,6 +65,18 @@ class Account with ChangeNotifier {
 
   void changeMasterPassword(String mdp) {
     _masterPassword = Chiffrement(mdp, _id);
+  }
+
+  bool findYubikey(String otp){
+    bool res = false;
+    secondFactors.forEach((element) {
+      if(element is Yubikey){
+        if(element.id == otp.substring(0,12)){
+          res = true;
+        }
+      }
+    });
+    return res;
   }
 
   // Getter

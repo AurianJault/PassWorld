@@ -3,8 +3,10 @@ import 'package:bcrypt/bcrypt.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
+import 'package:test/Classes/accountManager.dart';
 import 'package:test/Classes/authentification.dart';
 import 'package:test/Classes/cle.dart';
+import 'package:test/ui/demo/demo_yubikey_page.dart';
 import 'package:test/ui/nav_bar.dart';
 import '../Classes/config.dart';
 import 'register_page.dart';
@@ -120,14 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                         context
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);
-
-                        // context
-                        //     .read<Account>()
-                        //     .changeMasterPassword(passwordController.text); LIGNE QUI BUG SA MERE LA P*TE
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<dynamic>(
-                                builder: (context) => const NavBar()));
+                            if(AccountManager.getAuthMethod(context.read<Account>()) == 'twoFA_with_yubikey'){
+                              Navigator.push(context, 
+                              MaterialPageRoute(
+                                builder: (context) => const YubikeyDemoPage(),
+                            ),);
+                            } else {
+                               Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                    builder: (context) => const NavBar()));
+                            }
                       } else {
                         showDialog(
                             context: context,

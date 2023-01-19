@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:provider/provider.dart';
 import 'package:test/Classes/yubikey_related/yubiValidator.dart';
 
+import '../../Classes/account.dart';
 import '../nav_bar.dart';
 //import 'package:ndef/ndef.dart' as ndef;
 
@@ -37,7 +39,7 @@ class _YubikeyDemoPageState extends State<YubikeyDemoPage> {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               // Title
               const Text(
-                'Demo yubikey!',
+                'Yubikey Authentification',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
               const SizedBox(height: 50),
@@ -82,7 +84,7 @@ class _YubikeyDemoPageState extends State<YubikeyDemoPage> {
                                           builder: (context) => AlertDialog(
                                                 title: const Text('Erreur'),
                                                 content: const Text(
-                                                    "L'otp n'a pas été validé! La gestion d'erreur n'est pas encore faite!"),
+                                                    "L'otp n'a pas été validé!"),
                                                 actions: [
                                                   TextButton(
                                                     child: const Text('Ok'),
@@ -144,7 +146,7 @@ class _YubikeyDemoPageState extends State<YubikeyDemoPage> {
                                     builder: (context) => AlertDialog(
                                           title: const Text('Erreur'),
                                           content: const Text(
-                                              "L'otp n'a pas été validé! La gestion d'erreur n'est pas encore faite!"),
+                                              "L'otp n'a pas été validé!"),
                                           actions: [
                                             TextButton(
                                               child: const Text('Ok'),
@@ -185,12 +187,15 @@ class _YubikeyDemoPageState extends State<YubikeyDemoPage> {
     }
   }
   Future<void> validateNfc() async {
-    var rep = await YubiValidator.validadeNfcTag(otp);
-    valid = rep;
+    if(context.read<Account>().findYubikey(otp)){
+       var rep = await YubiValidator.validadeNfcTag(otp);
+       valid = rep;
+    }
   }
   Future<void> validate() async {
-    var rep = await YubiValidator.validadeOtp(otp);
-    valid = rep;
-    print("a");
+    if(context.read<Account>().findYubikey(otp)){
+      var rep = await YubiValidator.validadeOtp(otp);
+      valid = rep;
+    }
   }
 }

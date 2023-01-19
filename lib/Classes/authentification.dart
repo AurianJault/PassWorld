@@ -122,6 +122,14 @@ class Authentification {
       print("Problem request status code is ${requestResponse.statusCode}");
       return false;
     }
+    // to create file.txt
+    Account newAccount = Account(mail, password);
+    var config = Config();
+    await config.setAppDirPath();
+    List<Account> listAccount = List.empty(growable: true);
+    listAccount.add(newAccount);
+    ecriture(listAccount, p.join(config.appDirPath.path, accountFile));
+
     return true;
   }
 }

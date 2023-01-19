@@ -30,7 +30,7 @@ showShare(BuildContext context) async {
                 Directory? init = await getDownloadsDirectory();
                 String? output = await FilePicker.platform.saveFile(
                     dialogTitle: 'Please select an output file',
-                    fileName: 'passworld.pdf',
+                    fileName: 'passworld_encryption_key.txt',
                     initialDirectory: (init)!.path);
                 if (output != null) {
                   File(output).writeAsStringSync(

@@ -44,19 +44,34 @@ Future<void> testPasswordUpdate() async {
   print(req.body);
 }
 
-Future<Null> testFileUpload() async {
+Future<void> testFileUpload() async {
   print("Testing File Upload...");
-  File file = await File("/home/hel/Medias/Pictures/Wallpapers/vaporwave.png");
-  var req = await ClientAPI.uploadFile("remrem@gmail.com", "password123", file);
+  File file = await File("/home/hel/.passworld/remrem@gmail.com.sqlite");
+  var req = await ClientAPI.uploadFile("test@gmail.com", "testtesthash", file);
   print(req.statusCode);
-  return null;
+}
+
+Future<void> testFileDownload() async {
+  print("Testing File Download...");
+  var req = await ClientAPI.downloadFile("test@gmail.com", "testtesthash");
+  print(req.statusCode);
+  print(req.body);
+  var res = req.body;
+  var fileAsString = req.body.substring(1, res.length - 1);
+  List<int> file =
+      req.body.substring(1, res.length - 1).split(",").map(int.parse).toList();
+
+  File f = File("./passFile");
+  f.writeAsBytes(file);
 }
 
 void main() async {
   //await testAccountCreation();
-  await testSalt();
+  //await testSalt();
   //await testAccountDeletion();
   //await testMailUpdate();
   //await testPasswordUpdate();
+  //await testFileUpload();
+  await testFileDownload();
   return;
 }

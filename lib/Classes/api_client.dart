@@ -7,7 +7,7 @@ class ClientAPI {
   // static String base =
   //     'https://codefirst.iut.uca.fr/containers/PassWorld-passworld-api';
 
-  static String base = 'http://192.168.1.64:8080';
+  static String base = 'http://192.168.1.88:8989';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);
@@ -92,20 +92,36 @@ class ClientAPI {
     return response;
   }
 
-  static Future<StreamedResponse> uploadFile(
+  static Future<Response> uploadFile(
       String mail, String password, File passwordFile) async {
-    Stream<List<int>> streamFile = passwordFile.openRead();
+    List<int> fileBytes = await passwordFile.readAsBytes();
+    String bytesList = "";
+    for (int i in fileBytes) {
+      bytesList += i.toString();
+      bytesList += ",";
+    }
     Uri url = Uri.parse("$base/user/password-file");
+    String body = """
+    {
+      "email" : "$mail",
+      "password" : "$password",
+      "file" : "$bytesList"
+    }
+    """;
+    var response = await http.post(url, body: body);
+    if (response.statusCode == 200) print("File Uploaded");
+    return response;
+  }
+
+  static Future<Response> downloadFile(String mail, String password) async {
+    Uri url = Uri.parse("$base/user/password-file-download");
     String body = """
     {
       "email" : "$mail",
       "password" : "$password"
     }
     """;
-    var request = http.MultipartRequest('POST', url);
-    var requestFile = http.MultipartFile(body, streamFile, 4814386);
-    request.files.add(requestFile);
-    var response = await request.send();
+    var response = await http.post(url, body: body);
     if (response.statusCode == 200) print("File Uploaded");
     return response;
   }

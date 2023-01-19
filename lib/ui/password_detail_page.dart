@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:test/ui/edit_password_page.dart';
 import 'package:test/ui/home_page.dart';
+import 'package:test/ui/nav_bar.dart';
 
 import '../Classes/account.dart';
 import '../Classes/config.dart';
@@ -365,7 +366,7 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                                                     context,
                                                     MaterialPageRoute<dynamic>(
                                                         builder: (context) =>
-                                                            HomePage()))
+                                                            NavBar()))
                                                 .then((_) => setState(() {}));
                                           },
                                         ),

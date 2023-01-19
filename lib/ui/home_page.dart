@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   PageTitleW(
-                      title: LanguageTranslation.of(context)!.text(
-                          /*"Caca"*/ context.read<Account>().hash.base64)),
+                      title:
+                          LanguageTranslation.of(context)!.text("home_title")),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    context.read<Config>().setAppDirPath();
   }
 
   @override
@@ -147,13 +148,15 @@ class _LoginPageState extends State<LoginPage> {
                           (passwordController.text).trim(),
                           keyController.text)) {
                         context.read<Account>().setId =
-                            (emailController.text).trim();
+                            await Authentification.getUser();
                         await context.read<Config>().setAppDirPath();
-                        context.read<Account>().changeMasterPassword(
-                            context.read<Config>().appDirPath.path);
                         context
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);
+                        context.read<Account>().changeMasterPassword(
+                            context.read<Config>().appDirPath.path);
+                        print(
+                            context.read<Account>().vault.passwordList.length);
 
                         // context
                         //     .read<Account>()

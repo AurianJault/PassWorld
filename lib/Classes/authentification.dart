@@ -49,7 +49,9 @@ class Authentification {
         var iv = await Storage.getIV(it.current.id);
         var encrypter = Encrypter(AES(await Storage.getKey(it.current.id)));
         var hash = encrypter.decrypt(it.current.hash, iv: iv);
-        return BCrypt.checkpw(mdp, hash);
+        bool res = BCrypt.checkpw(mdp, hash);
+        var data = await ClientAPI.downloadFile(login, it.current.hash.base64);
+        ClientAPI.handleDownload(data, cp.appDirPath.path, login);
       }
     }
     return false;
@@ -106,6 +108,9 @@ class Authentification {
     Key key = encrypt.Key.fromBase64(keyArray[0]);
     IV iv = encrypt.IV.fromBase64(keyArray[1]);
     var encrypter = encrypt.Encrypter(AES(key));
+
+    var cp = Config();
+    await cp.setAppDirPath();
 
     // Récupere le salt
     var response = await ClientAPI.getSalt(mail);

@@ -5,6 +5,7 @@ import 'package:test/Classes/Exception/storageException.dart';
 import 'package:test/Classes/account.dart';
 import 'package:test/Classes/accountManager.dart';
 import 'package:test/Classes/authentification.dart';
+import 'package:test/Classes/biometric/biometric.dart';
 import 'package:test/Classes/cle.dart';
 import 'package:test/ui/demo/demo_yubikey_page.dart';
 import 'package:test/Classes/conflict_manager.dart';
@@ -115,24 +116,43 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12)),
                   child: InkWell(
                     onTap: () async {
-                                            if (await Authentification.authentification(
+                      if (AccountManager.getAuthMethod(
+                              context.read<Account>()) ==
+                          'biometric_only') {
+                        Biometric bio = Biometric();
+                        if (await bio.deviceSupport()) {
+                          if (await bio.authentification()) {
+                            context.read<Account>().setId =
+                                (emailController.text);
+                            await context.read<Config>().setAppDirPath();
+                            context.read<Account>().fillVault(
+                                context.read<Config>().appDirPath.path,
+                                context);
+                          }
+                        }
+                      }
+                      if (await Authentification.authentification(
                           (emailController.text).trim(),
                           (passwordController.text).trim())) {
                         context.read<Account>().setId = (emailController.text);
                         await context.read<Config>().setAppDirPath();
                         context.read<Account>().fillVault(
                             context.read<Config>().appDirPath.path, context);
-                            if(AccountManager.getAuthMethod(context.read<Account>()) == 'twoFA_with_yubikey'){
-                              Navigator.push(context, 
-                              MaterialPageRoute(
-                                builder: (context) => const YubikeyDemoPage(),
-                            ),);
-                            } else {
-                               Navigator.push(
-                                context,
-                                MaterialPageRoute<dynamic>(
-                                    builder: (context) => const NavBar()));
-                            }
+                        if (AccountManager.getAuthMethod(
+                                context.read<Account>()) ==
+                            'twoFA_with_yubikey') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const YubikeyDemoPage(),
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                  builder: (context) => const NavBar()));
+                        }
                       } else {
                         showDialog(
                             context: context,
@@ -162,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 30),
-                        
+
               // Register
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

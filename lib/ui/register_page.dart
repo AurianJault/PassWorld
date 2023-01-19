@@ -104,17 +104,15 @@ class _RegisterPage extends State<RegisterPage> {
                     child: InkWell(
                         onTap: () async {
                           try {
-                            if (await Authentification.register(
-                                (emailController.text).trim(),
-                                (passwordController.text).trim())) {
-                              Navigator.pop(context);
-                            } else {
+                            if (!RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch((emailController.text).trim())) {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
                                         title: const Text('Erreur'),
                                         content: const Text(
-                                            "Le nom d'utilisateur existe déjà !!"),
+                                            "veuillez entrer une adresse e-mail valide"),
                                         actions: [
                                           TextButton(
                                             child: const Text('Ok'),
@@ -123,6 +121,27 @@ class _RegisterPage extends State<RegisterPage> {
                                           )
                                         ],
                                       ));
+                            } else {
+                              if (await Authentification.register(
+                                  (emailController.text).trim(),
+                                  (passwordController.text).trim())) {
+                                Navigator.pop(context);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: const Text('Erreur'),
+                                          content: const Text(
+                                              "Le nom d'utilisateur existe déjà !!"),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('Ok'),
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                            )
+                                          ],
+                                        ));
+                              }
                             }
                           } on StorageException catch (e) {
                             showAlertDialog(context, e.message);

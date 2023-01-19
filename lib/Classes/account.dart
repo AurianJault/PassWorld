@@ -19,8 +19,8 @@ class Account with ChangeNotifier {
     _masterPassword = Chiffrement(mdp, id);
     _secondFactors = List.empty(growable: true);
     authMethod = {
-      "conventional": true,
-      "yubikey_only": false,
+      "conventional": false,
+      "yubikey_only": true,
       "twoFA_with_yubikey": false,
       "twoFA_with_biometric": false,
       "biometric_only": false
@@ -32,8 +32,8 @@ class Account with ChangeNotifier {
     _masterPassword = Chiffrement('null', _id);
     _secondFactors = List.empty(growable: true);
     authMethod = {
-      "conventional": true,
-      "yubikey_only": false,
+      "conventional": false,
+      "yubikey_only": true,
       "twoFA_with_yubikey": false,
       "twoFA_with_biometric": false,
       "biometric_only": false
@@ -51,6 +51,7 @@ class Account with ChangeNotifier {
     PassFile base = PassFile(_id, appDirPath);
     _vault = base.loadPasswords();
     _secondFactors = base.loadSecondFactors();
+    authMethod = base.loadAuth();
   }
 
   void saveFile(String appDirPath) {
@@ -58,6 +59,7 @@ class Account with ChangeNotifier {
     // Check File ?
     base.savePasswords(_vault);
     base.saveSecondFactors(secondFactors);
+    base.saveMethodesAuth(authMethod);
   }
 
   void changeMasterPassword(String mdp) {

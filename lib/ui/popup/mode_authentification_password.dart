@@ -25,6 +25,7 @@ showAuthentificationPassword(BuildContext context) {
                   builder: (context) =>
                       const SettingAuthentificationMethodSelectorPage()));
         } else {
+          
           Navigator.pop(context);
           showAlertDialog(context, "Le mot de passe est incorrecte");
         }

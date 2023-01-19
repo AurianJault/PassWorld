@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/accountManager.dart';
 
+import '../../Classes/account.dart';
+import '../../Classes/config.dart';
 import '../../Classes/localization/translation.dart';
 import '../widget/page_title_widget.dart';
 import '../widget/settingwidget/authentification_selector.dart';
@@ -27,37 +32,207 @@ class _SettingAuthentificationMethodSelectorPage
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             PageTitleW(
                 title: LanguageTranslation.of(context)!
-                    .text('authentification_setting_page_title')),
+                .text('authentification_setting_page_title')),
+                // ignore: prefer_interpolation_to_compose_strings
+                Text('Your current mehtod is: ' + AccountManager.getAuthMethod(context.read<Account>())),
             SizedBox(
               height: h * 0.05,
             ),
-            AuthentificationSelector(
+            InkWell(
+              onTap: () async {
+                context.read<Account>().authMethod = AccountManager.chooseAuthentificationMethod(context.read<Account>(), 1);
+                var path = Config();
+                await path.setAppDirPath();
+                context.read<Account>().saveFile(path.appDirPath.path);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text("Update"),
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 16),
+                              Text("New method is now: " + AccountManager.getAuthMethod(context.read<Account>())),
+                              const SizedBox(height: 16),
+                              CupertinoButton(
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                            )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+              },
+              child: AuthentificationSelector(
                 title: "Mot de passe",
                 icon: const IconData(0xe47a, fontFamily: 'MaterialIcons')),
+            ),
             SizedBox(
               height: h * 0.03,
             ),
-            AuthentificationSelector(
+
+            InkWell(
+              onTap: () async {
+                context.read<Account>().authMethod = AccountManager.chooseAuthentificationMethod(context.read<Account>(), 5);
+                var path = Config();
+                await path.setAppDirPath();
+                context.read<Account>().saveFile(path.appDirPath.path);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text("Update"),
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 16),
+                              Text("New method is now: " + AccountManager.getAuthMethod(context.read<Account>())),
+                              const SizedBox(height: 16),
+                              CupertinoButton(
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                            )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+              },
+            child: AuthentificationSelector(
                 title: "Biométrie",
                 icon: const IconData(0xf075, fontFamily: 'MaterialIcons')),
+            ),
             SizedBox(
               height: h * 0.03,
             ),
-            AuthentificationSelector(
+            
+            InkWell(
+              onTap: () async {
+                context.read<Account>().authMethod = AccountManager.chooseAuthentificationMethod(context.read<Account>(), 2);
+                var path = Config();
+                await path.setAppDirPath();
+                context.read<Account>().saveFile(path.appDirPath.path);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text("Update"),
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 16),
+                              Text("New method is now: " + AccountManager.getAuthMethod(context.read<Account>())),
+                              const SizedBox(height: 16),
+                              CupertinoButton(
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                            )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+              },
+            child: AuthentificationSelector(
                 title: "Yubikey",
                 icon: const IconData(0xe42b, fontFamily: 'MaterialIcons')),
+              ),
             SizedBox(
               height: h * 0.03,
             ),
-            AuthentificationSelector(
+            
+            InkWell(
+              onTap: () async {
+                context.read<Account>().authMethod = AccountManager.chooseAuthentificationMethod(context.read<Account>(), 4);
+                var path = Config();
+                await path.setAppDirPath();
+                context.read<Account>().saveFile(path.appDirPath.path);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text("Update"),
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 16),
+                              Text("New method is now: " + AccountManager.getAuthMethod(context.read<Account>())),
+                              const SizedBox(height: 16),
+                              CupertinoButton(
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                            )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+              },
+            child: AuthentificationSelector(
                 title: "2FA - Mot de passe/Biométrie",
-                icon: const IconData(0xe47a, fontFamily: 'MaterialIcons')),
+                icon: const IconData(0xe47a, fontFamily: 'MaterialIcons')),),
             SizedBox(
               height: h * 0.03,
             ),
-            AuthentificationSelector(
+            InkWell(
+              onTap: () async {
+                context.read<Account>().authMethod = AccountManager.chooseAuthentificationMethod(context.read<Account>(), 3);
+                var path = Config();
+                await path.setAppDirPath();
+                context.read<Account>().saveFile(path.appDirPath.path);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return SimpleDialog(
+                      title: const Text("Update"),
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 16),
+                              Text("New method is now: " + AccountManager.getAuthMethod(context.read<Account>())),
+                              const SizedBox(height: 16),
+                              CupertinoButton(
+                              child: const Text("Ok"),
+                              onPressed: () {
+                                  Navigator.pop(context);
+                              },
+                            )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  });
+                },
+              child: AuthentificationSelector(
                 title: "2FA - Mot de passe/Yubikey",
                 icon: const IconData(0xe47a, fontFamily: 'MaterialIcons')),
+            ),
+            
             SizedBox(
               height: h * 0.03,
             ),

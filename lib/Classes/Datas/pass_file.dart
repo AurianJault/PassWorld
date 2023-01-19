@@ -39,10 +39,10 @@ class PassFile extends IDataStrategy {
 
      db.execute('''
         CREATE TABLE IF NOT EXISTS Authentification(
-          conventional INTEGER
-          yubikey_only INTEGER
-          twoFA_with_yubikey INTEGER
-          twoFA_with_biometric INTEGER
+          conventional INTEGER,
+          yubikey_only INTEGER,
+          twoFA_with_yubikey INTEGER,
+          twoFA_with_biometric INTEGER,
           biometric_only INTEGER
         );
      ''');
@@ -190,7 +190,6 @@ class PassFile extends IDataStrategy {
         authMethod['biometric_only'] = true;
       }
     }
-
     return authMethod;
   }
   
@@ -203,43 +202,35 @@ class PassFile extends IDataStrategy {
     int twoFA_with_biometric = 0;
     int biometric_only = 0;
 
-    authMethod.forEach((key, value) {
-      if(key == "conventional"){
-        if(value == true){
-          conv = 1;
-        } else {
-          conv = 0;
-        }
-      }
-      if(key == "yubikey_only"){
-        if(value == true){
-          yubikey_only = 1;
-        } else {
-          yubikey_only = 0;
-        }
-      }
-      if(key == "twoFA_with_yubikey"){
-        if(value == true){
-          twoFA_with_yubikey = 1;
-        } else {
-          twoFA_with_yubikey = 0;
-        }
-      }
-      if(key == "twoFA_with_biometric"){
-        if(value == true){
-          twoFA_with_biometric = 1;
-        } else {
-          twoFA_with_biometric = 0;
-        }
-      }
-      if(key == "biometric_only"){
-        if(value == true){
-          biometric_only = 1;
-        } else {
-          biometric_only = 0;
-        }
-      }
-    });
+    if(authMethod['conventional'] == true){
+        conv = 1;
+    } else {
+      conv = 0;
+    }
+
+    if(authMethod['yubikey_only'] == true){
+        yubikey_only = 1;
+    } else {
+      yubikey_only = 0;
+    }
+
+    if(authMethod['twoFA_with_yubikey'] == true){
+        twoFA_with_yubikey = 1;
+    } else {
+      twoFA_with_yubikey = 0;
+    }
+
+    if(authMethod['twoFA_with_biometric'] == true){
+        twoFA_with_biometric = 1;
+    } else {
+      twoFA_with_biometric = 0;
+    }
+
+    if(authMethod['biometric_only'] == true){
+        biometric_only = 1;
+    } else {
+      biometric_only = 0;
+    }  
     insertValueA(
       conv, 
       yubikey_only, 
@@ -257,9 +248,9 @@ class PassFile extends IDataStrategy {
     db.execute("INSERT INTO Authentification VALUES (?,?,?,?,?)", [
       conv,
       yubikey_only,
-      biometric_only,
       twoFA_with_yubikey,
-      twoFA_with_biometric
+      twoFA_with_biometric,
+      biometric_only
     ]);
   }
 }

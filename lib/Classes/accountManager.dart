@@ -26,33 +26,49 @@ class AccountManager {
     a.secondFactors.remove(y);
   }
 
-  static void chooseAuthentificationMethod(Account a, int i) {
+  static Map<String, bool> chooseAuthentificationMethod(Account a, int i) {
     switch (i) {
       case 1:
-        switch_auth_method(a.authMethod, "conventional");
+        a.authMethod.forEach((key, value) {
+          a.authMethod[key] = false;
+        });
+        a.authMethod['conventional'] = true;
         break;
       case 2:
-        switch_auth_method(a.authMethod, "yubikey_only");
+        a.authMethod.forEach((key, value) {
+          a.authMethod[key] = false;
+        });
+        a.authMethod['yubikey_only'] = true;
         break;
       case 3:
-        switch_auth_method(a.authMethod, "twoFA_with_yubikey");
+        a.authMethod.forEach((key, value) {
+          a.authMethod[key] = false;
+        });
+        a.authMethod['twoFA_with_yubikey'] = true;
         break;
       case 4:
-        switch_auth_method(a.authMethod, "twoFA_with_biometric");
+        a.authMethod.forEach((key, value) {
+          a.authMethod[key] = false;
+        });
+        a.authMethod['twoFA_with_biometric'] = true;
         break;
       case 5:
-        switch_auth_method(a.authMethod, "biometric_only");
+        a.authMethod.forEach((key, value) {
+          a.authMethod[key] = false;
+        });
+        a.authMethod['biometric_only'] = true;
         break;
     }
+    return a.authMethod;
   }
 
-  static void switch_auth_method(Map<String, bool> m, String method) {
-    m.forEach((key, value) {
-      if (key == method) {
-        value = true;
-      } else {
-        value = false;
+  static getAuthMethod(Account a){
+    String res = '';
+    a.authMethod.forEach((key, value) {
+      if(a.authMethod[key] == true) {
+        res = key;
       }
     });
+    return res;
   }
 }

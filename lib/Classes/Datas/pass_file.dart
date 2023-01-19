@@ -94,8 +94,8 @@ class PassFile extends IDataStrategy {
     for (var element in secondFactors) {
       if(element is Yubikey) {
         insertValueY(
-        element.id,
         element.nom,
+        element.id,
         element.staticPassword,
         );
       }

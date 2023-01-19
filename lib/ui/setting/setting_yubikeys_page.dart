@@ -5,7 +5,6 @@ import 'package:test/ui/setting/setting_resgister_yubikey_page.dart';
 import 'package:test/ui/widget/2fa_widget.dart';
 import '../../Classes/account.dart';
 
-
 class SettingYubikeyPage extends StatefulWidget {
   const SettingYubikeyPage({Key? key}) : super(key: key);
 
@@ -67,7 +66,7 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                   }),
                 ),
               ),
-             ),
+            ),
             ),
             Padding(
               padding: EdgeInsets.only(top: h * 0.02),

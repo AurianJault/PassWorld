@@ -38,6 +38,12 @@
     "generator_characters" : "Characteres",
     "generator_not_include" : "Do not include",
     "generator_not_include_hint" : "Type characters you don't want",
-    "generator_info" : "The characters are divided into 5 buttons: \n- Lowercase alphabet \n- Uppercase alphabet \n- Numbers \n- The basic characters ( ) \n- Special characters ( ) "
+    "generator_info" : "The characters are divided into 5 buttons: \n- Lowercase alphabet \n- Uppercase alphabet \n- Numbers \n- The basic characters ( ) \n- Special characters ( ) ",
 
+    "health_care" : "Health",
+    "subtitle" : "We are taking care of your passwords",
+    "critical_passwords" : "Critical password(s) strenght",
+    "medium_passwords" : "Medium password(s) strenght",
+    "reused_passwords" : "Reused password(s)",
+    "old_passwords" : "Too old password(s)"
 }

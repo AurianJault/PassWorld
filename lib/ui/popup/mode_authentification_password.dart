@@ -4,6 +4,7 @@ import '../../Classes/account.dart';
 import '../popup/popupError.dart';
 import '../../Classes/authentification.dart';
 import 'mode_authentification.dart';
+import '../setting/mode_authentification_selector.dart';
 
 showAuthentificationPassword(BuildContext context) {
   var passwordController = TextEditingController();
@@ -18,7 +19,11 @@ showAuthentificationPassword(BuildContext context) {
         if (await Authentification.authentification(
             context.read<Account>().id, (passwordController.text).trim())) {
           Navigator.pop(context);
-          showAuthentificationSelector(context);
+          Navigator.push(
+              context,
+              MaterialPageRoute<dynamic>(
+                  builder: (context) =>
+                      const SettingAuthentificationMethodSelectorPage()));
         } else {
           Navigator.pop(context);
           showAlertDialog(context, "Le mot de passe est incorrecte");

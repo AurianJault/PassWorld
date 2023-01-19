@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test/Classes/account.dart';
+import 'package:test/Classes/accountManager.dart';
+import 'package:test/Classes/config.dart';
+import 'package:test/Classes/vault.dart';
 import 'package:test/ui/setting/setting_account_page.dart';
 import 'package:test/ui/login_page.dart';
 import 'package:test/ui/setting/setting_key_page.dart';
 import 'package:test/ui/setting/setting_theme_page.dart';
 import 'package:test/ui/widget/page_title_widget.dart';
 import 'package:test/ui/widget/settingwidget/setting_button.dart';
+
+import 'dart:io' as io;
+import 'package:path/path.dart' as p;
 
 import '../Classes/localization/translation.dart';
 
@@ -114,6 +122,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       borderRadius: BorderRadius.circular(w * 0.01)),
                   child: InkWell(
                       onTap: () {
+                        var path = context.read<Config>().appDirPath.path;
+                        var fichier1 = io.File(p.join(
+                            path, "${context.read<Account>().id}.sqlite"));
+                        var ficheir2 = io.File(p.join(path, "file.txt"));
+                        fichier1.delete();
+                        ficheir2.delete();
+
+                        context.read<Account>().setVault = Vault();
                         Navigator.push(
                             context,
                             MaterialPageRoute<dynamic>(

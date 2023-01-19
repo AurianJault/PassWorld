@@ -266,6 +266,7 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
                 
               // height should be fixed for vertical scrolling
               height: 150.0,
+              width: w,
               decoration: BoxDecoration(
                   
                 border: Border.all(
@@ -276,7 +277,6 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
               // SingleChildScrollView should be
               // wrapped in an Expanded Widget
               child: Expanded(
-                  
               // SingleChildScrollView contains a
               // single child which is scrollable
               child: SingleChildScrollView(

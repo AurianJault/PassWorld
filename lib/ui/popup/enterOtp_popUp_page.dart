@@ -64,13 +64,45 @@ void registerYubikey(){
                     );
                   } else {
                     //AccountManager.addYubikey(currentUser, name, otpCtrl.text.substring(0,12));
-                    // if(!await YubiValidator.validadeOtp(otpCtrl.text)){
-                    //   // error : Yubikey not valid
-                    // } 
-                    // if(AccountManager.isNewYubikey(context.read<Account>(),otpCtrl.text.substring(0,12))){
-                    //     // error: Already exists
-                    // }
-                    context.read<Account>().secondFactors.add(Yubikey(name, otpCtrl.text.substring(0,12),""));
+                    if(!await YubiValidator.validadeOtp(otpCtrl.text)){
+                        showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Error"),
+                            content: const Text("Otp was poorly inserted or yubikey is not valid"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("Ok"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else 
+                    if(!AccountManager.isNewYubikey(context.read<Account>(),otpCtrl.text.substring(0,12))){
+                        showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("Error"),
+                            content: const Text("This yubikey was already registered"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text("Ok"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      context.read<Account>().secondFactors.add(Yubikey(name, otpCtrl.text.substring(0,12),""));
                         var path = Config();
                         await path.setAppDirPath();
                         context.read<Account>().saveFile(path.appDirPath.path);
@@ -80,8 +112,8 @@ void registerYubikey(){
                         Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute<dynamic>(
                                     builder: (context) => const SettingYubikeyPage()));
+                      }
                     }
-                    
               },
             ),
               CupertinoButton(

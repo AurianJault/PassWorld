@@ -87,6 +87,10 @@ class Account with ChangeNotifier {
     _id = s;
   }
 
+  set setVault(Vault vault) {
+    _vault = vault;
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

@@ -19,7 +19,6 @@ class Config extends ChangeNotifier {
           "${Platform.environment['HOME'].toString()}/.passworld/");
       await setDirectory();
     } else {
-      // appDirPath = io.Directory("/data/user/0");
       appDirPath = await getApplicationDocumentsDirectory();
       await setDirectory();
     }

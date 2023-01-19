@@ -18,6 +18,12 @@ class PassFile extends IDataStrategy {
     db = sqlite3.open(path);
   }
 
+  void encrypt(String )
+  {
+
+  }
+
+
   void initPass() {
     db.execute('''
       CREATE TABLE IF NOT EXISTS Passwords(

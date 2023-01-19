@@ -61,6 +61,29 @@ class _SettingAuthentificationMethodSelectorPage
             SizedBox(
               height: h * 0.03,
             ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                  width: w * 0.2,
+                  height: h * 0.06,
+                  decoration: BoxDecoration(
+                      color: Colors.red[400],
+                      borderRadius: BorderRadius.circular(w * 0.04)),
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: w * 0.03, vertical: h * 0.01),
+                      child: Center(
+                        child: Text(
+                          'Back',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: w * 0.04),
+                        ),
+                      ))),
+            )
           ]),
         ),
       ),

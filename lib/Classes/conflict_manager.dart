@@ -6,13 +6,14 @@ import 'Datas/i_data_strategy.dart';
 import 'Datas/pass_file.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:io' as io;
+import 'package:path/path.dart' as p;
 
 class ConflictManager {
   static Future<Vault> manager(
       BuildContext context, String id, String path) async {
-    if (await Connectivity().checkConnectivity() == ConnectivityResult.none || !await io.File("$path$id.sqlite.down").exists()) {
+    if (await Connectivity().checkConnectivity() == ConnectivityResult.none || !await io.File(p.join(path,"${id}.sqlite.down")).exists()) {
       //adding when there is no file in db
-      if (!await io.File("$path$id.sqlite").exists()) {
+      if (!await io.File(p.join(path,"${id}.sqlite")).exists()) {
         // no db file and no local file
         return Vault();
       } else {
@@ -22,8 +23,8 @@ class ConflictManager {
     } else {
       Vault downVault = await loadDown(id, path);
 
-      if (!await io.File("$path$id.sqlite").exists()) {
-        File("$path$id.sqlite.down").rename(path + id);
+      if (!await io.File(p.join(path,"${id}.sqlite.down")).exists()) {
+        File(p.join(path,"${id}.sqlite.down")).rename(path + id);
         return downVault;
       } else {
         bool found = false;
@@ -73,7 +74,7 @@ class ConflictManager {
           finalVault.addPassword(sav);
         }
 
-        await io.File("$path$id.sqlite.down").delete();
+        await io.File(p.join(path,"${id}.sqlite.down")).delete();
         return finalVault;
       }
     }

@@ -123,13 +123,19 @@ class Authentification {
       return false;
     }
     // to create file.txt
-    Account newAccount = Account(mail, password);
+    Account newAccount =
+        Account.old(mail, salt, Encrypted.fromBase64(encryptedPassword));
     var config = Config();
     await config.setAppDirPath();
     List<Account> listAccount = List.empty(growable: true);
     listAccount.add(newAccount);
     ecriture(listAccount, p.join(config.appDirPath.path, accountFile));
 
+    Storage.storing(key, iv, mail);
+
+    //Download passfile
+    var data = await ClientAPI.downloadFile(mail, encryptedPassword);
+    ClientAPI.handleDownload(data, config.appDirPath.path, mail);
     return true;
   }
 }

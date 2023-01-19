@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:path/path.dart' as p;
 
 class ClientAPI {
   // Base URL of API
   // static String base =
   //     'https://codefirst.iut.uca.fr/containers/PassWorld-passworld-api';
 
-  static String base = 'http://192.168.1.88:8989';
+  static String base = 'http://172.27.171.157:8989';
 
   static Future<Response> root() async {
     Uri url = Uri.parse(base);
@@ -109,7 +110,7 @@ class ClientAPI {
     }
     """;
     var response = await http.post(url, body: body);
-    if (response.statusCode == 200) print("File Uploaded");
+    if (response.statusCode == 201) print("File Uploaded");
     return response;
   }
 
@@ -122,7 +123,20 @@ class ClientAPI {
     }
     """;
     var response = await http.post(url, body: body);
-    if (response.statusCode == 200) print("File Uploaded");
+    if (response.statusCode == 200) print("Downloaded");
     return response;
+  }
+
+  static void handleDownload(Response res, String path, String mail) {
+    var data = res.body;
+    var fileAsString = res.body.substring(1, data.length - 1);
+    List<int> file = res.body
+        .substring(1, data.length - 1)
+        .split(",")
+        .map(int.parse)
+        .toList();
+
+    File f = File(p.join(path, "${mail}.sqlite"));
+    f.writeAsBytes(file);
   }
 }

@@ -100,6 +100,8 @@ class _ConnectionPageState extends State<ConnectionPage> {
                         context
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);
+                        context.read<Account>().changeMasterPassword(
+                            context.read<Config>().appDirPath.path);
 
                         // context
                         //     .read<Account>()

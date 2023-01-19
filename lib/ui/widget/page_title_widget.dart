@@ -13,6 +13,6 @@ class PageTitleW extends StatelessWidget {
     var w = MediaQuery.of(context).size.width;
     // Widget
     return Text(title,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: w * 0.09));
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: w * 0.015));
   }
 }

@@ -1,5 +1,8 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:test/Classes/account.dart';
+import 'package:test/Classes/authentification.dart';
+import 'config.dart';
 import 'storage.dart';
 
 class Chiffrement {
@@ -25,6 +28,15 @@ class Chiffrement {
   Chiffrement.old(encrypt.Encrypted salty, encrypt.Encrypted hashy) {
     salt = salty;
     hash = hashy;
+    //Storage.storing(key, iv, id);
+  }
+
+  Chiffrement.last(String path) {
+    List<Account> listAccount = Authentification.allUser(path);
+    for (Account account in listAccount) {
+      salt = account.salt;
+      hash = account.hash;
+    }
   }
 
   @override

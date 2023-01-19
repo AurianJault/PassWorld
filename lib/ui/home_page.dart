@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   PageTitleW(
-                      title:
-                          LanguageTranslation.of(context)!.text('home_title')),
+                      title: LanguageTranslation.of(context)!.text(
+                          /*"Caca"*/ context.read<Account>().hash.base64)),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -128,7 +128,6 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, index) {
                           return PasswordWidget(
                               password: account.vault.access(index));
-
                         });
                   }),
                 ),

@@ -56,6 +56,9 @@ Future<void> testFileDownload() async {
   var req = await ClientAPI.downloadFile("test@gmail.com", "testtesthash");
   print(req.statusCode);
   print(req.body);
+  if (req.statusCode != 200) {
+    return;
+  }
   var res = req.body;
   var fileAsString = req.body.substring(1, res.length - 1);
   List<int> file =
@@ -71,7 +74,7 @@ void main() async {
   //await testAccountDeletion();
   //await testMailUpdate();
   //await testPasswordUpdate();
-  //await testFileUpload();
+  await testFileUpload();
   await testFileDownload();
   return;
 }

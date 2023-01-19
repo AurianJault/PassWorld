@@ -31,8 +31,7 @@ class Chiffrement {
     //Storage.storing(key, iv, id);
   }
 
-  Chiffrement.last(String path) {
-    List<Account> listAccount = Authentification.allUser(path);
+  Chiffrement.last(String path, List<Account> listAccount) {
     for (Account account in listAccount) {
       salt = account.salt;
       hash = account.hash;

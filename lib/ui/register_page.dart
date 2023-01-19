@@ -118,7 +118,9 @@ class _RegisterPage extends State<RegisterPage> {
                               context.read<Account>().fillVault(
                                   context.read<Config>().appDirPath.path);
                               context.read<Account>().changeMasterPassword(
-                                  context.read<Config>().appDirPath.path);
+                                  context.read<Config>().appDirPath.path,
+                                  await Authentification.allUser(
+                                      context.read<Config>().appDirPath.path));
                               Navigator.push(
                                   context,
                                   MaterialPageRoute<dynamic>(

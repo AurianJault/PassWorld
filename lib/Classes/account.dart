@@ -45,8 +45,8 @@ class Account with ChangeNotifier {
     //fillVault(); // Maybe uncomment // TODO
   }
 
-  Account.last(String id, String mdp) : _id = id {
-    _masterPassword = Chiffrement.last("haha");
+  Account.last(String id, String mdp, List<Account> listAccount) : _id = id {
+    _masterPassword = Chiffrement.last("haha", listAccount);
     _secondFactors = List.empty(growable: true);
     authMethod = {
       "conventional": true,
@@ -68,8 +68,8 @@ class Account with ChangeNotifier {
         _id, _masterPassword.hash.base64, File("${appDirPath + _id}.sqlite"));
   }
 
-  void changeMasterPassword(String path) {
-    _masterPassword = Chiffrement.last(path);
+  void changeMasterPassword(String path, List<Account> listAccount) {
+    _masterPassword = Chiffrement.last(path, listAccount);
   }
 
   // Getter

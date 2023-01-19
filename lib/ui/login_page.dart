@@ -154,7 +154,9 @@ class _LoginPageState extends State<LoginPage> {
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);
                         context.read<Account>().changeMasterPassword(
-                            context.read<Config>().appDirPath.path);
+                            context.read<Config>().appDirPath.path,
+                            await Authentification.allUser(
+                                context.read<Config>().appDirPath.path));
                         print(
                             context.read<Account>().vault.passwordList.length);
 

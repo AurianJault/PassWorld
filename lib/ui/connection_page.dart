@@ -36,9 +36,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Account> users = Authentification.allUser(
-        context.read<Config>().appDirPath.path); // TODO c'est de la merde
-
     var size = MediaQuery.of(context).size;
     double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
     double h = size.height;
@@ -101,7 +98,9 @@ class _ConnectionPageState extends State<ConnectionPage> {
                             .read<Account>()
                             .fillVault(context.read<Config>().appDirPath.path);
                         context.read<Account>().changeMasterPassword(
-                            context.read<Config>().appDirPath.path);
+                            context.read<Config>().appDirPath.path,
+                            await Authentification.allUser(
+                                context.read<Config>().appDirPath.path));
 
                         // context
                         //     .read<Account>()

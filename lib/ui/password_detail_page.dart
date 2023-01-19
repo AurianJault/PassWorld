@@ -276,19 +276,12 @@ class _PasswordDetailPage extends State<PasswordDetailPage> {
               ),
               // SingleChildScrollView should be
               // wrapped in an Expanded Widget
-              child: Expanded(
-              // SingleChildScrollView contains a
-              // single child which is scrollable
-              child: SingleChildScrollView(
-              
-              // for Vertical scrolling
-              scrollDirection: Axis.vertical,
-              child: Text(
+              child:Text(
                 notes,
                 style: TextStyle(
                   fontSize: w * 0.05,
                 ),
-              )))),
+              )),
             /*
             Text('Email: ',
                   style: TextStyle(fontWeight: FontWeight.bold,

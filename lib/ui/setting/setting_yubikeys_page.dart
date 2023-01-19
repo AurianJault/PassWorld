@@ -16,29 +16,25 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    double w = size.width; //* MediaQuery.of(context).devicePixelRatio;
-    double h = size.height; // * MediaQuery.of(context).devicePixelRatio;
+    double w = size.width; 
+    double h = size.height; 
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-            child: SingleChildScrollView(
-                child: Column(
+            child: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(25),
-              child: 
-               Flexible(
-               child: Padding(
-                 padding: EdgeInsets.symmetric(horizontal: w * 0.04),
-                 child: ScrollConfiguration(
-                   behavior: ScrollConfiguration.of(context)
-                       .copyWith(scrollbars: false),
-                   child: Consumer<Account>(builder: (context, account, child) {
-                   return ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: account.secondFactors.isEmpty ? 1 : account.secondFactors.length,
-                          itemBuilder: (context, index) {
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: w * 0.04),
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: Consumer<Account>(builder: (context, account, child) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: account.secondFactors.isEmpty ? 1 : account.secondFactors.length,
+                        itemBuilder: (context, index) {
                             if(account.secondFactors.isEmpty){
                               return Center(
                                 child: Column(
@@ -63,10 +59,9 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                               );
                             }
                          });
-                  }),
+                    }),
+                  ),
                 ),
-              ),
-            ),
             ),
             Padding(
               padding: EdgeInsets.only(top: h * 0.02),
@@ -89,38 +84,32 @@ class _SettingYubikeyPage extends State<SettingYubikeyPage> {
                 },
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: h * 0.02),
+              child: CupertinoButton(
+                color: Colors.red[400],
+                borderRadius: BorderRadius.circular(w * 0.04),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text("Back", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
 
             SizedBox(
               height: h * 0.03,
             ),
-            // Back button
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                  width: w * 0.2,
-                  height: h * 0.05,
-                  decoration: BoxDecoration(
-                      color: Colors.red[400],
-                      borderRadius: BorderRadius.circular(w * 0.04)),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: w * 0.03, vertical: h * 0.01),
-                      child: Center(
-                        child: Text(
-                          'Back',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: w * 0.04),
-                        ),
-                      ))),
-            )
-          ]
-        )
-        )
-        )
-        );
+            // Back b...
+          ],
+        )));
   }
 }
+

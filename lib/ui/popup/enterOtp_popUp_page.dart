@@ -15,8 +15,9 @@ class EnterOtpPage extends StatelessWidget {
   final TextEditingController otpCtrl;
   final String name;
   final Account currentUser;
+  final TextEditingController staticPassword;
 
-  EnterOtpPage(this.currentUser,this.otpCtrl, this.name);
+  EnterOtpPage(this.currentUser,this.otpCtrl, this.name, this.staticPassword);
 
 
 void registerYubikey(){
@@ -38,6 +39,12 @@ void registerYubikey(){
                 controller: otpCtrl,
                 decoration: const InputDecoration(
                   hintText: 'Enter OTP',
+                ),
+              ),
+              TextField(
+                controller: staticPassword,
+                decoration: const InputDecoration(
+                  hintText: 'Enter Static Password'
                 ),
               ),
               const SizedBox(height: 10),
@@ -102,7 +109,7 @@ void registerYubikey(){
                         },
                       );
                     } else {
-                      context.read<Account>().secondFactors.add(Yubikey(name, otpCtrl.text.substring(0,12),""));
+                      context.read<Account>().secondFactors.add(Yubikey(name, otpCtrl.text.substring(0,12),staticPassword.text));
                         var path = Config();
                         await path.setAppDirPath();
                         context.read<Account>().saveFile(path.appDirPath.path);

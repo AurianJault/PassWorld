@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test/Classes/account.dart';
@@ -283,7 +284,26 @@ class _SettingAuthentificationPage extends State<SettingAuthentificationPage> {
                 ])),
             SizedBox(
               height: h * 0.05,
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: h * 0.02),
+              child: CupertinoButton(
+                color: Colors.red[400],
+                borderRadius: BorderRadius.circular(w * 0.04),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text("Back", style: TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
           ],
         ))));
   }

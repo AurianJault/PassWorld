@@ -24,6 +24,7 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
   // Controllers for all inputs
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController otpCtrl = TextEditingController();
+  TextEditingController staticPassword = TextEditingController();
 
 
   void showRegistrationPopup(BuildContext context) {
@@ -46,7 +47,7 @@ class _HealthPageState extends State<RegisterYubikeyPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EnterOtpPage(context.read<Account>(), otpCtrl, nameCtrl.text),
+                                builder: (context) => EnterOtpPage(context.read<Account>(), otpCtrl, nameCtrl.text,staticPassword),
                             ),
                         );
                     },

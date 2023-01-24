@@ -46,7 +46,7 @@ Future<void> testPasswordUpdate() async {
 
 Future<void> testFileUpload() async {
   print("Testing File Upload...");
-  File file = await File("/home/hel/.passworld/rem@test.com.sqlite");
+  File file = await File("/home/hel/1_001.png");
   var req = await ClientAPI.uploadFile("remrem@gmail.com", "remremHash", file);
   print(req.statusCode);
 }

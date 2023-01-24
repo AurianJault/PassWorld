@@ -163,7 +163,7 @@ class _HealthPageState extends State<HealthPage> {
               width: w * 0.80,
               child: DropdownButton<Password>(
                 hint:Text(
-                  LanguageTranslation.of(context)!.text('critical_passwords'),
+                  LanguageTranslation.of(context)!.text('old_passwords'),
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,

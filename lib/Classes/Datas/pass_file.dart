@@ -3,6 +3,8 @@ import 'package:test/Classes/password.dart';
 import 'package:test/Classes/Datas/i_data_strategy.dart';
 import 'package:test/Classes/vault.dart';
 import 'package:path/path.dart' as p;
+import 'package:test/Classes/yubikey_related/two_fa.dart';
+import 'package:test/Classes/yubikey_related/yubikey.dart';
 
 class PassFile extends IDataStrategy {
   var db;
@@ -12,12 +14,24 @@ class PassFile extends IDataStrategy {
     db = sqlite3.open(path);
   }
 
+  PassFile.down(String identifiant, String docPath) {
+    String file = "$identifiant.sqlite.down";
+    String path = p.join(docPath, file);
+    db = sqlite3.open(path);
+  }
+
+  void encrypt(String )
+  {
+
+  }
+
+
   void initPass() {
     db.execute('''
       CREATE TABLE IF NOT EXISTS Passwords(
         id INTEGER PRIMARY KEY,
         name TEXT,
-        website TEXT NOT NULL,
+        website TEXT,
         username TEXT,
         email TEXT,
         note TEXT,
@@ -26,6 +40,24 @@ class PassFile extends IDataStrategy {
         modifDate TEXT
       );
     ''');
+
+    db.execute('''
+        CREATE TABLE IF NOT EXISTS Yubikey(
+          id TEXT PRIMARY KEY,
+          name TEXT,
+          staticPassword TEXT
+        );
+     ''');
+
+     db.execute('''
+        CREATE TABLE IF NOT EXISTS Authentification(
+          conventional INTEGER,
+          yubikey_only INTEGER,
+          twoFA_with_yubikey INTEGER,
+          twoFA_with_biometric INTEGER,
+          biometric_only INTEGER
+        );
+     ''');
   }
 
   @override
@@ -53,9 +85,10 @@ class PassFile extends IDataStrategy {
 
   @override
   void savePasswords(Vault passwords) {
+    initPass();
     db.execute("DELETE FROM Passwords");
     for (var element in passwords.passwordList) {
-      insertValue(
+      insertValueP(
           element.getId,
           element.getName,
           element.getWebsite,
@@ -68,7 +101,21 @@ class PassFile extends IDataStrategy {
     }
   }
 
-  void insertValue(
+  @override
+  void saveSecondFactors(List<TwoFA> secondFactors) {
+    db.execute("DELETE FROM Yubikey");
+    for (var element in secondFactors) {
+      if(element is Yubikey) {
+        insertValueY(
+        element.nom,
+        element.id,
+        element.staticPassword,
+        );
+      }
+    }
+  }
+
+  void insertValueP(
       int id,
       String? name,
       String? website,
@@ -88,6 +135,135 @@ class PassFile extends IDataStrategy {
       password,
       creationDate,
       modifDate
+    ]);
+  }
+
+  @override
+  List<TwoFA> loadSecondFactors() {
+    initPass();
+    List<TwoFA> secondFactors = List.empty(growable: true);
+    final ResultSet resultSet = db.select('SELECT * FROM Yubikey');
+    for (final Row row in resultSet) {
+      secondFactors.add(
+        Yubikey( 
+          row['id'].toString(), 
+          row['name'].toString(), 
+          row['staticPassword'].toString())
+      );
+    }
+    return secondFactors;
+  }
+
+    void insertValueY(
+      String? id,
+      String? name,
+      String? sp) {
+    db.execute("INSERT INTO Yubikey VALUES (?,?,?)", [
+      id,
+      name,
+      sp
+    ]);
+  }
+  
+  @override
+  Map<String, bool> loadAuth() {
+    Map<String,bool> authMethod = {
+      "conventional": false,
+      "yubikey_only": false,
+      "twoFA_with_yubikey": false,
+      "twoFA_with_biometric": false,
+      "biometric_only": false
+    };
+
+    final ResultSet resultSet = db.select('SELECT * FROM Authentification');
+    for (final Row row in resultSet) {
+      if(row['conventional'] == 0){
+        authMethod['conventional'] = false;
+      } else {
+        authMethod['conventional'] = true;
+      }
+      if(row['yubikey_only'] == 0){
+        authMethod['yubikey_only'] = false;
+      } else {
+        authMethod['yubikey_only'] = true;
+      }
+      if(row['twoFA_with_yubikey'] == 0){
+        authMethod['twoFA_with_yubikey'] = false;
+      } else {
+        authMethod['twoFA_with_yubikey'] = true;
+      }
+      if(row['twoFA_with_biometric'] == 0){
+        authMethod['twoFA_with_biometric'] = false;
+      } else {
+        authMethod['twoFA_with_biometric'] = true;
+      }
+      if(row['biometric_only'] == 0){
+        authMethod['biometric_only'] = false;
+      } else {
+        authMethod['biometric_only'] = true;
+      }
+    }
+    return authMethod;
+  }
+  
+  @override
+  void saveMethodesAuth(Map<String, bool> authMethod) {
+    db.execute("DELETE FROM Authentification");
+    int conv = 0;
+    int yubikey_only = 0;
+    int twoFA_with_yubikey = 0;
+    int twoFA_with_biometric = 0;
+    int biometric_only = 0;
+
+    if(authMethod['conventional'] == true){
+        conv = 1;
+    } else {
+      conv = 0;
+    }
+
+    if(authMethod['yubikey_only'] == true){
+        yubikey_only = 1;
+    } else {
+      yubikey_only = 0;
+    }
+
+    if(authMethod['twoFA_with_yubikey'] == true){
+        twoFA_with_yubikey = 1;
+    } else {
+      twoFA_with_yubikey = 0;
+    }
+
+    if(authMethod['twoFA_with_biometric'] == true){
+        twoFA_with_biometric = 1;
+    } else {
+      twoFA_with_biometric = 0;
+    }
+
+    if(authMethod['biometric_only'] == true){
+        biometric_only = 1;
+    } else {
+      biometric_only = 0;
+    }  
+    insertValueA(
+      conv, 
+      yubikey_only, 
+      twoFA_with_yubikey, 
+      twoFA_with_biometric, 
+      biometric_only);
+  }
+
+  void insertValueA(
+      int? conv,
+      int? yubikey_only,
+      int? twoFA_with_yubikey,
+      int? twoFA_with_biometric,
+      int? biometric_only) {
+    db.execute("INSERT INTO Authentification VALUES (?,?,?,?,?)", [
+      conv,
+      yubikey_only,
+      twoFA_with_yubikey,
+      twoFA_with_biometric,
+      biometric_only
     ]);
   }
 }

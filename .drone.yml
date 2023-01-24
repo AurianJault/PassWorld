@@ -5,8 +5,6 @@ name: Passworld
 trigger:
   event:
     - push
-  branch:
-    - master
 
 steps:
   - name: build-apk

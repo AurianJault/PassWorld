@@ -10,7 +10,13 @@ class Config extends ChangeNotifier {
 
   Config() {
     appDirPath = io.Directory("");
-    charac = [];
+    charac = [
+      0,
+      1,
+      2,
+      3,
+      4,
+    ];
   }
 
   Future<void> setAppDirPath() async {
@@ -19,7 +25,6 @@ class Config extends ChangeNotifier {
           "${Platform.environment['HOME'].toString()}/.passworld/");
       await setDirectory();
     } else {
-      // appDirPath = io.Directory("/data/user/0");
       appDirPath = await getApplicationDocumentsDirectory();
       await setDirectory();
     }
@@ -30,12 +35,10 @@ class Config extends ChangeNotifier {
       io.Directory(appDirPath.path).createSync();
     }
     if (!io.File(p.join(appDirPath.path, "file.txt")).existsSync()) {
-      print("LE FICHIER NEXISTE PAS ");
       io.File("${appDirPath.path}/file.txt").create();
     }
     else 
     {
-      print("LE FICHIER EXISTE");
     }
   }
 
@@ -43,6 +46,12 @@ class Config extends ChangeNotifier {
     if (charac.contains(i)) {
       charac.remove(i);
     } else {
+      charac.add(i);
+    }
+  }
+
+  void addAll() {
+    for (int i = 0; i < 4; i++) {
       charac.add(i);
     }
   }

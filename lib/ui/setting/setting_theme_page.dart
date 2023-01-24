@@ -61,55 +61,6 @@ class _SettingThemePage extends State<SettingThemePage> {
                     children: [
                       Expanded(
                         child: InkWell(
-                          onTap: () {
-                            //changing email
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(h * 0.02),
-                            child: Row(children: [
-                              Icon(
-                                const IconData(0xf1d9,
-                                    fontFamily: 'MaterialIcons'),
-                                size: w * 0.08,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: w * 0.02,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Mode nuit",
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: w * 0.05)),
-                                  Text(
-                                    "Change la couleur pour moins abimer les yeux",
-                                    style: TextStyle(
-                                        fontSize: w * 0.02,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                              const Spacer(),
-                              Icon(
-                                const IconData(0xe355,
-                                    fontFamily: 'MaterialIcons'),
-                                size: w * 0.06,
-                                color: Colors.white,
-                              )
-                            ]),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
                           onTap: () async {
                             //changement du master password
                           },
@@ -128,14 +79,17 @@ class _SettingThemePage extends State<SettingThemePage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Mode sombre/clair",
+                                  Text(
+                                      LanguageTranslation.of(context)!
+                                          .text('theme_mode_title'),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: w * 0.05)),
                                   Text(
-                                    '''Change les couleurs de l'application entre claires et sombres''',
+                                    LanguageTranslation.of(context)!
+                                        .text('theme_mode_description'),
                                     style: TextStyle(
                                         fontSize: w * 0.02,
                                         color: Colors.black),
@@ -189,14 +143,17 @@ class _SettingThemePage extends State<SettingThemePage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Changer la langue",
+                                    Text(
+                                        LanguageTranslation.of(context)!
+                                            .text('language_title'),
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: w * 0.05)),
                                     Text(
-                                      '''Permet de changer la langue de l'application selon celles proposées''',
+                                      LanguageTranslation.of(context)!
+                                          .text('language_description'),
                                       style: TextStyle(
                                           fontSize: w * 0.02,
                                           color: Colors.black),

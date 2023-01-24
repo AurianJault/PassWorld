@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   flutter_secure_storage_windows
+  local_auth_windows
   screen_brightness_util_windows
   share_plus
   sqlite3_flutter_libs

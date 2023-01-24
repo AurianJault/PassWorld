@@ -111,4 +111,37 @@ class Password {
   String toString() {
     return 'id: $_id\nnom: $_name\npassword: $_password\nwebsite: $_website\nusername: $_username\nemail: $_email\nnote: $_note\nCreation Date: $_creationDate\nModification Date: $_modifDate';
   }
+
+  // Override the equality operator
+  @override
+  bool operator ==(Object other) {
+    if (other is Password) {
+      return _id == other._id &&
+          _name == other._name &&
+          _password == other._password &&
+          _website == other._website &&
+          _username == other._username &&
+          _email == other._email &&
+          _note == other._note &&
+          _creationDate == other._creationDate &&
+          _modifDate == other._modifDate;
+    }
+    return false;
+  }
+
+  // Override the hashCode method
+  @override
+  int get hashCode {
+    int result = 17;
+    result = 37 * result + _id.hashCode;
+    result = 37 * result + _name.hashCode;
+    result = 37 * result + _password.hashCode;
+    result = 37 * result + _website.hashCode;
+    result = 37 * result + _username.hashCode;
+    result = 37 * result + _email.hashCode;
+    result = 37 * result + _note.hashCode;
+    result = 37 * result + _creationDate.hashCode;
+    result = 37 * result + _modifDate.hashCode;
+    return result;
+  }
 }

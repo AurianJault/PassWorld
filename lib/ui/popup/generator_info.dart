@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../Classes/localization/translation.dart';
+
 generatorInfo(BuildContext context) {
   // set up the button
 
   // set up the AlertDialog
-  AlertDialog alert = const AlertDialog(
-    title: Icon(
+  AlertDialog alert = AlertDialog(
+    title: const Icon(
       IconData(0xe33d, fontFamily: 'MaterialIcons'),
     ),
-    content: Text('''Les caractères sont divisés en 5 boutons : 
-    - L'alphabet en minuscule 
-    - L'alphabet en majuscule 
-    - Les chiffres
-    - Les caractères de base ( )
-    - Les caractères spéciaux ( ) '''),
+    content: Text(LanguageTranslation.of(context)!.text('generator_info')),
   );
 
   // show the dialog

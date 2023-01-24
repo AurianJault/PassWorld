@@ -31,7 +31,8 @@ class _SettingAccountPage extends State<SettingAccountPage> {
               padding: const EdgeInsets.all(25),
               child: Row(children: [
                 PageTitleW(
-                    title: LanguageTranslation.of(context)!.text('account')),
+                    title: LanguageTranslation.of(context)!
+                        .text('account_setting_title')),
                 const Spacer(),
                 InkWell(
                     onTap: () {
@@ -126,7 +127,7 @@ class _SettingAccountPage extends State<SettingAccountPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Modifier son mot de passe maître",
+                                  Text("Changer son mot de passe",
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                           color: Colors.white,

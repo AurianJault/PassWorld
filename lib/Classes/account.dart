@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:test/Classes/conflict_manager.dart';
 import 'package:test/Classes/yubikey_related/two_fa.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:test/Classes/yubikey_related/yubikey.dart';
 import 'chiffrement.dart';
 import 'vault.dart';
 import 'Datas/pass_file.dart';
@@ -19,9 +21,11 @@ class Account with ChangeNotifier {
     _masterPassword = Chiffrement(mdp, id);
     _secondFactors = List.empty(growable: true);
     authMethod = {
-      "conventional": true,
-      "yubikey_only": false,
-      "twoFA_with_yubikey": false
+      "conventional": false,
+      "yubikey_only": true,
+      "twoFA_with_yubikey": false,
+      "twoFA_with_biometric": false,
+      "biometric_only": false
     };
   }
 
@@ -30,9 +34,11 @@ class Account with ChangeNotifier {
     _masterPassword = Chiffrement('null', _id);
     _secondFactors = List.empty(growable: true);
     authMethod = {
-      "conventional": true,
-      "yubikey_only": false,
-      "twoFA_with_yubikey": false
+      "conventional": false,
+      "yubikey_only": true,
+      "twoFA_with_yubikey": false,
+      "twoFA_with_biometric": false,
+      "biometric_only": false
     };
   }
 
@@ -43,19 +49,36 @@ class Account with ChangeNotifier {
   }
 
   // Methods
-  void fillVault(String appDirPath) {
+  void fillVault(String appDirPath, BuildContext context) async {
     PassFile base = PassFile(_id, appDirPath);
-    _vault = base.loadPasswords();
+    _secondFactors = base.loadSecondFactors();
+    authMethod = base.loadAuth();
+    _vault = await ConflictManager.manager(
+        context, id, appDirPath); //base.loadPasswords();
   }
 
   void saveFile(String appDirPath) {
     PassFile base = PassFile(_id, appDirPath);
     // Check File ?
     base.savePasswords(_vault);
+    base.saveSecondFactors(secondFactors);
+    base.saveMethodesAuth(authMethod);
   }
 
   void changeMasterPassword(String mdp) {
     _masterPassword = Chiffrement(mdp, _id);
+  }
+
+  bool findYubikey(String otp){
+    bool res = false;
+    secondFactors.forEach((element) {
+      if(element is Yubikey){
+        if(element.id == otp.substring(0,12)){
+          res = true;
+        }
+      }
+    });
+    return res;
   }
 
   // Getter
@@ -83,6 +106,18 @@ class Account with ChangeNotifier {
 
   set setId(String s) {
     _id = s;
+  }
+
+  TwoFA? accessTfa(int i) {
+    if (_secondFactors.isEmpty) {
+      return null;
+    } else {
+      return _secondFactors[i];
+    }
+  }
+  
+  set setVault(Vault vault) {
+    _vault = vault;
   }
 
   @override
